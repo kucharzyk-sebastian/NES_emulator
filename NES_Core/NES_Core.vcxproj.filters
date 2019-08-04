@@ -15,6 +15,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\helpers\math.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="src\nes\cpu\registers\registers.h">
