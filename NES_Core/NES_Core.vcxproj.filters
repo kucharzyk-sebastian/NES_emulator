@@ -17,5 +17,10 @@
   <ItemGroup>
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="src\nes\cpu\registers\registers.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
   </ItemGroup>
 </Project>
