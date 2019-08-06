@@ -10,8 +10,8 @@ namespace nes::cpu::registers {
 		Interrupt = 2,
 		Decimal = 3,
 		Break = 4,
-		Overflow = 5,
-		Negative = 6
+		Overflow = 6,
+		Negative = 7
 	};
 
 	struct Registers
@@ -23,7 +23,7 @@ namespace nes::cpu::registers {
 		uint16_t PC;
 		std::bitset<8> PS;
 
-		//TODO sk: verify default values of registers
+		//TODO sk: verify default values of registers and create unit tests for defaults
 		Registers() :
 			A(0),
 			X(0),
