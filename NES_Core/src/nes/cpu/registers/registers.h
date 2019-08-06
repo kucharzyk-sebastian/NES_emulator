@@ -24,7 +24,7 @@ namespace nes::cpu::registers {
 		std::bitset<8> PS;
 
 		//TODO sk: verify default values of registers and create unit tests for defaults
-		Registers() :
+		constexpr Registers() noexcept :
 			A(0),
 			X(0),
 			Y(0),
