@@ -18,6 +18,7 @@
     <ClInclude Include="src\helpers\math.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="src\nes\cpu\opcodes\immediate\executor.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="src\nes\cpu\registers\registers.h">
@@ -25,5 +26,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\nes\cpu\opcodes\immediate\executor.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

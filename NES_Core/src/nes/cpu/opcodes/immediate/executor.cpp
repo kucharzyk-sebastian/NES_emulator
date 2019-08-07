@@ -1,0 +1,22 @@
+#include "nes/cpu/opcodes/immediate/executor.h"
+#include "helpers/math.h"
+
+namespace nes::cpu::opcodes::immediate {
+	Executor::Executor(registers::Registers& registers) noexcept :
+		registers_(registers)
+	{
+	}
+
+	void Executor::ADC(int8_t value) noexcept
+	{
+		int8_t result = registers_.A + value;
+		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Overflow)] = helpers::math::isOverflow(registers_.A, value, result) ? true : false;
+		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Carry)] = helpers::math::isCarry(registers_.A, value) ? true : false;
+		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Negative)] = result < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = result == 0 ? true : false;
+
+		registers_.A = result;
+	}
+}
+
+
