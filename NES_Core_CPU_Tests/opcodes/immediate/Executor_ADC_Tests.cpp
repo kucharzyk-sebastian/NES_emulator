@@ -149,7 +149,7 @@ namespace OPCodes_Immediate_Executor
 		}
 
 
-		TEST_METHOD(ADC_sets_zero_flag_for_zero_results)
+		TEST_METHOD(ADC_sets_zero_flag_for_zero_result)
 		{
 			ie_.LDA(int8_t(3));
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
@@ -159,7 +159,7 @@ namespace OPCodes_Immediate_Executor
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 		}
 
-		TEST_METHOD(ADC_resets_zero_flag_for_positive_results)
+		TEST_METHOD(ADC_resets_zero_flag_for_positive_result)
 		{
 			ie_.LDA(int8_t(0));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
@@ -169,7 +169,7 @@ namespace OPCodes_Immediate_Executor
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 		}
 
-		TEST_METHOD(ADC_resets_zero_flag_for_negative_results)
+		TEST_METHOD(ADC_resets_zero_flag_for_negative_result)
 		{
 			ie_.LDA(int8_t(0));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
