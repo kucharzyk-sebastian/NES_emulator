@@ -12,6 +12,10 @@ namespace nes::cpu::opcodes::immediate {
 		Executor& operator=(const Executor& rhs) = delete;
 		Executor& operator=(Executor&& rhs) = delete;
 
+		registers::Registers getRegisters() const noexcept;
+		// TODO sk: think about move setRegisters version
+		void setRegisters(const registers::Registers& registers) noexcept;
+
 		// TODO sk: think about changing them to const once all implemented
 		void ADC(int8_t value) noexcept;
 		void AND(int8_t value) noexcept;

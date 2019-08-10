@@ -7,6 +7,16 @@ namespace nes::cpu::opcodes::immediate {
 	{
 	}
 
+	registers::Registers Executor::getRegisters() const noexcept
+	{
+		return registers_;
+	}
+
+	void Executor::setRegisters(const registers::Registers& registers) noexcept
+	{
+		registers_ = registers;
+	}
+
 	void Executor::ADC(int8_t value) noexcept
 	{
 		int8_t result = registers_.A + value;
