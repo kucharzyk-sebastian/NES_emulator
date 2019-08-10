@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="opcodes\Immediate\Executor_LDA_Tests.cpp">
+    <ClCompile Include="opcodes\immediate\Executor_ADC_Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="opcodes\Immediate\Executor_ADC_Tests.cpp">
+    <ClCompile Include="opcodes\immediate\Executor_AND_Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="opcodes\Immediate\Executor_AND_Tests.cpp">
+    <ClCompile Include="opcodes\immediate\Executor_LDA_Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
