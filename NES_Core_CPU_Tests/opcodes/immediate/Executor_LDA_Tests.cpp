@@ -47,15 +47,21 @@ namespace OPCodes_Immediate_Executor
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 		}
 
-		TEST_METHOD(LDA_does_not_set_zero_flag_for_positive)
+		TEST_METHOD(LDA_resets_zero_flag_for_positive)
 		{
+			ie_.LDA(uint8_t(0));
+			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
+			
 			ie_.LDA(uint8_t(3));
 
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 		}
 
-		TEST_METHOD(LDA_does_not_set_zero_flag_for_negative)
+		TEST_METHOD(LDA_resets_zero_flag_for_negative)
 		{
+			ie_.LDA(uint8_t(0));
+			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
+
 			ie_.LDA(uint8_t(-2));
 
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
@@ -63,26 +69,28 @@ namespace OPCodes_Immediate_Executor
 
 		TEST_METHOD(LDA_sets_negative_flag_for_negative_number)
 		{
-			auto flags = reg_.PS;
 			ie_.LDA(uint8_t(3));
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
 			ie_.LDA(uint8_t(-2));
+
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 		}
 
-		TEST_METHOD(LDA_does_not_set_negative_flag_for_positive)
+		TEST_METHOD(LDA_resets_negative_flag_for_positive)
 		{
-			auto flags = reg_.PS;
+			ie_.LDA(uint8_t(-2));
+			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
 			ie_.LDA(uint8_t(3));
 
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 		}
 
-		TEST_METHOD(LDA_does_not_set_negative_flag_for_zero)
+		TEST_METHOD(LDA_resets_negative_flag_for_zero)
 		{
-			auto flags = reg_.PS;
+			ie_.LDA(uint8_t(-2));
+			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
 			ie_.LDA(uint8_t(0));
 
