@@ -30,7 +30,7 @@ namespace OPCodes_Immediate_Executor
 		{
 			auto flags = reg_.PS;
 			ie_.LDA(uint8_t(3));
-			Assert::AreEqual(reg_.PS.to_string(), flags.to_string());
+			Assert::IsTrue(reg_.PS == flags);
 		}
 
 		TEST_METHOD(LDA_sets_zero_flag_for_zero)
