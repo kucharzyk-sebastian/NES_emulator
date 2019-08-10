@@ -23,14 +23,18 @@ namespace OPCodes_Immediate_Executor
 		TEST_METHOD(ADC_adds_positive_in_boundaries)
 		{
 			int8_t val = 5;
+
 			ie_.ADC(val);
+
 			Assert::AreEqual(reg_.A, val);
 		}
 
 		TEST_METHOD(ADC_adds_negative_in_boundaries)
 		{
 			int8_t val = -2;
+
 			ie_.ADC(int8_t(val));
+
 			Assert::AreEqual(reg_.A, val);
 		}
 
@@ -38,6 +42,7 @@ namespace OPCodes_Immediate_Executor
 		{
 			ie_.ADC(int8_t(17));
 			ie_.ADC(int8_t(1));
+
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Overflow)]);
 		}
 
@@ -45,6 +50,7 @@ namespace OPCodes_Immediate_Executor
 		{
 			ie_.ADC(int8_t(127));
 			ie_.ADC(int8_t(1));
+
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Overflow)]);
 		}
 
@@ -52,6 +58,7 @@ namespace OPCodes_Immediate_Executor
 		{
 			ie_.ADC(int8_t(-128));
 			ie_.ADC(int8_t(-1));
+
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Overflow)]);
 		}
 
@@ -60,7 +67,9 @@ namespace OPCodes_Immediate_Executor
 			ie_.ADC(int8_t(-128));
 			ie_.ADC(int8_t(-1));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Overflow)]);
+
 			ie_.ADC(int8_t(-1));
+
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Overflow)]);
 		}
 
@@ -68,6 +77,7 @@ namespace OPCodes_Immediate_Executor
 		{
 			ie_.ADC(int8_t(-128));
 			ie_.ADC(int8_t(-127));
+
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
 		}
 
@@ -75,6 +85,7 @@ namespace OPCodes_Immediate_Executor
 		{
 			ie_.ADC(int8_t(127));
 			ie_.ADC(int8_t(126));
+
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
 		}
 
@@ -82,6 +93,7 @@ namespace OPCodes_Immediate_Executor
 		{
 			ie_.ADC(int8_t(-4));
 			ie_.ADC(int8_t(5));
+
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
 		}
 
@@ -89,6 +101,7 @@ namespace OPCodes_Immediate_Executor
 		{
 			ie_.ADC(int8_t(-4));
 			ie_.ADC(int8_t(3));
+
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
 		}
 
@@ -97,25 +110,30 @@ namespace OPCodes_Immediate_Executor
 			ie_.ADC(int8_t(-4));
 			ie_.ADC(int8_t(5));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
+
 			ie_.ADC(int8_t(2));
+
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
 		}
 
 		TEST_METHOD(ADC_does_not_set_negative_flag_for_positive_result)
 		{
 			ie_.ADC(int8_t(5));
+
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 		}
 
-		TEST_METHOD(ADC_does_sets_negative_flag_for_negative_result)
+		TEST_METHOD(ADC_does_set_negative_flag_for_negative_result)
 		{
 			ie_.ADC(int8_t(-10));
+
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 		}
 
 		TEST_METHOD(ADC_does_not_set_zero_flag_for_non_zero_results)
 		{
 			ie_.ADC(int8_t(2));
+
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 		}
 
@@ -123,6 +141,7 @@ namespace OPCodes_Immediate_Executor
 		{
 			ie_.ADC(int8_t(3));
 			ie_.ADC(int8_t(-3));
+
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 		}
 
@@ -131,7 +150,9 @@ namespace OPCodes_Immediate_Executor
 			ie_.ADC(int8_t(3));
 			ie_.ADC(int8_t(-3));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
+
 			ie_.ADC(int8_t(1));
+
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 		}
 
