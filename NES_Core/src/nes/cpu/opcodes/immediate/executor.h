@@ -20,6 +20,7 @@ namespace nes::cpu::opcodes::immediate {
 		void ADC(int8_t value) noexcept;
 		void AND(int8_t value) noexcept;
 		void LDA(int8_t value) noexcept;
+		void CMP(int8_t value) noexcept;
 	private:
 		registers::Registers& registers_;
 	private:

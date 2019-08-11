@@ -24,5 +24,8 @@
     <ClCompile Include="opcodes\immediate\Executor_LDA_Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="opcodes\immediate\Executor_CMP_Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
