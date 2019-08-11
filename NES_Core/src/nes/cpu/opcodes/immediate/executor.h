@@ -25,6 +25,7 @@ namespace nes::cpu::opcodes::immediate {
 		void CPX(int8_t value) noexcept;
 		// TODO sk: to be implemented once operations on Y are implemented 
 		void CPY(int8_t value) noexcept;
+		void EOR(int8_t value) noexcept;
 	private:
 		registers::Registers& registers_;
 	private:
