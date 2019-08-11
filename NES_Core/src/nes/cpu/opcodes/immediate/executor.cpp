@@ -37,14 +37,6 @@ namespace nes::cpu::opcodes::immediate {
 		registers_.A = result;
 	}
 
-	void Executor::LDA(int8_t value) noexcept
-	{
-		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Negative)] = value < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = value == 0 ? true : false;
-
-		registers_.A = value;
-	}
-
 	void Executor::CMP(int8_t value) noexcept
 	{
 		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Carry)] = static_cast<uint8_t>(registers_.A) >= static_cast<uint8_t>(value) ? true : false;
@@ -59,6 +51,14 @@ namespace nes::cpu::opcodes::immediate {
 		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = result == 0 ? true : false;
 
 		registers_.A = result;
+	}
+
+	void Executor::LDA(int8_t value) noexcept
+	{
+		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Negative)] = value < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = value == 0 ? true : false;
+
+		registers_.A = value;
 	}
 }
 
