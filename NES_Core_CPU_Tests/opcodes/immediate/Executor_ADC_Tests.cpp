@@ -20,7 +20,6 @@ namespace OPCodes_Immediate_Executor
 			ie_.LDA(0);
 		}
 
-		// TODO sk: possibly refactor all doubled ADC once Load instruction is implemented and tested
 		TEST_METHOD(ADC_adds_value_in_boundaries)
 		{
 			int8_t val = 5;
@@ -96,6 +95,7 @@ namespace OPCodes_Immediate_Executor
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
 		}
 
+		//TODO sk: think of placing proper description instead of "condition met"
 		TEST_METHOD(ADC_sets_carry_flag_with_sum_of_positive_and_negative_when_condition_met)
 		{
 			ie_.LDA(int8_t(7));
