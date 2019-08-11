@@ -68,7 +68,7 @@ namespace OPCodes_Immediate_Executor
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 		}
 
-		TEST_METHOD(AND_resets_negative_flag_for_positive_results)
+		TEST_METHOD(EOR_resets_negative_flag_for_positive_results)
 		{
 			ie_.LDA(int8_t(0b10010101));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
