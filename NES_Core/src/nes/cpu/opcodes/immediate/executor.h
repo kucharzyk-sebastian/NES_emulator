@@ -26,6 +26,7 @@ namespace nes::cpu::opcodes::immediate {
 		void EOR(int8_t value) noexcept;
 		void LDA(int8_t value) noexcept;
 		void LDX(int8_t value) noexcept;
+		void LDY(int8_t value) noexcept;
 	private:
 		registers::Registers& registers_;
 	private:

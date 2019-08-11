@@ -179,6 +179,7 @@
     <ClCompile Include="opcodes\immediate\Executor_EOR_Tests.cpp" />
     <ClCompile Include="opcodes\immediate\Executor_LDA_Tests.cpp" />
     <ClCompile Include="opcodes\immediate\Executor_LDX_Tests.cpp" />
+    <ClCompile Include="opcodes\immediate\Executor_LDY_Tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NES_Core\NES_Core.vcxproj">
