@@ -2,8 +2,10 @@
 
 namespace helpers::math {
 	template<typename T> 
-	inline bool isOverflow(T lhs, T rhs, T result) noexcept(noexcept((lhs < 0 && rhs < 0 && result > 0) || (lhs > 0 && rhs > 0 && result < 0)))
+	inline bool isOverflow(T lhs, T rhs, T result, bool isSubtraction = false) noexcept(noexcept(-rhs) && noexcept((lhs < 0 && rhs < 0 && result > 0) || (lhs > 0 && rhs > 0 && result < 0)))
 	{
+		if (isSubtraction)
+			rhs = -rhs;
 		return (lhs < 0 && rhs < 0 && result > 0) || (lhs > 0 && rhs > 0 && result < 0);
 	}
 
