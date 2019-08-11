@@ -175,6 +175,7 @@
     <ClCompile Include="opcodes\immediate\Executor_ADC_Tests.cpp" />
     <ClCompile Include="opcodes\immediate\Executor_AND_Tests.cpp" />
     <ClCompile Include="opcodes\immediate\Executor_CMP_Tests.cpp" />
+    <ClCompile Include="opcodes\immediate\Executor_CPX_Tests.cpp" />
     <ClCompile Include="opcodes\immediate\Executor_EOR_Tests.cpp" />
     <ClCompile Include="opcodes\immediate\Executor_LDA_Tests.cpp" />
     <ClCompile Include="opcodes\immediate\Executor_LDX_Tests.cpp" />

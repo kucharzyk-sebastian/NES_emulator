@@ -20,7 +20,6 @@ namespace nes::cpu::opcodes::immediate {
 		void ADC(int8_t value) noexcept;
 		void AND(int8_t value) noexcept;
 		void CMP(int8_t value) noexcept;
-		// TODO sk: to be implemented once operations on X are implemented
 		void CPX(int8_t value) noexcept;
 		// TODO sk: to be implemented once operations on Y are implemented 
 		void CPY(int8_t value) noexcept;
