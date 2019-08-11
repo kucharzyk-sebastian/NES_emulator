@@ -51,6 +51,13 @@ namespace nes::cpu::opcodes::immediate {
 		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = registers_.X == value ? true : false;
 	}
 
+	void Executor::CPY(int8_t value) noexcept
+	{
+		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Carry)] = static_cast<uint8_t>(registers_.Y) >= static_cast<uint8_t>(value) ? true : false;
+		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Negative)] = (registers_.Y - value) < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = registers_.Y == value ? true : false;
+	}
+
 	void Executor::EOR(int8_t value) noexcept
 	{
 		int8_t result = registers_.A ^ value;
