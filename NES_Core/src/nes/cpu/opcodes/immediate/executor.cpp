@@ -63,26 +63,17 @@ namespace nes::cpu::opcodes::immediate {
 
 	void Executor::LDA(int8_t value) noexcept
 	{
-		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Negative)] = value < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = value == 0 ? true : false;
-
-		registers_.A = value;
+		loadWithFlags(registers_.A, value, registers_.PS);
 	}
 
 	void Executor::LDX(int8_t value) noexcept
 	{
-		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Negative)] = value < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = value == 0 ? true : false;
-
-		registers_.X = value;
+		loadWithFlags(registers_.X, value, registers_.PS);
 	}
 
 	void Executor::LDY(int8_t value) noexcept
 	{
-		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Negative)] = value < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = value == 0 ? true : false;
-
-		registers_.Y = value;
+		loadWithFlags(registers_.Y, value, registers_.PS);
 	}
 
 	void Executor::compareWithFlags(int8_t& reg, int8_t value, std::bitset<8>& flags) noexcept
@@ -91,6 +82,15 @@ namespace nes::cpu::opcodes::immediate {
 		flags[static_cast<uint8_t>(registers::ProcessorStatus::Negative)] = (reg - value) < 0 ? true : false;
 		flags[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = reg == value ? true : false;
 	}
+
+	void Executor::loadWithFlags(int8_t& reg, int8_t value, std::bitset<8> & flags) noexcept
+	{
+		flags[static_cast<uint8_t>(registers::ProcessorStatus::Negative)] = value < 0 ? true : false;
+		flags[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = value == 0 ? true : false;
+
+		reg = value;
+	}
+
 }
 
 
