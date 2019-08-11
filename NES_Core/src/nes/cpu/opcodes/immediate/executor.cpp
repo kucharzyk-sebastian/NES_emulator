@@ -83,7 +83,7 @@ namespace nes::cpu::opcodes::immediate {
 		flags[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = reg == value ? true : false;
 	}
 
-	void Executor::loadWithFlags(int8_t& reg, int8_t value, std::bitset<8> & flags) noexcept
+	void Executor::loadWithFlags(int8_t& reg, int8_t value, std::bitset<8>& flags) noexcept
 	{
 		flags[static_cast<uint8_t>(registers::ProcessorStatus::Negative)] = value < 0 ? true : false;
 		flags[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = value == 0 ? true : false;
