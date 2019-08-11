@@ -29,5 +29,7 @@ namespace nes::cpu::opcodes::immediate {
 	private:
 		registers::Registers& registers_;
 	private:
+		// TODO sk: think how to get rid of hardcoded 8 size
+		static void compareWithFlags(int8_t& reg, int8_t value, std::bitset<8>& flags) noexcept;
 	};
 }
