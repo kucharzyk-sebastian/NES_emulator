@@ -60,6 +60,14 @@ namespace nes::cpu::opcodes::immediate {
 
 		registers_.A = value;
 	}
+
+	void Executor::LDX(int8_t value) noexcept
+	{
+		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Negative)] = value < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = value == 0 ? true : false;
+
+		registers_.X = value;
+	}
 }
 
 
