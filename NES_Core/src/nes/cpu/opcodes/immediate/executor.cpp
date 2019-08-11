@@ -44,6 +44,13 @@ namespace nes::cpu::opcodes::immediate {
 
 		registers_.A = value;
 	}
+
+	void Executor::CMP(int8_t value) noexcept
+	{
+		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Carry)] = static_cast<uint8_t>(registers_.A) >= static_cast<uint8_t>(value) ? true : false;
+		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Negative)] = (registers_.A - value) < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = registers_.A == value ? true : false;
+	}
 }
 
 
