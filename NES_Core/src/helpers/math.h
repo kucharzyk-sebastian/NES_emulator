@@ -1,17 +1,21 @@
 #pragma once
+#include <limits>
 
-namespace helpers::math {
-	template<typename T> 
-	inline bool isOverflow(T lhs, T rhs, T result, bool isSubtraction = false) noexcept(noexcept(-rhs) && noexcept((lhs < 0 && rhs < 0 && result > 0) || (lhs > 0 && rhs > 0 && result < 0)))
+namespace helpers::math { 
+	inline bool isOverflow(int8_t lhs, int8_t rhs, int8_t result, bool isSubtraction = false) noexcept
 	{
 		if (isSubtraction)
 			rhs = -rhs;
-		return (lhs < 0 && rhs < 0 && result > 0) || (lhs > 0 && rhs > 0 && result < 0);
+		return (lhs <= 0 && rhs <= 0 && result > 0) || (lhs >= 0 && rhs >= 0 && result < 0);
 	}
 
-	template<typename T>
-	inline bool isCarry(T lhs, T rhs) noexcept(noexcept((lhs < 0 && rhs > 0 && rhs >= -lhs) || (rhs < 0 && lhs > 0 && lhs >= -rhs) || (lhs < 0 && rhs < 0)))
+	inline bool isCarry(uint8_t lhs, uint8_t rhs) noexcept
 	{
-		return (lhs < 0 && rhs > 0 && rhs >= -lhs) || (rhs < 0 && lhs > 0 && lhs >= -rhs) || (lhs < 0 && rhs < 0);
+		return (int(lhs) + rhs) > UINT8_MAX;
+	}
+
+	inline bool isCarry(int8_t lhs, int8_t rhs) noexcept
+	{
+		return isCarry(uint8_t(lhs), uint8_t(rhs));
 	}
 }

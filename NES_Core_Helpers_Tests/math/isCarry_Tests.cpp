@@ -71,5 +71,12 @@ namespace Math_Tests
 			val2 = 127;
 			Assert::IsTrue(helpers::math::isCarry(val1, val2));
 		}
+
+		TEST_METHOD(isCarry_returns_true_for_two_positives_with_sum_exceeding_u8bit_range)
+		{
+			uint8_t val1 = 255;
+			uint8_t val2 = 1;
+			Assert::IsTrue(helpers::math::isCarry(val1, val2));
+		}
 	};
 } // eof namespace MathTests
