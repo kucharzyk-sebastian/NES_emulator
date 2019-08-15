@@ -172,10 +172,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\helpers\math.h" />
+    <ClInclude Include="src\nes\cpu\opcodes\implied\executor.h" />
     <ClInclude Include="src\nes\cpu\opcodes\immediate\executor.h" />
     <ClInclude Include="src\nes\cpu\registers\registers.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\nes\cpu\opcodes\implied\executor.cpp" />
     <ClCompile Include="src\nes\cpu\opcodes\immediate\executor.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
