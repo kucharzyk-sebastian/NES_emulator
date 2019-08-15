@@ -90,6 +90,11 @@ namespace nes::cpu::opcodes::immediate{
 		registers_.A = result;
 	}
 
+	void Executor::SBC(int8_t value) noexcept
+	{
+		ADC(~value);
+	}
+
 	void Executor::compareWithFlags(int8_t& reg, int8_t value, std::bitset<8>& flags) noexcept
 	{
 		flags[static_cast<uint8_t>(rps::Carry)] = static_cast<uint8_t>(reg) >= static_cast<uint8_t>(value) ? true : false;

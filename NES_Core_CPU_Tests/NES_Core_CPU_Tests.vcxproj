@@ -182,6 +182,7 @@
     <ClCompile Include="opcodes\immediate\Executor_LDX_Tests.cpp" />
     <ClCompile Include="opcodes\immediate\Executor_LDY_Tests.cpp" />
     <ClCompile Include="opcodes\immediate\Executor_ORA_Tests.cpp" />
+    <ClCompile Include="opcodes\immediate\Executor_SBC_Tests.cpp" />
     <ClCompile Include="opcodes\implied\Executor_Flags_Tests.cpp" />
   </ItemGroup>
   <ItemGroup>

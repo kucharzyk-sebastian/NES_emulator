@@ -48,5 +48,8 @@
     <ClCompile Include="opcodes\implied\Executor_Flags_Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="opcodes\immediate\Executor_SBC_Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
