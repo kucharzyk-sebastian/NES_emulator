@@ -1,7 +1,9 @@
 #include "nes/cpu/opcodes/immediate/executor.h"
 #include "helpers/math.h"
 
-namespace nes::cpu::opcodes::immediate {
+namespace nes::cpu::opcodes::immediate{
+	using rps =  registers::ProcessorStatus;
+
 	Executor::Executor(registers::Registers& registers) noexcept :
 		registers_(registers)
 	{
@@ -19,11 +21,13 @@ namespace nes::cpu::opcodes::immediate {
 
 	void Executor::ADC(int8_t value) noexcept
 	{
-		int8_t result = registers_.A + value + registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Carry)];
-		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Overflow)] = helpers::math::isOverflow(registers_.A, value, result) ? true : false;
-		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Carry)] = helpers::math::isCarry(registers_.A, value) ? true : false;
-		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Negative)] = result < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = result == 0 ? true : false;
+		int8_t valWithCarry = value + registers_.PS[static_cast<uint8_t>(rps::Carry)];
+		int8_t result = registers_.A + valWithCarry;
+		registers_.PS[static_cast<uint8_t>(rps::Overflow)] = helpers::math::isOverflow(registers_.A, value, result) ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Carry)] = helpers::math::isCarry(value, registers_.PS[static_cast<uint8_t>(rps::Carry)]) ? 
+			true : helpers::math::isCarry(registers_.A, valWithCarry);
+		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Zero)] = result == 0 ? true : false;
 
 		registers_.A = result;
 	}
@@ -31,8 +35,8 @@ namespace nes::cpu::opcodes::immediate {
 	void Executor::AND(int8_t value) noexcept
 	{
 		int8_t result = registers_.A & value;
-		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Negative)] = result < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = result == 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Zero)] = result == 0 ? true : false;
 
 		registers_.A = result;
 	}
@@ -55,8 +59,8 @@ namespace nes::cpu::opcodes::immediate {
 	void Executor::EOR(int8_t value) noexcept
 	{
 		int8_t result = registers_.A ^ value;
-		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Negative)] = result < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = result == 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Zero)] = result == 0 ? true : false;
 
 		registers_.A = result;
 	}
@@ -80,23 +84,23 @@ namespace nes::cpu::opcodes::immediate {
 	void Executor::ORA(int8_t value) noexcept
 	{
 		int8_t result = registers_.A | value;
-		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Negative)] = result < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = result == 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Zero)] = result == 0 ? true : false;
 
 		registers_.A = result;
 	}
 
 	void Executor::compareWithFlags(int8_t& reg, int8_t value, std::bitset<8>& flags) noexcept
 	{
-		flags[static_cast<uint8_t>(registers::ProcessorStatus::Carry)] = static_cast<uint8_t>(reg) >= static_cast<uint8_t>(value) ? true : false;
-		flags[static_cast<uint8_t>(registers::ProcessorStatus::Negative)] = (reg - value) < 0 ? true : false;
-		flags[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = reg == value ? true : false;
+		flags[static_cast<uint8_t>(rps::Carry)] = static_cast<uint8_t>(reg) >= static_cast<uint8_t>(value) ? true : false;
+		flags[static_cast<uint8_t>(rps::Negative)] = (reg - value) < 0 ? true : false;
+		flags[static_cast<uint8_t>(rps::Zero)] = reg == value ? true : false;
 	}
 
 	void Executor::loadWithFlags(int8_t& reg, int8_t value, std::bitset<8>& flags) noexcept
 	{
-		flags[static_cast<uint8_t>(registers::ProcessorStatus::Negative)] = value < 0 ? true : false;
-		flags[static_cast<uint8_t>(registers::ProcessorStatus::Zero)] = value == 0 ? true : false;
+		flags[static_cast<uint8_t>(rps::Negative)] = value < 0 ? true : false;
+		flags[static_cast<uint8_t>(rps::Zero)] = value == 0 ? true : false;
 
 		reg = value;
 	}
