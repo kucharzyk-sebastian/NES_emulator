@@ -19,7 +19,7 @@ namespace nes::cpu::opcodes::immediate {
 
 	void Executor::ADC(int8_t value) noexcept
 	{
-		int8_t result = registers_.A + value;
+		int8_t result = registers_.A + value + registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Carry)];
 		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Overflow)] = helpers::math::isOverflow(registers_.A, value, result) ? true : false;
 		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Carry)] = helpers::math::isCarry(registers_.A, value) ? true : false;
 		registers_.PS[static_cast<uint8_t>(registers::ProcessorStatus::Negative)] = result < 0 ? true : false;

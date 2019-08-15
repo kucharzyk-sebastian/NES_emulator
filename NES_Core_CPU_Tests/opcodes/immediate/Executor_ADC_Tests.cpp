@@ -172,5 +172,41 @@ namespace OPCodes_Immediate_Executor
 
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 		}
+
+		TEST_METHOD(ADC_adds_carry_bit_to_result_when_set_and_resets_carry_when_sum_in_boundaries)
+		{
+			ie_.LDA(int8_t(0x01));
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry));
+			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
+
+			ie_.ADC(int8_t(0x01));
+
+			Assert::AreEqual(reg_.A, int8_t(0x03));
+			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
+		}
+
+		TEST_METHOD(ADC_adds_carry_bit_to_result_when_set_and_sets_carry_again_when_sum_out_of_boundaries)
+		{
+			ie_.LDA(int8_t(0x05));
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry));
+			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
+
+			ie_.ADC(int8_t(0xFE));
+
+			Assert::AreEqual(reg_.A, int8_t(0x04));
+			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
+		}
+
+		TEST_METHOD(ADC_adds_carry_bit_to_result_when_set_and_sets_carry_again_when_sum_out_of_boundaries_edge_case)
+		{
+			ie_.LDA(int8_t(0x07));
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry));
+			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
+
+			ie_.ADC(int8_t(0xFF));
+
+			Assert::AreEqual(reg_.A, int8_t(0x07));
+			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
+		}
 	};
 }
