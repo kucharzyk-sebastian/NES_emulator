@@ -7,7 +7,7 @@ namespace nes::cpu::registers {
 	{
 		Carry = 0,
 		Zero = 1,
-		Interrupt = 2,
+		InterruptDisable = 2,
 		Decimal = 3,
 		Break = 4,
 		Overflow = 6,
