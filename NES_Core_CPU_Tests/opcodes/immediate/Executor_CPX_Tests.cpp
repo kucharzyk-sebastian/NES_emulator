@@ -73,7 +73,7 @@ namespace OPCodes_Immediate_Executor
 		TEST_METHOD(CPX_resets_carry_flag_for_unsigned_X_register_lt_input)
 		{
 			ie_.LDX(int8_t(5));
-			ie_.CPX(int8_t(2));
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
 
 			ie_.CPX(int8_t(7));
@@ -104,10 +104,10 @@ namespace OPCodes_Immediate_Executor
 		TEST_METHOD(CPX_resets_negative_flag_for_signed_substraction_of_X_and_input_equal_to_zero)
 		{
 			int8_t value = -7;
-			ie_.LDX(int8_t(value));
+			ie_.LDX(value);
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
-			ie_.CPX(int8_t(value));
+			ie_.CPX(value);
 
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 		}

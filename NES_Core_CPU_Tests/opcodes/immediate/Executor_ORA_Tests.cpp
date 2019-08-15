@@ -31,10 +31,7 @@ namespace OPCodes_Immediate_Executor
 		TEST_METHOD(ORA_sets_zero_flag_for_zero_result)
 		{
 			ie_.LDA(int8_t(0b00000000));
-			// TODO sk: think if it's worth it to extract resetting and setting to common function
-			auto registers = ie_.getRegisters();
-			registers.PS.reset(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
-			ie_.setRegisters(registers);
+			reg_.PS.reset(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
 			ie_.ORA(int8_t(0b00000000));
@@ -75,9 +72,7 @@ namespace OPCodes_Immediate_Executor
 		TEST_METHOD(ORA_resets_negative_flag_for_positive_results)
 		{
 			ie_.LDA(int8_t(0b00010101));
-			auto registers = ie_.getRegisters();
-			registers.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative));
-			ie_.setRegisters(registers);
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
 			ie_.ORA(int8_t(0b00010110));
@@ -88,9 +83,7 @@ namespace OPCodes_Immediate_Executor
 		TEST_METHOD(ORA_resets_negative_flag_for_zero_result)
 		{
 			ie_.LDA(int8_t(0b00000000));
-			auto registers = ie_.getRegisters();
-			registers.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative));
-			ie_.setRegisters(registers);
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
 			ie_.ORA(int8_t(0b00000000));

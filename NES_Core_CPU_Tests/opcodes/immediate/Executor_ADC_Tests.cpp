@@ -41,9 +41,7 @@ namespace OPCodes_Immediate_Executor
 
 		TEST_METHOD(ADC_resets_overflow_flag_with_positive_sum_in_range_of_int8)
 		{
-			ie_.LDA(int8_t(127));
-			ie_.ADC(int8_t(1));
-			ie_.LDA(int8_t(0));
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Overflow));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Overflow)]);
 
 			ie_.ADC(int8_t(18));
@@ -63,9 +61,7 @@ namespace OPCodes_Immediate_Executor
 
 		TEST_METHOD(ADC_resets_overflow_flag_with_negative_sum_in_range_of_int8t)
 		{
-			ie_.LDA(int8_t(-128));
-			ie_.ADC(int8_t(-1));
-			ie_.LDA(int8_t(0));
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Overflow));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Overflow)]);
 
 			ie_.ADC(int8_t(-5));
@@ -85,9 +81,8 @@ namespace OPCodes_Immediate_Executor
 
 		TEST_METHOD(ADC_resets_carry_flag_with_any_sum_of_positives)
 		{
-			ie_.LDA(int8_t(-128));
-			ie_.ADC(int8_t(-127));
 			ie_.LDA(int8_t(127));
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
 
 			ie_.ADC(int8_t(126));
@@ -108,8 +103,7 @@ namespace OPCodes_Immediate_Executor
 
 		TEST_METHOD(ADC_resets_carry_flag_with_sum_of_positive_and_negative_when_condition_not_met)
 		{
-			ie_.LDA(int8_t(7));
-			ie_.ADC(int8_t(-6));
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry));
 			ie_.LDA(int8_t(3));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
 
@@ -161,7 +155,7 @@ namespace OPCodes_Immediate_Executor
 
 		TEST_METHOD(ADC_resets_zero_flag_for_positive_result)
 		{
-			ie_.LDA(int8_t(0));
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
 			ie_.ADC(int8_t(8));
@@ -171,7 +165,7 @@ namespace OPCodes_Immediate_Executor
 
 		TEST_METHOD(ADC_resets_zero_flag_for_negative_result)
 		{
-			ie_.LDA(int8_t(0));
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
 			ie_.ADC(int8_t(-3));

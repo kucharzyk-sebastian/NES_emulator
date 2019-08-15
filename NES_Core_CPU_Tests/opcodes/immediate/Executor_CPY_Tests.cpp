@@ -73,7 +73,7 @@ namespace OPCodes_Immediate_Executor
 		TEST_METHOD(CPY_resets_carry_flag_for_unsigned_Y_register_lt_input)
 		{
 			ie_.LDY(int8_t(5));
-			ie_.CPY(int8_t(2));
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
 
 			ie_.CPY(int8_t(7));
@@ -104,10 +104,10 @@ namespace OPCodes_Immediate_Executor
 		TEST_METHOD(CPY_resets_negative_flag_for_signed_substraction_of_Y_and_input_equal_to_zero)
 		{
 			int8_t value = -7;
-			ie_.LDY(int8_t(value));
+			ie_.LDY(value);
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
-			ie_.CPY(int8_t(value));
+			ie_.CPY(value);
 
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 		}

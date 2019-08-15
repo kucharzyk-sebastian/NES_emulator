@@ -41,9 +41,7 @@ namespace OPCodes_Immediate_Executor
 		TEST_METHOD(AND_resets_zero_flag_for_positive_result)
 		{
 			ie_.LDA(int8_t(0b00001111));
-			auto registers = ie_.getRegisters();
-			registers.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
-			ie_.setRegisters(registers);
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
 			ie_.AND(int8_t(0b00001010));
@@ -54,9 +52,7 @@ namespace OPCodes_Immediate_Executor
 		TEST_METHOD(AND_resets_zero_flag_for_negative_result)
 		{
 			ie_.LDA(int8_t(0b10001111));
-			auto registers = ie_.getRegisters();
-			registers.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
-			ie_.setRegisters(registers);
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
 			ie_.AND(int8_t(0b10001110));
@@ -67,9 +63,7 @@ namespace OPCodes_Immediate_Executor
 		TEST_METHOD(AND_sets_negative_flag_for_negative_results)
 		{
 			ie_.LDA(int8_t(0b10001100));
-			auto registers = ie_.getRegisters();
-			registers.PS.reset(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative));
-			ie_.setRegisters(registers);
+			reg_.PS.reset(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative));
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
 			ie_.AND(int8_t(0b10000000));
