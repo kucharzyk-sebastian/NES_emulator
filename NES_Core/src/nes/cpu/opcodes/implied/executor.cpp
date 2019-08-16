@@ -1,6 +1,8 @@
 #include "nes/cpu/opcodes/implied/executor.h"
 
 namespace nes::cpu::opcodes::implied {
+	using rps =  registers::ProcessorStatus;
+
 	Executor::Executor(registers::Registers & registers) noexcept :
 		registers_(registers)
 	{
@@ -18,36 +20,36 @@ namespace nes::cpu::opcodes::implied {
 
 	void Executor::CLC() noexcept
 	{
-		registers_.PS.reset(static_cast<uint8_t>(registers::ProcessorStatus::Carry));
+		registers_.PS.reset(static_cast<uint8_t>(rps::Carry));
 	}
 
 	void Executor::CLD() noexcept
 	{
-		registers_.PS.reset(static_cast<uint8_t>(registers::ProcessorStatus::Decimal));
+		registers_.PS.reset(static_cast<uint8_t>(rps::Decimal));
 	}
 
 	void Executor::CLI() noexcept
 	{
-		registers_.PS.reset(static_cast<uint8_t>(registers::ProcessorStatus::InterruptDisable));
+		registers_.PS.reset(static_cast<uint8_t>(rps::InterruptDisable));
 	}
 
 	void Executor::CLV() noexcept
 	{
-		registers_.PS.reset(static_cast<uint8_t>(registers::ProcessorStatus::Overflow));
+		registers_.PS.reset(static_cast<uint8_t>(rps::Overflow));
 	}
 
 	void Executor::SEC() noexcept
 	{
-		registers_.PS.set(static_cast<uint8_t>(registers::ProcessorStatus::Carry));
+		registers_.PS.set(static_cast<uint8_t>(rps::Carry));
 	}
 
 	void Executor::SED() noexcept
 	{
-		registers_.PS.set(static_cast<uint8_t>(registers::ProcessorStatus::Decimal));
+		registers_.PS.set(static_cast<uint8_t>(rps::Decimal));
 	}
 
 	void Executor::SEI() noexcept
 	{
-		registers_.PS.set(static_cast<uint8_t>(registers::ProcessorStatus::InterruptDisable));
+		registers_.PS.set(static_cast<uint8_t>(rps::InterruptDisable));
 	}
 }
