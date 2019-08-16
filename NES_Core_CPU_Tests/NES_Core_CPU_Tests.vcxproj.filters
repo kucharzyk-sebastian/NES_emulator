@@ -54,5 +54,8 @@
     <ClCompile Include="opcodes\implied\Executor_DEX_Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="opcodes\implied\Executor_DEY_Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

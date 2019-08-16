@@ -47,6 +47,15 @@ namespace nes::cpu::opcodes::implied {
 		registers_.X = result;
 	}
 
+	void Executor::DEY() noexcept
+	{
+		int8_t result = registers_.Y - 1;
+		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Zero)] = result == 0 ? true : false;
+
+		registers_.Y = result;
+	}
+
 	void Executor::SEC() noexcept
 	{
 		registers_.PS.set(static_cast<uint8_t>(rps::Carry));
