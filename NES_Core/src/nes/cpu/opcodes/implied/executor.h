@@ -25,6 +25,8 @@ namespace nes::cpu::opcodes::implied{
 		void CLV() noexcept;
 		void DEX() noexcept;
 		void DEY() noexcept;
+		void INX() noexcept;
+		void INY() noexcept;
 		void SEC() noexcept;
 		void SED() noexcept;
 		void SEI() noexcept;
