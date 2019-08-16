@@ -17,6 +17,8 @@ namespace nes::cpu::opcodes::implied{
 		void setRegisters(const registers::Registers& registers) noexcept;
 
 		// TODO sk: think about changing them to const once all implemented
+		//TODO sk: not implemented yet
+		void BRK() noexcept;
 		void CLC() noexcept;
 		void CLD() noexcept;
 		void CLI() noexcept;
