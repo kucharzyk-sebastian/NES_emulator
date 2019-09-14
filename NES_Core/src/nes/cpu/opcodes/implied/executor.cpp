@@ -74,6 +74,11 @@ namespace nes::cpu::opcodes::implied {
 		registers_.Y = result;
 	}
 
+	//TODO sk: probably will need to increase program counter
+	void Executor::NOP() noexcept
+	{
+	}
+
 	void Executor::SEC() noexcept
 	{
 		registers_.PS.set(static_cast<uint8_t>(rps::Carry));
