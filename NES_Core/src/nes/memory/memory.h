@@ -12,8 +12,6 @@ namespace nes::memory {
 		Memory& operator=(const Memory& rhs) = delete;
 		Memory& operator=(Memory&& rhs) = delete;
 
-		int8_t readMemory(uint16_t address);
-		void writeMemory(uint16_t address, int8_t value);
 		int8_t& operator[](uint16_t address);
 	private:
 		static constexpr int memorySize_ = 0xFFFF + 0x1;

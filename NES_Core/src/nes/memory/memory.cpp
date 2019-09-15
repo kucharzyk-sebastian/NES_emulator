@@ -6,16 +6,6 @@ namespace nes::memory {
 	{
 	}
 
-	int8_t Memory::readMemory(uint16_t address)
-	{
-		return (*memory_)[address];
-	}
-
-	void Memory::writeMemory(uint16_t address, int8_t value)
-	{
-		(*memory_)[address] = value;
-	}
-
 	int8_t& Memory::operator[](uint16_t address)
 	{
 		return (*memory_)[address];
