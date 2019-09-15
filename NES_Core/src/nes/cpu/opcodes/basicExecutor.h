@@ -13,7 +13,7 @@ namespace nes::cpu::opcodes{
 		BasicExecutor& operator=(BasicExecutor&& rhs) = delete;
 
 		const registers::Registers& getRegisters() const noexcept;
-		void setRegisters(const registers::Registers& registers) noexcept;
+		void setRegisters(registers::Registers& registers) noexcept;
 	protected:
 		registers::Registers& registers_;
 	private:
