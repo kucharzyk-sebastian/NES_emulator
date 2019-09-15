@@ -175,10 +175,12 @@
     <ClInclude Include="src\nes\cpu\opcodes\implied\executor.h" />
     <ClInclude Include="src\nes\cpu\opcodes\immediate\executor.h" />
     <ClInclude Include="src\nes\cpu\registers\registers.h" />
+    <ClInclude Include="src\nes\memory\memory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\nes\cpu\opcodes\implied\executor.cpp" />
     <ClCompile Include="src\nes\cpu\opcodes\immediate\executor.cpp" />
+    <ClCompile Include="src\nes\memory\memory.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
