@@ -69,7 +69,7 @@ namespace nes::cpu::opcodes{
 	{
 	}
 
-	void ImpliedExecutor::PHA() noexcept
+	void ImpliedExecutor::PHA()
 	{
 		writeToStack(registers_.A);
 	}
