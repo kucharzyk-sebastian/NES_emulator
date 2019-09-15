@@ -48,7 +48,6 @@ namespace OPCodes_ImpliedExecutor
 
 		TEST_METHOD(PHA_decrements_stack_pointer)
 		{
-			int8_t value = 5;
 			Assert::AreEqual(reg_.SP, uint8_t(0xFF));
 
 			ie_.PHA();
@@ -58,7 +57,6 @@ namespace OPCodes_ImpliedExecutor
 
 		TEST_METHOD(PHA_decrements_stack_pointer_for_the_second_time)
 		{
-			int8_t value = 5;
 			Assert::AreEqual(reg_.SP, uint8_t(0xFF));
 			ie_.PHA();
 
