@@ -9,7 +9,7 @@ namespace nes::cpu::opcodes{
 
 	int8_t BasicExecutor::readFromStack()
 	{
-		return memory_[stackPage_ + registers_.SP++];
+		return memory_[stackPage_ + ++registers_.SP];
 	}
 
 	void BasicExecutor::writeToStack(int8_t value)
