@@ -24,7 +24,8 @@ namespace OPCodes_ImmediateExecutor
 		TEST_METHOD(CMP_sets_zero_flag_for_equal_values)
 		{
 			int8_t val = 5;
-			ie_.LDA(val);
+			reg_.A = val;
+			reg_.PS.reset(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
 			ie_.CMP(val);
@@ -34,7 +35,8 @@ namespace OPCodes_ImmediateExecutor
 
 		TEST_METHOD(CMP_resets_zero_flag_for_A_register_lt_input)
 		{
-			ie_.LDA(int8_t(0));
+			reg_.A = int8_t(0);
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
 			ie_.CMP(int8_t(3));
@@ -44,7 +46,8 @@ namespace OPCodes_ImmediateExecutor
 
 		TEST_METHOD(CMP_resets_zero_flag_for_A_register_gt_input)
 		{
-			ie_.LDA(int8_t(0));
+			reg_.A = int8_t(0);
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
 			ie_.CMP(int8_t(-6));
@@ -54,7 +57,7 @@ namespace OPCodes_ImmediateExecutor
 
 		TEST_METHOD(CMP_sets_carry_flag_for_unsigned_A_register_equal_input)
 		{
-			ie_.LDA(int8_t(5));
+			reg_.A = int8_t(5);
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
 
 			ie_.CMP(int8_t(5));
@@ -64,7 +67,7 @@ namespace OPCodes_ImmediateExecutor
 
 		TEST_METHOD(CMP_sets_carry_flag_for_unsigned_A_register_gt_input)
 		{
-			ie_.LDA(int8_t(5));
+			reg_.A = int8_t(5);
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
 
 			ie_.CMP(int8_t(4));
@@ -74,7 +77,7 @@ namespace OPCodes_ImmediateExecutor
 
 		TEST_METHOD(CMP_resets_carry_flag_for_unsigned_A_register_lt_input)
 		{
-			ie_.LDA(int8_t(5));
+			reg_.A = int8_t(5);
 			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
 
@@ -85,7 +88,7 @@ namespace OPCodes_ImmediateExecutor
 
 		TEST_METHOD(CMP_sets_negative_flag_for_signed_substraction_of_A_and_input_lt_zero)
 		{
-			ie_.LDA(int8_t(1));
+			reg_.A = int8_t(1);
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
 			ie_.CMP(int8_t(2));
@@ -95,7 +98,8 @@ namespace OPCodes_ImmediateExecutor
 
 		TEST_METHOD(CMP_resets_negative_flag_for_signed_substraction_of_A_and_input_gt_zero)
 		{
-			ie_.LDA(int8_t(-3));
+			reg_.A = int8_t(-3);
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
 			ie_.CMP(int8_t(-4));
@@ -106,7 +110,8 @@ namespace OPCodes_ImmediateExecutor
 		TEST_METHOD(CMP_resets_negative_flag_for_signed_substraction_of_A_and_input_equal_to_zero)
 		{
 			int8_t value = -7;
-			ie_.LDA(value);
+			reg_.A = value;
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
 			ie_.CMP(value);

@@ -23,16 +23,16 @@ namespace OPCodes_ImmediateExecutor
 
 		TEST_METHOD(AND_performs_binary_and)
 		{
-			ie_.LDA(int8_t(0b00001011));
+			reg_.A = int8_t(0b00001011);
 
 			ie_.AND(int8_t(0b00100110));
 
-			Assert::AreEqual(reg_.A, int8_t(0b00000010));
+			Assert::AreEqual(int8_t(0b00000010), reg_.A);
 		}
 
 		TEST_METHOD(AND_sets_zero_flag_for_zero_result)
 		{
-			ie_.LDA(int8_t(0b00100010));
+			reg_.A = int8_t(0b00100010);
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
 			ie_.AND(int8_t(0b00001000));
@@ -42,7 +42,7 @@ namespace OPCodes_ImmediateExecutor
 
 		TEST_METHOD(AND_resets_zero_flag_for_positive_result)
 		{
-			ie_.LDA(int8_t(0b00001111));
+			reg_.A = int8_t(0b00001111);
 			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
@@ -53,7 +53,7 @@ namespace OPCodes_ImmediateExecutor
 
 		TEST_METHOD(AND_resets_zero_flag_for_negative_result)
 		{
-			ie_.LDA(int8_t(0b10001111));
+			reg_.A = int8_t(0b10001111);
 			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
@@ -64,7 +64,7 @@ namespace OPCodes_ImmediateExecutor
 
 		TEST_METHOD(AND_sets_negative_flag_for_negative_results)
 		{
-			ie_.LDA(int8_t(0b10001100));
+			reg_.A = int8_t(0b10001100);
 			reg_.PS.reset(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative));
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
@@ -75,7 +75,8 @@ namespace OPCodes_ImmediateExecutor
 
 		TEST_METHOD(AND_resets_negative_flag_for_positive_results)
 		{
-			ie_.LDA(int8_t(0b10011001));
+			reg_.A = int8_t(0b10011001);
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
 			ie_.AND(int8_t(0b00011000));
@@ -85,7 +86,8 @@ namespace OPCodes_ImmediateExecutor
 
 		TEST_METHOD(AND_resets_negative_flag_for_zero_result)
 		{
-			ie_.LDA(int8_t(0b10011001));
+			reg_.A = int8_t(0b10011001);
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
 			ie_.AND(int8_t(0b00100100));

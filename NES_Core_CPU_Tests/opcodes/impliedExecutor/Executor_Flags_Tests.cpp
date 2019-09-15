@@ -43,7 +43,7 @@ namespace OPCodes_ImpliedExecutor
 
 		TEST_METHOD(CLI_resets_interrupt_disable_flag)
 		{
-			ie_.SEI();
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::InterruptDisable));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::InterruptDisable)]);
 
 			ie_.CLI();
@@ -62,7 +62,7 @@ namespace OPCodes_ImpliedExecutor
 
 		TEST_METHOD(CLD_resets_decimal_flag)
 		{
-			ie_.SED();
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Decimal));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Decimal)]);
 
 			ie_.CLD();
@@ -81,7 +81,7 @@ namespace OPCodes_ImpliedExecutor
 
 		TEST_METHOD(CLC_resets_carry_flag)
 		{
-			ie_.SEC();
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
 
 			ie_.CLC();

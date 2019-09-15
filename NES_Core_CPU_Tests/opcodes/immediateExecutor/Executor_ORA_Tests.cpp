@@ -23,16 +23,16 @@ namespace OPCodes_ImmediateExecutor
 
 		TEST_METHOD(ORA_performs_binary_inclusive_or)
 		{
-			ie_.LDA(int8_t(0b00001011));
+			reg_.A = int8_t(0b00001011);
 
 			ie_.ORA(int8_t(0b00100110));
 
-			Assert::AreEqual(reg_.A, int8_t(0b00101111));
+			Assert::AreEqual(int8_t(0b00101111), reg_.A);
 		}
 
 		TEST_METHOD(ORA_sets_zero_flag_for_zero_result)
 		{
-			ie_.LDA(int8_t(0b00000000));
+			reg_.A = int8_t(0b00000000);
 			reg_.PS.reset(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
@@ -43,7 +43,8 @@ namespace OPCodes_ImmediateExecutor
 
 		TEST_METHOD(ORA_resets_zero_flag_for_positive_result)
 		{
-			ie_.LDA(int8_t(0b00000000));
+			reg_.A = int8_t(0b00000000);
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
 			ie_.ORA(int8_t(0b00010001));
@@ -53,7 +54,8 @@ namespace OPCodes_ImmediateExecutor
 
 		TEST_METHOD(ORA_resets_zero_flag_for_negative_result)
 		{
-			ie_.LDA(int8_t(0b00000000));
+			reg_.A = int8_t(0b00000000);
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
 			ie_.ORA(int8_t(0b10001010));
@@ -63,7 +65,7 @@ namespace OPCodes_ImmediateExecutor
 
 		TEST_METHOD(ORA_sets_negative_flag_for_negative_results)
 		{
-			ie_.LDA(int8_t(0b00001100));
+			reg_.A = int8_t(0b00001100);
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
 			ie_.ORA(int8_t(0b10101000));
@@ -73,7 +75,7 @@ namespace OPCodes_ImmediateExecutor
 
 		TEST_METHOD(ORA_resets_negative_flag_for_positive_results)
 		{
-			ie_.LDA(int8_t(0b00010101));
+			reg_.A = int8_t(0b00010101);
 			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
@@ -84,7 +86,7 @@ namespace OPCodes_ImmediateExecutor
 
 		TEST_METHOD(ORA_resets_negative_flag_for_zero_result)
 		{
-			ie_.LDA(int8_t(0b00000000));
+			reg_.A = int8_t(0b00000000);
 			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 

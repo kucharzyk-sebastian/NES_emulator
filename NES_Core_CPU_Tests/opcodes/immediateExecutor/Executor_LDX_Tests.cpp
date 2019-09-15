@@ -27,76 +27,80 @@ namespace OPCodes_ImmediateExecutor
 
 			ie_.LDX(val);
 
-			Assert::AreEqual(reg_.X, val);
+			Assert::AreEqual(val, reg_.X);
 		}
 
 		TEST_METHOD(LDX_does_not_change_any_flags_when_not_needed)
 		{
 			auto flags = reg_.PS;
 
-			ie_.LDX(uint8_t(3));
+			ie_.LDX(int8_t(3));
 
 			Assert::IsTrue(reg_.PS == flags);
 		}
 
 		TEST_METHOD(LDX_sets_zero_flag_for_zero)
 		{
-			ie_.LDX(uint8_t(3));
-			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
+			reg_.X = int8_t(3);
+			Assert::IsFalse(reg_.PS[static_cast<int8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
-			ie_.LDX(uint8_t(0));
+			ie_.LDX(int8_t(0));
 
-			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
+			Assert::IsTrue(reg_.PS[static_cast<int8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 		}
 
 		TEST_METHOD(LDX_resets_zero_flag_for_positive)
 		{
-			ie_.LDX(uint8_t(0));
-			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
+			reg_.X = int8_t(0);
+			reg_.PS.set(static_cast<int8_t>(nes::cpu::registers::ProcessorStatus::Zero));
+			Assert::IsTrue(reg_.PS[static_cast<int8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
-			ie_.LDX(uint8_t(3));
+			ie_.LDX(int8_t(3));
 
-			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
+			Assert::IsFalse(reg_.PS[static_cast<int8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 		}
 
 		TEST_METHOD(LDX_resets_zero_flag_for_negative)
 		{
-			ie_.LDX(uint8_t(0));
-			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
+			reg_.X = int8_t(0);
+			reg_.PS.set(static_cast<int8_t>(nes::cpu::registers::ProcessorStatus::Zero));
+			Assert::IsTrue(reg_.PS[static_cast<int8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
-			ie_.LDX(uint8_t(-2));
+			ie_.LDX(int8_t(-2));
 
-			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
+			Assert::IsFalse(reg_.PS[static_cast<int8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 		}
 
 		TEST_METHOD(LDX_sets_negative_flag_for_negative_number)
 		{
-			ie_.LDX(uint8_t(3));
-			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
+			reg_.X = int8_t(3);
+			Assert::IsFalse(reg_.PS[static_cast<int8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
-			ie_.LDX(uint8_t(-2));
+			ie_.LDX(int8_t(-2));
 
-			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
+			Assert::IsTrue(reg_.PS[static_cast<int8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 		}
 
 		TEST_METHOD(LDX_resets_negative_flag_for_positive)
 		{
-			ie_.LDX(uint8_t(-2));
-			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
+			reg_.X = int8_t(-2);
+			reg_.PS.set(static_cast<int8_t>(nes::cpu::registers::ProcessorStatus::Negative));
+			Assert::IsTrue(reg_.PS[static_cast<int8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
-			ie_.LDX(uint8_t(3));
+			ie_.LDX(int8_t(3));
 
-			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
+			Assert::IsFalse(reg_.PS[static_cast<int8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 		}
 
 		TEST_METHOD(LDX_resets_negative_flag_for_zero)
 		{
-			ie_.LDX(uint8_t(-2));
-			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
+			reg_.X = int8_t(-2);
+			reg_.PS.set(static_cast<int8_t>(nes::cpu::registers::ProcessorStatus::Negative));
+			Assert::IsTrue(reg_.PS[static_cast<int8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
-			ie_.LDX(uint8_t(0));
+			ie_.LDX(int8_t(0));
 
-			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
+			Assert::IsFalse(reg_.PS[static_cast<int8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 		}
 	};
 }

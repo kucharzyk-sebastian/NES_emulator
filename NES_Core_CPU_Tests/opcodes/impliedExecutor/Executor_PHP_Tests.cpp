@@ -13,7 +13,7 @@ namespace OPCodes_ImpliedExecutor
 		nes::cpu::registers::Registers reg_;
 		nes::memory::Memory mem_;
 		nes::cpu::opcodes::ImpliedExecutor ie_;
-
+		using PSType = std::bitset<nes::cpu::registers::Registers::PSSize>;
 
 		PHP_Tests() :
 			reg_(),
@@ -24,38 +24,44 @@ namespace OPCodes_ImpliedExecutor
 
 		TEST_METHOD(PHP_pushes_processor_status_flag_value_onto_the_stack)
 		{
+			Assert::AreNotEqual(PSType(mem_[0x01FF]).to_string(), reg_.PS.to_string());
 
 			ie_.PHP();
 
-			Assert::AreEqual(std::bitset<nes::cpu::registers::Registers::PSSize>(mem_[0x01FF]).to_string(), reg_.PS.to_string());
+			Assert::AreEqual(reg_.PS.to_string(), PSType(mem_[0x01FF]).to_string());
 		}
 
-		TEST_METHOD(PHP_pushes_processor_status_flag_value_onto_the_stack_for_the_second_time)
+		TEST_METHOD(PHP_pushes_processor_status_flag_value_onto_the_stack_two_times)
 		{
-			ie_.PHP();
+			auto firstPS = reg_.PS;
+			auto secondPS = PSType(0b010100110);
+			Assert::AreNotEqual(firstPS.to_string(), PSType(mem_[0x01FF]).to_string());
 
 			ie_.PHP();
+			reg_.PS = secondPS;
+			ie_.PHP();
 
-			Assert::AreEqual(std::bitset<nes::cpu::registers::Registers::PSSize>(mem_[0x01FE]).to_string(), reg_.PS.to_string());
+			Assert::AreEqual(firstPS.to_string(), PSType(mem_[0x01FF]).to_string());
+			Assert::AreEqual(secondPS.to_string(), PSType(mem_[0x01FE]).to_string());
 		}
 
 		TEST_METHOD(PHP_decrements_stack_pointer)
 		{
-			Assert::AreEqual(reg_.SP, uint8_t(0xFF));
+			Assert::AreEqual(uint8_t(0xFF), reg_.SP);
 
 			ie_.PHP();
 
-			Assert::AreEqual(reg_.SP, uint8_t(0xFE));
+			Assert::AreEqual(uint8_t(0xFE), reg_.SP);
 		}
 
-		TEST_METHOD(PHP_decrements_stack_pointer_for_the_second_time)
+		TEST_METHOD(PHP_decrements_stack_pointer_two_times)
 		{
-			Assert::AreEqual(reg_.SP, uint8_t(0xFF));
+			Assert::AreEqual(uint8_t(0xFF), reg_.SP);
+			
+			ie_.PHA();
 			ie_.PHA();
 
-			ie_.PHA();
-
-			Assert::AreEqual(reg_.SP, uint8_t(0xFD));
+			Assert::AreEqual(uint8_t(0xFD), reg_.SP);
 		}
 
 	};
