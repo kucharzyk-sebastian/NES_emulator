@@ -15,9 +15,4 @@ namespace nes::cpu::opcodes{
 	{
 		registers_ = registers;
 	}
-	
-	void BasicExecutor::setRegisters(registers::Registers&& registers) noexcept
-	{
-		registers_ = registers;
-	}
 }
