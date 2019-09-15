@@ -28,6 +28,7 @@ namespace nes::cpu::opcodes{
 		void NOP() noexcept;
 		void PHA();
 		void PHP();
+		void PLA();
 		void SEC() noexcept;
 		void SED() noexcept;
 		void SEI() noexcept;
