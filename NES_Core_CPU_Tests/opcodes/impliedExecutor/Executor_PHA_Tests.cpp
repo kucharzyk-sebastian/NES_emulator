@@ -25,7 +25,7 @@ namespace OPCodes_ImpliedExecutor
 
 		}
 
-		TEST_METHOD(PHA_pushes_value_onto_the_stack)
+		TEST_METHOD(PHA_pushes_A_register_value_onto_the_stack)
 		{
 			int8_t value = 5;
 			immediateExecHelper_.LDA(value);
@@ -33,6 +33,17 @@ namespace OPCodes_ImpliedExecutor
 			ie_.PHA();
 
 			Assert::AreEqual(mem_[0x01FF], value);
+		}
+
+		TEST_METHOD(PHA_pushes_A_register_value_onto_the_stack_for_the_second_time)
+		{
+			int8_t value = 5;
+			immediateExecHelper_.LDA(value);
+			ie_.PHA();
+
+			ie_.PHA();
+
+			Assert::AreEqual(mem_[0x01FE], value);
 		}
 
 		TEST_METHOD(PHA_decrements_stack_pointer)
@@ -43,6 +54,17 @@ namespace OPCodes_ImpliedExecutor
 			ie_.PHA();
 
 			Assert::AreEqual(reg_.SP, uint8_t(0xFE));
+		}
+
+		TEST_METHOD(PHA_decrements_stack_pointer_for_the_second_time)
+		{
+			int8_t value = 5;
+			Assert::AreEqual(reg_.SP, uint8_t(0xFF));
+			ie_.PHA();
+
+			ie_.PHA();
+
+			Assert::AreEqual(reg_.SP, uint8_t(0xFD));
 		}
 	};
 }
