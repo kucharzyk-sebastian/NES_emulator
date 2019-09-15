@@ -26,7 +26,7 @@ namespace nes::cpu::opcodes{
 		void INX() noexcept;
 		void INY() noexcept;
 		void NOP() noexcept;
-		void PHA() noexcept;
+		void PHA();
 		void SEC() noexcept;
 		void SED() noexcept;
 		void SEI() noexcept;
