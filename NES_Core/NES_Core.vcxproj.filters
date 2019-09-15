@@ -18,27 +18,33 @@
     <ClInclude Include="src\helpers\math.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\nes\cpu\opcodes\immediate\executor.h">
+    <ClInclude Include="src\nes\cpu\registers\registers.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\nes\cpu\registers\registers.h">
     <ClInclude Include="src\nes\memory\memory.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="src\nes\cpu\opcodes\immediateExecutor.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\nes\cpu\opcodes\implied\executor.h">
+    <ClInclude Include="src\nes\cpu\opcodes\impliedExecutor.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="src\nes\cpu\opcodes\basicExecutor.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\nes\cpu\opcodes\immediate\executor.cpp">
     <ClCompile Include="src\nes\memory\memory.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="src\nes\cpu\opcodes\immediateExecutor.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="src\nes\cpu\opcodes\implied\executor.cpp">
+    <ClCompile Include="src\nes\cpu\opcodes\impliedExecutor.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="src\nes\cpu\opcodes\basicExecutor.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,16 +1,16 @@
 #include "CppUnitTest.h"
 #include "nes/cpu/registers/registers.h"
-#include  "nes/cpu/opcodes/implied/executor.h"
+#include  "nes/cpu/opcodes/impliedExecutor.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace OPCodes_Implied_Executor
+namespace OPCodes_ImpliedExecutor
 {
 	TEST_CLASS(Flags_Tests)
 	{
 	public:
 		nes::cpu::registers::Registers reg_;
-		nes::cpu::opcodes::implied::Executor ie_;
+		nes::cpu::opcodes::ImpliedExecutor ie_;
 
 
 		Flags_Tests() :

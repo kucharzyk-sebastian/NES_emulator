@@ -1,96 +1,92 @@
 #include "CppUnitTest.h"
 #include "nes/cpu/registers/registers.h"
-#include  "nes/cpu/opcodes/implied/executor.h"
-#include  "nes/cpu/opcodes/immediate/executor.h"
+#include "nes/cpu/opcodes/immediateExecutor.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace OPCodes_Implied_Executor
+namespace OPCodes_ImmediateExecutor
 {
-	TEST_CLASS(DEY_Tests)
+	TEST_CLASS(ORA_Tests)
 	{
 	public:
 		nes::cpu::registers::Registers reg_;
-		nes::cpu::opcodes::implied::Executor ie_;
-		nes::cpu::opcodes::immediate::Executor immediateExecHelper_;
+		nes::cpu::opcodes::ImmediateExecutor ie_;
 
 
-		DEY_Tests() :
+		ORA_Tests() :
 			reg_(),
-			ie_(reg_),
-			immediateExecHelper_(reg_)
+			ie_(reg_)
 		{
-
 		}
 
-		TEST_METHOD(DEY_decrements_register_Y_value_by_one)
+		TEST_METHOD(ORA_performs_binary_inclusive_or)
 		{
-			int8_t value = 5;
-			immediateExecHelper_.LDY(value);
+			ie_.LDA(int8_t(0b00001011));
 
-			ie_.DEY();
+			ie_.ORA(int8_t(0b00100110));
 
-			Assert::AreEqual(reg_.Y, --value);
+			Assert::AreEqual(reg_.A, int8_t(0b00101111));
 		}
 
-		TEST_METHOD(DEY_sets_zero_flag_when_result_equal_zero)
+		TEST_METHOD(ORA_sets_zero_flag_for_zero_result)
 		{
-			immediateExecHelper_.LDY(int8_t(1));
+			ie_.LDA(int8_t(0b00000000));
+			reg_.PS.reset(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
-			ie_.DEY();
+			ie_.ORA(int8_t(0b00000000));
 
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 		}
 
-		TEST_METHOD(DEY_resets_zero_flag_when_result_lt_zero)
+		TEST_METHOD(ORA_resets_zero_flag_for_positive_result)
 		{
-			immediateExecHelper_.LDY(int8_t(0));
+			ie_.LDA(int8_t(0b00000000));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
-			ie_.DEY();
+			ie_.ORA(int8_t(0b00010001));
 
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 		}
 
-		TEST_METHOD(DEY_resets_zero_flag_when_result_gt_zero)
+		TEST_METHOD(ORA_resets_zero_flag_for_negative_result)
 		{
-			immediateExecHelper_.LDY(int8_t(5));
-			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
+			ie_.LDA(int8_t(0b00000000));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 
-			ie_.DEY();
+			ie_.ORA(int8_t(0b10001010));
 
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
 		}
 
-		TEST_METHOD(DEY_sets_negative_flag_when_result_lt_zero)
+		TEST_METHOD(ORA_sets_negative_flag_for_negative_results)
 		{
-			immediateExecHelper_.LDY(int8_t(0));
+			ie_.LDA(int8_t(0b00001100));
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
-			ie_.DEY();
+			ie_.ORA(int8_t(0b10101000));
 
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 		}
 
-		TEST_METHOD(DEY_resets_negative_flag_when_result_gt_zero)
+		TEST_METHOD(ORA_resets_negative_flag_for_positive_results)
 		{
-			immediateExecHelper_.LDY(int8_t(-128));
-			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
-
-			ie_.DEY();
-
-			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
-		}
-
-		TEST_METHOD(DEY_resets_negative_flag_when_result_equal_zero)
-		{
-			immediateExecHelper_.LDY(int8_t(1));
+			ie_.LDA(int8_t(0b00010101));
 			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
-			ie_.DEY();
+			ie_.ORA(int8_t(0b00010110));
+
+			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
+		}
+
+		TEST_METHOD(ORA_resets_negative_flag_for_zero_result)
+		{
+			ie_.LDA(int8_t(0b00000000));
+			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative));
+			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
+
+			ie_.ORA(int8_t(0b00000000));
 
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 		}

@@ -1,16 +1,16 @@
 #include "CppUnitTest.h"
 #include "nes/cpu/registers/registers.h"
-#include "nes/cpu/opcodes/immediate/executor.h"
+#include "nes/cpu/opcodes/immediateExecutor.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace OPCodes_Immediate_Executor
+namespace OPCodes_ImmediateExecutor
 {
 	TEST_CLASS(LDX_Tests)
 	{
 	public:
 		nes::cpu::registers::Registers reg_;
-		nes::cpu::opcodes::immediate::Executor ie_;
+		nes::cpu::opcodes::ImmediateExecutor ie_;
 
 
 		LDX_Tests() :

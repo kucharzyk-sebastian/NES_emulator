@@ -1,20 +1,17 @@
 #pragma once
 #include "nes/cpu/registers/registers.h"
+#include "nes/cpu/opcodes/basicExecutor.h"
 
-namespace nes::cpu::opcodes::immediate {
-	class Executor
+namespace nes::cpu::opcodes{
+	class ImmediateExecutor : public BasicExecutor
 	{
 	public:
-		Executor(registers::Registers& registers) noexcept;
-		~Executor() = default;
-		Executor(Executor& rhs) = delete;
-		Executor(Executor&& rhs) = delete;
-		Executor& operator=(const Executor& rhs) = delete;
-		Executor& operator=(Executor&& rhs) = delete;
-
-		registers::Registers getRegisters() const noexcept;
-		// TODO sk: think about move setRegisters version
-		void setRegisters(const registers::Registers& registers) noexcept;
+		ImmediateExecutor(registers::Registers& registers) noexcept;
+		~ImmediateExecutor() = default;
+		ImmediateExecutor(const ImmediateExecutor& rhs) = delete;
+		ImmediateExecutor(ImmediateExecutor&& rhs) = delete;
+		ImmediateExecutor& operator=(const ImmediateExecutor& rhs) = delete;
+		ImmediateExecutor& operator=(ImmediateExecutor&& rhs) = delete;
 
 		// TODO sk: think about changing them to const once all implemented
 		void ADC(int8_t value) noexcept;
@@ -29,7 +26,7 @@ namespace nes::cpu::opcodes::immediate {
 		void ORA(int8_t value) noexcept;
 		void SBC(int8_t value) noexcept;
 	private:
-		registers::Registers& registers_;
+
 	private:
 		// TODO sk: think how to get rid of hardcoded 8 size
 		static void compareWithFlags(int8_t& reg, int8_t value, std::bitset<8>& flags) noexcept;

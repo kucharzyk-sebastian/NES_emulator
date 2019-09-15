@@ -1,44 +1,34 @@
-#include "nes/cpu/opcodes/implied/executor.h"
+#include "nes/cpu/opcodes/impliedExecutor.h"
 
-namespace nes::cpu::opcodes::implied {
+namespace nes::cpu::opcodes{
 	using rps =  registers::ProcessorStatus;
 
-	Executor::Executor(registers::Registers & registers) noexcept :
-		registers_(registers)
+	ImpliedExecutor::ImpliedExecutor(registers::Registers& registers) noexcept :
+		BasicExecutor(registers)
 	{
 	}
 
-	registers::Registers Executor::getRegisters() const noexcept
-	{
-		return registers_;
-	}
-
-	void Executor::setRegisters(const registers::Registers & registers) noexcept
-	{
-		registers_ = registers;
-	}
-
-	void Executor::CLC() noexcept
+	void ImpliedExecutor::CLC() noexcept
 	{
 		registers_.PS.reset(static_cast<uint8_t>(rps::Carry));
 	}
 
-	void Executor::CLD() noexcept
+	void ImpliedExecutor::CLD() noexcept
 	{
 		registers_.PS.reset(static_cast<uint8_t>(rps::Decimal));
 	}
 
-	void Executor::CLI() noexcept
+	void ImpliedExecutor::CLI() noexcept
 	{
 		registers_.PS.reset(static_cast<uint8_t>(rps::InterruptDisable));
 	}
 
-	void Executor::CLV() noexcept
+	void ImpliedExecutor::CLV() noexcept
 	{
 		registers_.PS.reset(static_cast<uint8_t>(rps::Overflow));
 	}
 
-	void Executor::DEX() noexcept
+	void ImpliedExecutor::DEX() noexcept
 	{
 		int8_t result = registers_.X - 1;
 		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
@@ -47,7 +37,7 @@ namespace nes::cpu::opcodes::implied {
 		registers_.X = result;
 	}
 
-	void Executor::DEY() noexcept
+	void ImpliedExecutor::DEY() noexcept
 	{
 		int8_t result = registers_.Y - 1;
 		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
@@ -56,7 +46,7 @@ namespace nes::cpu::opcodes::implied {
 		registers_.Y = result;
 	}
 
-	void Executor::INX() noexcept
+	void ImpliedExecutor::INX() noexcept
 	{
 		int8_t result = registers_.X + 1;
 		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
@@ -65,7 +55,7 @@ namespace nes::cpu::opcodes::implied {
 		registers_.X = result;
 	}
 
-	void Executor::INY() noexcept
+	void ImpliedExecutor::INY() noexcept
 	{
 		int8_t result = registers_.Y + 1;
 		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
@@ -75,21 +65,26 @@ namespace nes::cpu::opcodes::implied {
 	}
 
 	//TODO sk: probably will need to increase program counter
-	void Executor::NOP() noexcept
+	void ImpliedExecutor::NOP() noexcept
 	{
 	}
 
-	void Executor::SEC() noexcept
+	void ImpliedExecutor::PHA() noexcept
+	{
+
+	}
+
+	void ImpliedExecutor::SEC() noexcept
 	{
 		registers_.PS.set(static_cast<uint8_t>(rps::Carry));
 	}
 
-	void Executor::SED() noexcept
+	void ImpliedExecutor::SED() noexcept
 	{
 		registers_.PS.set(static_cast<uint8_t>(rps::Decimal));
 	}
 
-	void Executor::SEI() noexcept
+	void ImpliedExecutor::SEI() noexcept
 	{
 		registers_.PS.set(static_cast<uint8_t>(rps::InterruptDisable));
 	}
