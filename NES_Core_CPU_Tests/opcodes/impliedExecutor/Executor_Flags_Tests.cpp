@@ -1,5 +1,6 @@
 #include "CppUnitTest.h"
 #include "nes/cpu/registers/registers.h"
+#include "nes/memory/memory.h"
 #include  "nes/cpu/opcodes/impliedExecutor.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -10,16 +11,15 @@ namespace OPCodes_ImpliedExecutor
 	{
 	public:
 		nes::cpu::registers::Registers reg_;
+		nes::memory::Memory mem_;
 		nes::cpu::opcodes::ImpliedExecutor ie_;
 
 
 		Flags_Tests() :
 			reg_(),
-			ie_(reg_)
+			ie_(reg_, mem_)
 		{
-			auto reg = reg_;
-			reg.PS.reset();
-			ie_.setRegisters(reg);
+			reg_.PS.reset();
 		}
 
 		TEST_METHOD(CLV_resets_overflow_flag)

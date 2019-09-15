@@ -7,7 +7,7 @@ namespace nes::cpu::opcodes{
 	class ImpliedExecutor : public BasicExecutor
 	{
 	public:
-		ImpliedExecutor(registers::Registers& registers) noexcept;
+		ImpliedExecutor(registers::Registers& registers, memory::Memory& memory);
 		~ImpliedExecutor() = default;
 		ImpliedExecutor(const ImpliedExecutor& rhs) = delete;
 		ImpliedExecutor(ImpliedExecutor&& rhs) = delete;

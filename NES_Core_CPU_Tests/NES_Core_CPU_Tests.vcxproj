@@ -189,6 +189,7 @@
     <ClCompile Include="opcodes\impliedExecutor\Executor_Flags_Tests.cpp" />
     <ClCompile Include="opcodes\impliedExecutor\Executor_INX_Tests.cpp" />
     <ClCompile Include="opcodes\impliedExecutor\Executor_INY_Tests.cpp" />
+    <ClCompile Include="opcodes\impliedExecutor\Executor_PHA_Tests.cpp" />
     <ClCompile Include="registers\Registers_Tests.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -3,8 +3,8 @@
 namespace nes::cpu::opcodes{
 	using rps =  registers::ProcessorStatus;
 
-	ImpliedExecutor::ImpliedExecutor(registers::Registers& registers) noexcept :
-		BasicExecutor(registers)
+	ImpliedExecutor::ImpliedExecutor(registers::Registers& registers, memory::Memory& memory) :
+		BasicExecutor(registers, memory)
 	{
 	}
 
@@ -71,7 +71,7 @@ namespace nes::cpu::opcodes{
 
 	void ImpliedExecutor::PHA() noexcept
 	{
-
+		writeToStack(registers_.A);
 	}
 
 	void ImpliedExecutor::SEC() noexcept

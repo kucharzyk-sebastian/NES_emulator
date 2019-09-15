@@ -1,18 +1,19 @@
 #include "nes/cpu/opcodes/basicExecutor.h"
 
 namespace nes::cpu::opcodes{
-	BasicExecutor::BasicExecutor(registers::Registers& registers) :
-		registers_(registers)
+	BasicExecutor::BasicExecutor(registers::Registers& registers, memory::Memory& memory) :
+		registers_(registers),
+		memory_(memory)
 	{
 	}
 
-	const registers::Registers& BasicExecutor::getRegisters() const noexcept
+	int8_t BasicExecutor::readFromStack()
 	{
-		return registers_;
+		return memory_[stackPage_ + registers_.SP++];
 	}
 
-	void BasicExecutor::setRegisters(registers::Registers& registers) noexcept
+	void BasicExecutor::writeToStack(int8_t value)
 	{
-		registers_ = registers;
+		memory_[stackPage_ + registers_.SP--] = value;
 	}
 }

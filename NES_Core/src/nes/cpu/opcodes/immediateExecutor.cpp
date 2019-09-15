@@ -4,8 +4,8 @@
 namespace nes::cpu::opcodes{
 	using rps =  registers::ProcessorStatus;
 
-	ImmediateExecutor::ImmediateExecutor(registers::Registers& registers) noexcept :
-		BasicExecutor(registers)
+	ImmediateExecutor::ImmediateExecutor(registers::Registers& registers, memory::Memory& memory) :
+		BasicExecutor(registers, memory)
 	{
 	}
 

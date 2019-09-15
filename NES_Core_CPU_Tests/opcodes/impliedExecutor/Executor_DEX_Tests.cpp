@@ -1,5 +1,6 @@
 #include "CppUnitTest.h"
 #include "nes/cpu/registers/registers.h"
+#include "nes/memory/memory.h"
 #include  "nes/cpu/opcodes/impliedExecutor.h"
 #include  "nes/cpu/opcodes/immediateExecutor.h"
 
@@ -12,13 +13,14 @@ namespace OPCodes_ImpliedExecutor
 	public:
 		nes::cpu::registers::Registers reg_;
 		nes::cpu::opcodes::ImpliedExecutor ie_;
+		nes::memory::Memory mem_;
 		nes::cpu::opcodes::ImmediateExecutor immediateExecHelper_;
 
 
 		DEX_Tests() :
 			reg_(),
-			ie_(reg_),
-			immediateExecHelper_(reg_)
+			ie_(reg_, mem_),
+			immediateExecHelper_(reg_, mem_)
 		{
 
 		}

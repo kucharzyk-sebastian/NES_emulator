@@ -1,5 +1,6 @@
 #include "CppUnitTest.h"
 #include "nes/cpu/registers/registers.h"
+#include "nes/memory/memory.h"
 #include "nes/cpu/opcodes/immediateExecutor.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -10,12 +11,13 @@ namespace OPCodes_ImmediateExecutor
 	{
 	public:
 		nes::cpu::registers::Registers reg_;
+		nes::memory::Memory mem_;
 		nes::cpu::opcodes::ImmediateExecutor ie_;
 
 
 		CPY_Tests() :
 			reg_(),
-			ie_(reg_)
+			ie_(reg_, mem_)
 		{
 		}
 
