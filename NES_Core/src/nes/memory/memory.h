@@ -14,6 +14,7 @@ namespace nes::memory {
 
 		int8_t readMemory(uint16_t address);
 		void writeMemory(uint16_t address, int8_t value);
+		int8_t& operator[](uint16_t address);
 	private:
 		static constexpr int memorySize_ = 0xFFFF + 0x1;
 		using MemArray = std::array<int8_t, memorySize_>;

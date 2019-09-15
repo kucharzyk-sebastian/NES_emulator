@@ -15,4 +15,9 @@ namespace nes::memory {
 	{
 		(*memory_)[address] = value;
 	}
+
+	int8_t& Memory::operator[](uint16_t address)
+	{
+		return (*memory_)[address];
+	}
 }
