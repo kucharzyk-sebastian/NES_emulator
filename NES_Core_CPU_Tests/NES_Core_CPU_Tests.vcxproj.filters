@@ -72,5 +72,8 @@
     <ClCompile Include="opcodes\impliedExecutor\Executor_PHA_Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="opcodes\impliedExecutor\Executor_PHP_Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -74,6 +74,11 @@ namespace nes::cpu::opcodes{
 		writeToStack(registers_.A);
 	}
 
+	void ImpliedExecutor::PHP()
+	{
+		writeToStack(static_cast<int8_t>(registers_.PS.to_ulong()));
+	}
+
 	void ImpliedExecutor::SEC() noexcept
 	{
 		registers_.PS.set(static_cast<uint8_t>(rps::Carry));

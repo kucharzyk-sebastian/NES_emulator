@@ -21,7 +21,8 @@ namespace nes::cpu::registers {
 		int8_t Y;
 		uint8_t SP;
 		uint16_t PC;
-		std::bitset<8> PS;
+		static constexpr uint8_t PSSize = 8;
+		std::bitset<PSSize> PS;
 
 		constexpr Registers() noexcept :
 			A(0),
