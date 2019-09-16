@@ -55,7 +55,7 @@ namespace OPCodes_ImpliedExecutor
 
 		TEST_METHOD(TAY_resets_negative_flag_when_result_gt_zero)
 		{
-			reg_.A = uint8_t(123);
+			reg_.A = int8_t(123);
 			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative));
 			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
