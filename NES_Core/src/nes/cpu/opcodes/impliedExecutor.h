@@ -37,6 +37,7 @@ namespace nes::cpu::opcodes{
 		void TAX() noexcept;
 		void TAY() noexcept;
 		void TSX() noexcept;
+		void TXA() noexcept;
 	private:
 
 	private:
