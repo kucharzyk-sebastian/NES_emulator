@@ -194,6 +194,7 @@
     <ClCompile Include="opcodes\impliedExecutor\Executor_PLA_Tests.cpp" />
     <ClCompile Include="opcodes\impliedExecutor\Executor_PLP_Tests.cpp" />
     <ClCompile Include="opcodes\impliedExecutor\Executor_TAX_Tests.cpp" />
+    <ClCompile Include="opcodes\impliedExecutor\Executor_TAY_Tests.cpp" />
     <ClCompile Include="registers\Registers_Tests.cpp" />
   </ItemGroup>
   <ItemGroup>

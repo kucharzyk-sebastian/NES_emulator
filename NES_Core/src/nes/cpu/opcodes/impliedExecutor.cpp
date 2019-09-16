@@ -112,4 +112,11 @@ namespace nes::cpu::opcodes{
 		registers_.PS[static_cast<uint8_t>(rps::Negative)] = registers_.X < 0 ? true : false;
 		registers_.PS[static_cast<uint8_t>(rps::Zero)] = registers_.X == 0 ? true : false;
 	}
+
+	void ImpliedExecutor::TAY() noexcept
+	{
+		registers_.Y = registers_.A;
+		registers_.PS[static_cast<uint8_t>(rps::Negative)] = registers_.Y < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Zero)] = registers_.Y == 0 ? true : false;
+	}
 }

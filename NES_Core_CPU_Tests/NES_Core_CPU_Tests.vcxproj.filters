@@ -84,5 +84,8 @@
     <ClCompile Include="opcodes\impliedExecutor\Executor_TAX_Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="opcodes\impliedExecutor\Executor_TAY_Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
