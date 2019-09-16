@@ -34,6 +34,7 @@ namespace nes::cpu::opcodes{
 		void SEC() noexcept;
 		void SED() noexcept;
 		void SEI() noexcept;
+		void TAX() noexcept;
 	private:
 
 	private:
