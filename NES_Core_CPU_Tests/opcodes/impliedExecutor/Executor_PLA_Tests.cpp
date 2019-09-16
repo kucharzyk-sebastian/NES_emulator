@@ -63,7 +63,7 @@ namespace OPCodes_ImpliedExecutor
 			Assert::AreEqual(uint8_t(0xFF), reg_.SP);
 		}
 
-		TEST_METHOD(PHP_decrements_stack_pointer_for_the_second_time)
+		TEST_METHOD(PLA_increments_stack_pointer_for_the_second_time)
 		{
 			reg_.SP = uint8_t(0xFD);
 			Assert::AreEqual(uint8_t(0xFD), reg_.SP);
