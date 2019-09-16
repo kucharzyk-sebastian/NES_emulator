@@ -86,6 +86,11 @@ namespace nes::cpu::opcodes{
 		registers_.PS[static_cast<uint8_t>(rps::Zero)] = registers_.A == 0 ? true : false;
 	}
 
+	void ImpliedExecutor::PLP()
+	{
+		registers_.PS = readFromStack();
+	}
+
 	void ImpliedExecutor::SEC() noexcept
 	{
 		registers_.PS.set(static_cast<uint8_t>(rps::Carry));
