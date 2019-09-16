@@ -22,7 +22,7 @@ namespace OPCodes_ImpliedExecutor
 
 		}
 
-		TEST_METHOD(PHP_pushes_processor_status_flag_value_onto_the_stack)
+		TEST_METHOD(PHP_pushes_processor_status_flags_value_onto_the_stack)
 		{
 			Assert::AreNotEqual(PSType(mem_[0x01FF]).to_string(), reg_.PS.to_string());
 
@@ -31,11 +31,12 @@ namespace OPCodes_ImpliedExecutor
 			Assert::AreEqual(reg_.PS.to_string(), PSType(mem_[0x01FF]).to_string());
 		}
 
-		TEST_METHOD(PHP_pushes_processor_status_flag_value_onto_the_stack_two_times)
+		TEST_METHOD(PHP_pushes_processor_status_flags_value_onto_the_stack_two_times)
 		{
 			auto firstPS = reg_.PS;
 			auto secondPS = PSType(0b010100110);
 			Assert::AreNotEqual(firstPS.to_string(), PSType(mem_[0x01FF]).to_string());
+			Assert::AreNotEqual(secondPS.to_string(), PSType(mem_[0x01FF]).to_string());
 
 			ie_.PHP();
 			reg_.PS = secondPS;
