@@ -22,7 +22,7 @@ namespace OPCodes_ImpliedExecutor
 
 		}
 
-		TEST_METHOD(TAY_copies_value_from_register_A_to_X)
+		TEST_METHOD(TAY_copies_value_from_register_A_to_Y)
 		{
 			reg_.A = int8_t(-21);
 			Assert::AreNotEqual(reg_.A, reg_.Y);
