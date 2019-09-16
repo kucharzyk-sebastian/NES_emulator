@@ -29,7 +29,7 @@ namespace OPCodes_ImpliedExecutor
 
 			ie_.TAX();
 
-			Assert::AreEqual(reg_.A, reg_.A);
+			Assert::AreEqual(reg_.A, reg_.X);
 		}
 
 		TEST_METHOD(TAX_sets_negative_flag_when_result_lt_zero)

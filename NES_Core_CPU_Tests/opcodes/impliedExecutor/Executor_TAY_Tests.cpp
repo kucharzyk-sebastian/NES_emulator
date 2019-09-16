@@ -29,7 +29,7 @@ namespace OPCodes_ImpliedExecutor
 
 			ie_.TAY();
 
-			Assert::AreEqual(reg_.A, reg_.A);
+			Assert::AreEqual(reg_.A, reg_.Y);
 		}
 
 		TEST_METHOD(TAY_sets_negative_flag_when_result_lt_zero)
