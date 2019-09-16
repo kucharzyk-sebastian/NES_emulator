@@ -198,6 +198,7 @@
     <ClCompile Include="opcodes\impliedExecutor\Executor_TSX_Tests.cpp" />
     <ClCompile Include="opcodes\impliedExecutor\Executor_TXA_Tests.cpp" />
     <ClCompile Include="opcodes\impliedExecutor\Executor_TXS_Tests.cpp" />
+    <ClCompile Include="opcodes\impliedExecutor\Executor_TYA_Tests.cpp" />
     <ClCompile Include="registers\Registers_Tests.cpp" />
   </ItemGroup>
   <ItemGroup>

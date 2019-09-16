@@ -138,4 +138,11 @@ namespace nes::cpu::opcodes{
 	{
 		registers_.SP = registers_.X;
 	}
+
+	void ImpliedExecutor::TYA() noexcept
+	{
+		registers_.A = registers_.Y;
+		registers_.PS[static_cast<uint8_t>(rps::Negative)] = registers_.A < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Zero)] = registers_.A == 0 ? true : false;
+	}
 }

@@ -96,5 +96,8 @@
     <ClCompile Include="opcodes\impliedExecutor\Executor_TXS_Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="opcodes\impliedExecutor\Executor_TYA_Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
