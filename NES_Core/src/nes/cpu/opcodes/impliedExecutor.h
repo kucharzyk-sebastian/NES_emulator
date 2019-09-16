@@ -15,8 +15,7 @@ namespace nes::cpu::opcodes{
 		ImpliedExecutor& operator=(ImpliedExecutor&& rhs) = delete;
 
 		// TODO sk: think about changing them to const once all implemented
-		//TODO sk: not implemented yet
-		void BRK() noexcept;
+		void BRK() noexcept; //TODO sk: implement
 		void CLC() noexcept;
 		void CLD() noexcept;
 		void CLI() noexcept;
@@ -30,6 +29,8 @@ namespace nes::cpu::opcodes{
 		void PHP();
 		void PLA();
 		void PLP();
+		void RTI(); //TODO sk: implement
+		void RTS(); //TODO sk: implement
 		void SEC() noexcept;
 		void SED() noexcept;
 		void SEI() noexcept;
