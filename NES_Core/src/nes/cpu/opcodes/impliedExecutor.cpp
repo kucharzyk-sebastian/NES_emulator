@@ -1,7 +1,6 @@
 #include "nes/cpu/opcodes/impliedExecutor.h"
 
 namespace nes::cpu::opcodes{
-	using rps =  registers::ProcessorStatus;
 
 	ImpliedExecutor::ImpliedExecutor(registers::Registers& registers, memory::Memory& memory) :
 		BasicExecutor(registers, memory)

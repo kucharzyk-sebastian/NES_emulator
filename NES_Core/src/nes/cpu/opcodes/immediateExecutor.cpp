@@ -2,7 +2,6 @@
 #include "helpers/math.h"
 
 namespace nes::cpu::opcodes{
-	using rps =  registers::ProcessorStatus;
 
 	ImmediateExecutor::ImmediateExecutor(registers::Registers& registers, memory::Memory& memory) :
 		BasicExecutor(registers, memory)
@@ -11,15 +10,7 @@ namespace nes::cpu::opcodes{
 
 	void ImmediateExecutor::ADC(int8_t value) noexcept
 	{
-		int8_t valWithCarry = value + registers_.PS[static_cast<uint8_t>(rps::Carry)];
-		int8_t result = registers_.A + valWithCarry;
-		registers_.PS[static_cast<uint8_t>(rps::Overflow)] = helpers::math::isOverflow(registers_.A, value, result) ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Carry)] = helpers::math::isCarry(value, registers_.PS[static_cast<uint8_t>(rps::Carry)]) ? 
-			true : helpers::math::isCarry(registers_.A, valWithCarry);
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = result == 0 ? true : false;
-
-		registers_.A = result;
+		registers_.A = BasicExecutor::ADC(registers_.A, value);
 	}
 
 	void ImmediateExecutor::AND(int8_t value) noexcept
