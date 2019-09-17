@@ -26,8 +26,17 @@ namespace nes::cpu::opcodes{
 	void AccumulatorExecutor::ROL() noexcept
 	{
 		int8_t oldCarry = registers_.PS[static_cast<uint8_t>(rps::Carry)];
-		registers_.PS[static_cast<uint8_t>(rps::Carry)] = registers_.A >> (sizeof(unsigned int) * CHAR_BIT - 1);
+		registers_.PS[static_cast<uint8_t>(rps::Carry)] = registers_.A >> (sizeof(int8_t) * CHAR_BIT - 1);
 		registers_.A = (registers_.A << 1) + oldCarry;
+		registers_.PS[static_cast<uint8_t>(rps::Negative)] = registers_.A < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Zero)] = registers_.A == 0 ? true : false;
+	}
+
+	void AccumulatorExecutor::ROR() noexcept
+	{
+		int8_t oldCarry = registers_.PS[static_cast<uint8_t>(rps::Carry)];
+		registers_.PS[static_cast<uint8_t>(rps::Carry)] = registers_.A & 1;
+		registers_.A = (uint8_t(registers_.A) >> 1) + (oldCarry << (sizeof(int8_t) * CHAR_BIT - 1));
 		registers_.PS[static_cast<uint8_t>(rps::Negative)] = registers_.A < 0 ? true : false;
 		registers_.PS[static_cast<uint8_t>(rps::Zero)] = registers_.A == 0 ? true : false;
 	}
