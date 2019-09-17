@@ -13,6 +13,7 @@ namespace nes::cpu::opcodes{
 		AccumulatorExecutor& operator=(AccumulatorExecutor&& rhs) = delete;
 
 		void ASL() noexcept;
+		void LSR() noexcept;
 	private:
 	private:
 	};

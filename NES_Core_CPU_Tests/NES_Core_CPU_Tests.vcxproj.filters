@@ -102,5 +102,8 @@
     <ClCompile Include="opcodes\accumulatorExecutor\Executor_ASL_Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="opcodes\accumulatorExecutor\Executor_LSR_Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
