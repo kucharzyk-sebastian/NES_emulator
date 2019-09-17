@@ -1,5 +1,5 @@
 #pragma once
-#include <limits>
+#include <cstdint>
 
 namespace helpers::math { 
 	inline bool isOverflow(int8_t lhs, int8_t rhs, int8_t result, bool isSubtraction = false) noexcept
