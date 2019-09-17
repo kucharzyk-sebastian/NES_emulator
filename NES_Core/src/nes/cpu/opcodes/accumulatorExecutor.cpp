@@ -22,4 +22,13 @@ namespace nes::cpu::opcodes{
 		registers_.PS[static_cast<uint8_t>(rps::Negative)] = registers_.A < 0 ? true : false;
 		registers_.PS[static_cast<uint8_t>(rps::Zero)] = registers_.A == 0 ? true : false;
 	}
+
+	void AccumulatorExecutor::ROL() noexcept
+	{
+		int8_t oldCarry = registers_.PS[static_cast<uint8_t>(rps::Carry)];
+		registers_.PS[static_cast<uint8_t>(rps::Carry)] = registers_.A >> (sizeof(unsigned int) * CHAR_BIT - 1);
+		registers_.A = (registers_.A << 1) + oldCarry;
+		registers_.PS[static_cast<uint8_t>(rps::Negative)] = registers_.A < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Zero)] = registers_.A == 0 ? true : false;
+	}
 }

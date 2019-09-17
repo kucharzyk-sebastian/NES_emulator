@@ -14,6 +14,7 @@ namespace nes::cpu::opcodes{
 
 		void ASL() noexcept;
 		void LSR() noexcept;
+		void ROL() noexcept;
 	private:
 	private:
 	};
