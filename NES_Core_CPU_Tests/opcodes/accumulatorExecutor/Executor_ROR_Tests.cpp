@@ -5,7 +5,7 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace OPCodes_ImpliedExecutor
+namespace OPCodes_AccumulatorExecutor
 {
 	TEST_CLASS(ROR_Tests)
 	{
