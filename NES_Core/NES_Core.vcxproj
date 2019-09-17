@@ -171,6 +171,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\nes\cpu\opcodes\accumulatorExecutor.h" />
     <ClInclude Include="src\nes\cpu\opcodes\basicExecutor.h" />
     <ClInclude Include="src\helpers\math.h" />
     <ClInclude Include="src\nes\cpu\opcodes\impliedExecutor.h" />
@@ -179,6 +180,7 @@
     <ClInclude Include="src\nes\memory\memory.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\nes\cpu\opcodes\accumulatorExecutor.cpp" />
     <ClCompile Include="src\nes\cpu\opcodes\basicExecutor.cpp" />
     <ClCompile Include="src\nes\cpu\opcodes\impliedExecutor.cpp" />
     <ClCompile Include="src\nes\cpu\opcodes\immediateExecutor.cpp" />
