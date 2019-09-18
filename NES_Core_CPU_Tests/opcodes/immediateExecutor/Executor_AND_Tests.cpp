@@ -21,7 +21,7 @@ namespace OPCodes_ImmediateExecutor
 		{
 		}
 
-		TEST_METHOD(AND_performs_binary_and)
+		TEST_METHOD(AND_performs_binary_and_operation_between_immediate_value_and_A_register)
 		{
 			reg_.A = int8_t(0b00001011);
 
