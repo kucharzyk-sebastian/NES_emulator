@@ -11,4 +11,9 @@ namespace nes::cpu::opcodes{
 	{
 		BasicExecutor::ADC(memory_[page_ + address]);
 	}
+
+	void ZeroPageExecutor::AND(uint8_t address)
+	{
+		BasicExecutor::AND(memory_[page_ + address]);
+	}
 }
