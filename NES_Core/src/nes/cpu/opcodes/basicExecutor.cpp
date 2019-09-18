@@ -38,4 +38,14 @@ namespace nes::cpu::opcodes{
 
 		registers_.A = result;
 	}
+
+	int8_t BasicExecutor::ASL(int8_t value) noexcept
+	{
+		registers_.PS[static_cast<uint8_t>(rps::Carry)] = value >> (sizeof(int8_t) * CHAR_BIT - 1);
+		value = value << 1;
+		registers_.PS[static_cast<uint8_t>(rps::Negative)] = value < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Zero)] = value == 0 ? true : false;
+
+		return value;
+	}
 }

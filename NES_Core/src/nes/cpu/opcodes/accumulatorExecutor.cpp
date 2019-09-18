@@ -9,10 +9,7 @@ namespace nes::cpu::opcodes{
 
 	void nes::cpu::opcodes::AccumulatorExecutor::ASL() noexcept
 	{
-		registers_.PS[static_cast<uint8_t>(rps::Carry)] = registers_.A >> (sizeof(int8_t) * CHAR_BIT - 1);
-		registers_.A = registers_.A << 1;
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = registers_.A < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = registers_.A == 0 ? true : false;
+		registers_.A = BasicExecutor::ASL(registers_.A);
 	}
 
 	void AccumulatorExecutor::LSR() noexcept

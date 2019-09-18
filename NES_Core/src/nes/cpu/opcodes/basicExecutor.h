@@ -15,6 +15,7 @@ namespace nes::cpu::opcodes{
 
 		void ADC(int8_t value) noexcept;
 		void AND(int8_t value) noexcept;
+		int8_t ASL(int8_t value) noexcept;
 	protected:
 		using rps =  registers::ProcessorStatus;
 		registers::Registers& registers_;

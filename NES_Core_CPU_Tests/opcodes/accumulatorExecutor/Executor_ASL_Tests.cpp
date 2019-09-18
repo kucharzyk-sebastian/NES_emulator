@@ -24,97 +24,12 @@ namespace OPCodes_AccumulatorExecutor
 
 		TEST_METHOD(ASL_shifts_A_register_left)
 		{
-			reg_.A = int8_t(0b01110111);
-			Assert::AreNotEqual(int8_t(0b11101110), reg_.A);
+			reg_.A = int8_t(0b11101110);
+			Assert::AreNotEqual(int8_t(0b11011100), reg_.A);
 
 			ae_.ASL();
 
-			Assert::AreEqual(int8_t(0b11101110), reg_.A);
-		}
-
-		TEST_METHOD(ASL_resets_carry_flag_when_most_left_bit_equals_zero)
-		{
-			reg_.A = int8_t(0b01000101);
-			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry));
-			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
-
-			ae_.ASL();
-
-			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
-		}
-
-		TEST_METHOD(ASL_sets_carry_flag_when_most_left_bit_equals_one)
-		{
-			reg_.A = int8_t(0b10010101);
-			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
-
-			ae_.ASL();
-
-			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
-		}
-
-		TEST_METHOD(ASL_sets_zero_flag_when_result_equal_zero)
-		{
-			reg_.A = int8_t(0b10000000);
-			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
-
-			ae_.ASL();
-
-			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
-		}
-
-		TEST_METHOD(ASL_resets_zero_flag_when_result_lt_zero)
-		{
-			reg_.A = int8_t(0b01100100);
-			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
-			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
-
-			ae_.ASL();
-
-			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
-		}
-
-		TEST_METHOD(ASL_resets_zero_flag_when_result_gt_zero)
-		{
-			reg_.A = int8_t(0b00100101);
-			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero));
-			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
-
-			ae_.ASL();
-
-			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Zero)]);
-		}
-
-		TEST_METHOD(ASL_sets_negative_flag_when_result_lt_zero)
-		{
-			reg_.A = int8_t(0b01000000);
-			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
-
-			ae_.ASL();
-
-			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
-		}
-
-		TEST_METHOD(ASL_resets_negative_flag_when_result_gt_zero)
-		{
-			reg_.A = int8_t(0b00000001);
-			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative));
-			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
-
-			ae_.ASL();
-
-			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
-		}
-
-		TEST_METHOD(ASL_resets_negative_flag_when_result_equal_zero)
-		{
-			reg_.A = int8_t(0b00000000);
-			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative));
-			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
-
-			ae_.ASL();
-
-			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
+			Assert::AreEqual(int8_t(0b11011100), reg_.A);
 		}
 	};
 }
