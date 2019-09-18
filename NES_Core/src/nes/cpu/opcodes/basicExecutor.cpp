@@ -29,4 +29,13 @@ namespace nes::cpu::opcodes{
 		registers_.PS[static_cast<uint8_t>(rps::Zero)] = result == 0 ? true : false;
 		registers_.A = result;
 	}
+
+	void BasicExecutor::AND(int8_t value) noexcept
+	{
+		int8_t result = registers_.A & value;
+		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Zero)] = result == 0 ? true : false;
+
+		registers_.A = result;
+	}
 }

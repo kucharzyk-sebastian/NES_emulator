@@ -14,6 +14,7 @@ namespace nes::cpu::opcodes{
 		BasicExecutor& operator=(BasicExecutor&& rhs) = delete;
 
 		void ADC(int8_t value) noexcept;
+		void AND(int8_t value) noexcept;
 	protected:
 		using rps =  registers::ProcessorStatus;
 		registers::Registers& registers_;
