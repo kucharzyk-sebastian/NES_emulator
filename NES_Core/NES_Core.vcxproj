@@ -178,6 +178,7 @@
     <ClInclude Include="src\nes\cpu\opcodes\immediateExecutor.h" />
     <ClInclude Include="src\nes\cpu\registers\registers.h" />
     <ClInclude Include="src\nes\memory\memory.h" />
+    <ClInclude Include="src\nes\cpu\opcodes\zeroPageExecutor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\nes\cpu\opcodes\accumulatorExecutor.cpp" />
@@ -185,6 +186,7 @@
     <ClCompile Include="src\nes\cpu\opcodes\impliedExecutor.cpp" />
     <ClCompile Include="src\nes\cpu\opcodes\immediateExecutor.cpp" />
     <ClCompile Include="src\nes\memory\memory.cpp" />
+    <ClCompile Include="src\nes\cpu\opcodes\zeroPageExecutor.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
