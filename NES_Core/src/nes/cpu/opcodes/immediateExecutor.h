@@ -4,7 +4,7 @@
 #include "nes/cpu/opcodes/basicExecutor.h"
 
 namespace nes::cpu::opcodes{
-	class ImmediateExecutor : public BasicExecutor
+	class ImmediateExecutor : private BasicExecutor
 	{
 	public:
 		ImmediateExecutor(registers::Registers& registers, memory::Memory& memory);

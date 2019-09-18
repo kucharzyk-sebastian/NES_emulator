@@ -10,7 +10,7 @@ namespace nes::cpu::opcodes{
 
 	void ImmediateExecutor::ADC(int8_t value) noexcept
 	{
-		registers_.A = BasicExecutor::ADC(registers_.A, value);
+		BasicExecutor::ADC(value);
 	}
 
 	void ImmediateExecutor::AND(int8_t value) noexcept

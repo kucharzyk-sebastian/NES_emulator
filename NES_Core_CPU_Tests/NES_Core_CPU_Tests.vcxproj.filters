@@ -21,9 +21,6 @@
     <ClCompile Include="memory\Memory_Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="opcodes\immediateExecutor\Executor_ADC_Tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="opcodes\immediateExecutor\Executor_AND_Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -109,6 +106,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="opcodes\accumulatorExecutor\Executor_ROR_Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="opcodes\basicExecutor\Executor_ADC_Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="opcodes\immediateExecutor\Executor_ADC_Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

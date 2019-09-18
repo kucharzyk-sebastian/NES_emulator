@@ -106,6 +106,7 @@
       <UseFullPaths>true</UseFullPaths>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -123,6 +124,7 @@
       <UseFullPaths>true</UseFullPaths>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -142,6 +144,7 @@
       <UseFullPaths>true</UseFullPaths>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -163,6 +166,7 @@
       <UseFullPaths>true</UseFullPaths>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -177,6 +181,7 @@
     <ClCompile Include="opcodes\accumulatorExecutor\Executor_LSR_Tests.cpp" />
     <ClCompile Include="opcodes\accumulatorExecutor\Executor_ROL_Tests.cpp" />
     <ClCompile Include="opcodes\accumulatorExecutor\Executor_ROR_Tests.cpp" />
+    <ClCompile Include="opcodes\basicExecutor\Executor_ADC_Tests.cpp" />
     <ClCompile Include="opcodes\immediateExecutor\Executor_ADC_Tests.cpp" />
     <ClCompile Include="opcodes\immediateExecutor\Executor_AND_Tests.cpp" />
     <ClCompile Include="opcodes\immediateExecutor\Executor_CMP_Tests.cpp" />
