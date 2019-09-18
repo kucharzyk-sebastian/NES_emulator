@@ -212,6 +212,7 @@
     <ClCompile Include="opcodes\impliedExecutor\Executor_TYA_Tests.cpp" />
     <ClCompile Include="opcodes\zeroPageExecutor\Executor_ADC_Tests.cpp" />
     <ClCompile Include="opcodes\zeroPageExecutor\Executor_AND_Tests.cpp" />
+    <ClCompile Include="opcodes\zeroPageExecutor\Executor_ASL_Tests.cpp" />
     <ClCompile Include="registers\Registers_Tests.cpp" />
   </ItemGroup>
   <ItemGroup>

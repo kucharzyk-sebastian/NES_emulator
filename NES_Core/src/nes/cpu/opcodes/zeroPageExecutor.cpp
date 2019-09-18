@@ -16,4 +16,10 @@ namespace nes::cpu::opcodes{
 	{
 		BasicExecutor::AND(memory_[page_ + address]);
 	}
+
+	void ZeroPageExecutor::ASL(uint8_t address)
+	{
+		address = page_ + address;
+		memory_[address] = BasicExecutor::ASL(memory_[address]);
+	}
 }
