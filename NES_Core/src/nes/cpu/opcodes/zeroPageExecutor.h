@@ -15,6 +15,7 @@ namespace nes::cpu::opcodes{
 		void ADC(uint8_t address);
 		void AND(uint8_t address);
 		void ASL(uint8_t address);
+		void BIT(uint8_t address);
 	private:
 		uint8_t page_ = 0x0000;
 	};

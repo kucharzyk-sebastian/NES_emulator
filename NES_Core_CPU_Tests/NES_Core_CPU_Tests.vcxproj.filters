@@ -129,5 +129,8 @@
     <ClCompile Include="opcodes\zeroPageExecutor\Executor_ASL_Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="opcodes\zeroPageExecutor\Executor_BIT_Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

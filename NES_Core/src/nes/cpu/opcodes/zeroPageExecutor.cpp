@@ -22,4 +22,12 @@ namespace nes::cpu::opcodes{
 		address = page_ + address;
 		memory_[address] = BasicExecutor::ASL(memory_[address]);
 	}
+
+	void ZeroPageExecutor::BIT(uint8_t address)
+	{
+		int8_t result = memory_[page_ + address] & registers_.A;
+		registers_.PS[static_cast<uint8_t>(rps::Zero)] = result == 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Overflow)] = result & 0b01000000;
+	}
 }
