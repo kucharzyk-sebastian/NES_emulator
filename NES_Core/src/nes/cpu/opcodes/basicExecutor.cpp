@@ -48,4 +48,27 @@ namespace nes::cpu::opcodes{
 
 		return value;
 	}
+
+	void BasicExecutor::CMP(int8_t value) noexcept
+	{
+		compareWithFlags(registers_.A, value);
+	}
+
+	void BasicExecutor::CPX(int8_t value) noexcept
+	{
+		compareWithFlags(registers_.X, value);
+	}
+
+	void BasicExecutor::CPY(int8_t value) noexcept
+	{
+		compareWithFlags(registers_.Y, value);
+	}
+
+
+	void BasicExecutor::compareWithFlags(int8_t registerValue, int8_t inputValue) noexcept
+	{
+		registers_.PS[static_cast<uint8_t>(rps::Carry)] = static_cast<uint8_t>(registerValue) >= static_cast<uint8_t>(inputValue) ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Negative)] = (registerValue - inputValue) < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Zero)] = registerValue == inputValue ? true : false;
+	}
 }

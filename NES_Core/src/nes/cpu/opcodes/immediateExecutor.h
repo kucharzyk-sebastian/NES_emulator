@@ -27,10 +27,7 @@ namespace nes::cpu::opcodes{
 		void ORA(int8_t value) noexcept;
 		void SBC(int8_t value) noexcept;
 	private:
-
-	private:
 		// TODO sk: think how to get rid of hardcoded 8 size
-		static void compareWithFlags(int8_t& reg, int8_t value, std::bitset<8>& flags) noexcept;
 		static void loadWithFlags(int8_t& reg, int8_t value, std::bitset<8>& flags) noexcept;
 	};
 }

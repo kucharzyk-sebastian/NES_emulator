@@ -20,17 +20,17 @@ namespace nes::cpu::opcodes{
 
 	void ImmediateExecutor::CMP(int8_t value) noexcept
 	{
-		compareWithFlags(registers_.A, value, registers_.PS);
+		BasicExecutor::CMP(value);
 	}
 
 	void ImmediateExecutor::CPX(int8_t value) noexcept
 	{
-		compareWithFlags(registers_.X, value, registers_.PS);
+		BasicExecutor::CPX(value);
 	}
 
 	void ImmediateExecutor::CPY(int8_t value) noexcept
 	{
-		compareWithFlags(registers_.Y, value, registers_.PS);
+		BasicExecutor::CPY(value);
 	}
 
 	void ImmediateExecutor::EOR(int8_t value) noexcept
@@ -70,13 +70,6 @@ namespace nes::cpu::opcodes{
 	void ImmediateExecutor::SBC(int8_t value) noexcept
 	{
 		ADC(~value);
-	}
-
-	void ImmediateExecutor::compareWithFlags(int8_t& reg, int8_t value, std::bitset<8>& flags) noexcept
-	{
-		flags[static_cast<uint8_t>(rps::Carry)] = static_cast<uint8_t>(reg) >= static_cast<uint8_t>(value) ? true : false;
-		flags[static_cast<uint8_t>(rps::Negative)] = (reg - value) < 0 ? true : false;
-		flags[static_cast<uint8_t>(rps::Zero)] = reg == value ? true : false;
 	}
 
 	void ImmediateExecutor::loadWithFlags(int8_t& reg, int8_t value, std::bitset<8>& flags) noexcept

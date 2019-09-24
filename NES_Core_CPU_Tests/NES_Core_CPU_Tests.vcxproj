@@ -184,6 +184,9 @@
     <ClCompile Include="opcodes\basicExecutor\Executor_ADC_Tests.cpp" />
     <ClCompile Include="opcodes\basicExecutor\Executor_AND_Tests.cpp" />
     <ClCompile Include="opcodes\basicExecutor\Executor_ASL_Tests.cpp" />
+    <ClCompile Include="opcodes\basicExecutor\Executor_CMP_Tests.cpp" />
+    <ClCompile Include="opcodes\basicExecutor\Executor_CPX_Tests.cpp" />
+    <ClCompile Include="opcodes\basicExecutor\Executor_CPY_Tests.cpp" />
     <ClCompile Include="opcodes\immediateExecutor\Executor_ADC_Tests.cpp" />
     <ClCompile Include="opcodes\immediateExecutor\Executor_AND_Tests.cpp" />
     <ClCompile Include="opcodes\immediateExecutor\Executor_CMP_Tests.cpp" />
