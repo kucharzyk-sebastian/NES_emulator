@@ -16,6 +16,9 @@ namespace nes::cpu::opcodes{
 		void AND(uint8_t address);
 		void ASL(uint8_t address);
 		void BIT(uint8_t address);
+		void CMP(uint8_t address);
+		void CPX(uint8_t address);
+		void CPY(uint8_t address);
 	private:
 		uint8_t page_ = 0x0000;
 	};

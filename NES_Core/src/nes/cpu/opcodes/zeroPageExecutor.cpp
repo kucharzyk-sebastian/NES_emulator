@@ -30,4 +30,19 @@ namespace nes::cpu::opcodes{
 		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
 		registers_.PS[static_cast<uint8_t>(rps::Overflow)] = result & 0b01000000;
 	}
+
+	void ZeroPageExecutor::CMP(uint8_t address)
+	{
+		BasicExecutor::CMP(memory_[page_ + address]);
+	}
+
+	void ZeroPageExecutor::CPX(uint8_t address)
+	{
+		BasicExecutor::CPX(memory_[page_ + address]);
+	}
+
+	void ZeroPageExecutor::CPY(uint8_t address)
+	{
+		BasicExecutor::CPY(memory_[page_ + address]);
+	}
 }
