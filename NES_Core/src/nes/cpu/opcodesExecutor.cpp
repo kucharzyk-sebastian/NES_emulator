@@ -304,30 +304,23 @@ namespace nes::cpu{
 
 	void OpcodesExecutor::TAX() noexcept
 	{
-		registers_.X = registers_.A;
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = registers_.X < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = registers_.X == 0 ? true : false;
+		transferWithFlags(registers_.A, registers_.X);
 	}
 
 	void OpcodesExecutor::TAY() noexcept
 	{
-		registers_.Y = registers_.A;
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = registers_.Y < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = registers_.Y == 0 ? true : false;
+		transferWithFlags(registers_.A, registers_.Y);
 	}
 
 	void OpcodesExecutor::TSX() noexcept
 	{
-		registers_.X = int8_t(registers_.SP);
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = registers_.X < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = registers_.X == 0 ? true : false;
+		int8_t castedSP = int8_t(registers_.SP);
+		transferWithFlags(castedSP, registers_.X);
 	}
 
 	void OpcodesExecutor::TXA() noexcept
 	{
-		registers_.A = registers_.X;
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = registers_.A < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = registers_.A == 0 ? true : false;
+		transferWithFlags(registers_.X, registers_.A);
 	}
 
 	void OpcodesExecutor::TXS() noexcept
@@ -337,9 +330,7 @@ namespace nes::cpu{
 
 	void OpcodesExecutor::TYA() noexcept
 	{
-		registers_.A = registers_.Y;
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = registers_.A < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = registers_.A == 0 ? true : false;
+		transferWithFlags(registers_.Y, registers_.A);
 	}
 
 
@@ -400,6 +391,13 @@ namespace nes::cpu{
 		registers_.PS[static_cast<uint8_t>(rps::Zero)] = value == 0 ? true : false;
 
 		return value;
+	}
+
+	void OpcodesExecutor::transferWithFlags(int8_t& src, int8_t& dest)
+	{
+		dest = src;
+		registers_.PS[static_cast<uint8_t>(rps::Negative)] = src < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Zero)] = src == 0 ? true : false;
 	}
 
 

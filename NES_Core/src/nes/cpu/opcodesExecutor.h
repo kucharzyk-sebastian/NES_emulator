@@ -100,6 +100,7 @@ namespace nes::cpu{
 		int8_t shiftRightWithFlags(int8_t value) noexcept;
 		int8_t rotateLeftWithFlags(int8_t value) noexcept;
 		int8_t rotateRightWithFlags(int8_t value) noexcept;
+		void transferWithFlags(int8_t& src, int8_t& dest);
 		void compareWithFlags(int8_t registerValue, int8_t inputValue) noexcept;
 		//todo sk: try to extract PSSize to ProcessorStatus enum
 		static void loadWithFlags(int8_t& reg, int8_t value, std::bitset<registers::Registers::PSSize> & flags) noexcept;
