@@ -162,5 +162,11 @@
     <ClCompile Include="opcodes\Executor_NOP_Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="opcodes\Executor_RTI_Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="opcodes\Executor_RTS_Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
