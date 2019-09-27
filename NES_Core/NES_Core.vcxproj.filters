@@ -18,25 +18,13 @@
     <ClInclude Include="src\helpers\math.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\nes\cpu\registers\registers.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
     <ClInclude Include="src\nes\memory\memory.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\nes\cpu\opcodes\immediateExecutor.h">
+    <ClInclude Include="src\nes\cpu\opcodesExecutor.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\nes\cpu\opcodes\impliedExecutor.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="src\nes\cpu\opcodes\basicExecutor.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="src\nes\cpu\opcodes\accumulatorExecutor.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="src\nes\cpu\opcodes\zeroPageExecutor.h">
+    <ClInclude Include="src\nes\cpu\registers.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
@@ -44,19 +32,7 @@
     <ClCompile Include="src\nes\memory\memory.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="src\nes\cpu\opcodes\immediateExecutor.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="src\nes\cpu\opcodes\impliedExecutor.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="src\nes\cpu\opcodes\basicExecutor.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="src\nes\cpu\opcodes\accumulatorExecutor.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="src\nes\cpu\opcodes\zeroPageExecutor.cpp">
+    <ClCompile Include="src\nes\cpu\opcodesExecutor.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>

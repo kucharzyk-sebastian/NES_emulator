@@ -1,5 +1,5 @@
 #include "CppUnitTest.h"
-#include "nes/cpu/registers/registers.h"
+#include "nes/cpu/registers.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
