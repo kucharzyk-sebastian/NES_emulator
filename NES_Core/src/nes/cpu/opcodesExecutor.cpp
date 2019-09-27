@@ -209,6 +209,27 @@ namespace nes::cpu{
 		registers_.Y = incrementWithFlags(registers_.Y);
 	}
 
+	void OpcodesExecutor::JMP_absolute(uint16_t value)
+	{
+		registers_.PC = value;
+	}
+
+	// there's a common bug in 6502 Jump method. For example if address $3000 contains $40, $30FF contains $80, and $3100 contains $50, 
+	// the result of JMP ($30FF) will be a transfer of control to $4080 rather than $5080 as you intended
+	// i.e. the 6502 took the low byte of the address from $30FF and the high byte from $3000.
+	void OpcodesExecutor::JMP_indirect(uint16_t address)
+	{
+		registers_.PC = ((address & 0xFF) == 0xFF ? memory_[address & 0xFF00] << CHAR_BIT : memory_[address + 1] << CHAR_BIT) + uint8_t(memory_[address]);
+	}
+
+	void OpcodesExecutor::JSR(uint16_t value)
+	{
+		uint16_t returnPoint = --registers_.PC;
+		writeToStack(returnPoint >> CHAR_BIT);
+		writeToStack(returnPoint & 0x00FF);
+		registers_.PC = value;
+	}
+
 	void OpcodesExecutor::LDA(int8_t value) noexcept
 	{
 		loadWithFlags(registers_.A, value, registers_.PS);

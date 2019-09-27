@@ -187,6 +187,8 @@
     <ClCompile Include="opcodes\Executor_BVS_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_DEC_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_INC_Tests.cpp" />
+    <ClCompile Include="opcodes\Executor_JMP_Tests.cpp" />
+    <ClCompile Include="opcodes\Executor_JSR_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_LSR_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_ROL_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_ROR_Tests.cpp" />
