@@ -21,7 +21,7 @@ namespace Registers_Tests
 			Assert::AreEqual(int8_t(0), reg_.A);
 			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
 			Assert::AreEqual(int(uint16_t(0)), int(reg_.PC));
-			Assert::AreEqual(std::bitset<8>(0b00110100).to_string(), reg_.PS.to_string());
+			Assert::AreEqual(std::bitset<8>(0b00100100).to_string(), reg_.PS.to_string());
 			Assert::AreEqual(uint8_t(0xFF), reg_.SP);
 			Assert::AreEqual(int8_t(0), reg_.X);
 			Assert::AreEqual(int8_t(0), reg_.Y);

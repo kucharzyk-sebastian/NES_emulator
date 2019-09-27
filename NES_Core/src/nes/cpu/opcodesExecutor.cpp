@@ -103,6 +103,16 @@ namespace nes::cpu{
 			registers_.PC += value;
 	}
 
+	void OpcodesExecutor::BRK()
+	{
+		//todo sk: extract reading/writing 2bytes from stack to common place;
+		writeToStack(registers_.PC >> CHAR_BIT);
+		writeToStack(registers_.PC & 0x00FF);
+		writeToStack(registers_.PS.to_ulong());
+		registers_.PC = uint8_t(memory_[interruptVectorLSB]) + (memory_[interruptVectorMSB] << CHAR_BIT);
+		registers_.PS.set(static_cast<uint8_t>(rps::Break));
+	}
+
 	void OpcodesExecutor::BVC(int8_t value) noexcept
 	{
 		if (!registers_.PS[static_cast<uint8_t>(rps::Overflow)])
@@ -334,12 +344,12 @@ namespace nes::cpu{
 	void OpcodesExecutor::RTI()
 	{
 		registers_.PS = std::bitset<registers::Registers::PSSize>(readFromStack());
-		registers_.PC = uint8_t(readFromStack()) + (readFromStack() << 8);
+		registers_.PC = uint8_t(readFromStack()) + (readFromStack() << CHAR_BIT);
 	}
 
 	void OpcodesExecutor::RTS()
 	{
-		registers_.PC = uint8_t(readFromStack()) + (readFromStack() << 8) + 1;
+		registers_.PC = uint8_t(readFromStack()) + (readFromStack() << CHAR_BIT) + 1;
 	}
 
 	void OpcodesExecutor::SBC(int8_t value) noexcept

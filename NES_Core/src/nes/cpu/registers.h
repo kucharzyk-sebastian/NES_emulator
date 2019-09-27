@@ -30,7 +30,7 @@ namespace nes::cpu::registers {
 			X(0),
 			Y(0),
 			SP(0xFF),
-			PS(0b00110100),
+			PS(0b00100100),
 			PC(0)
 		{
 		}

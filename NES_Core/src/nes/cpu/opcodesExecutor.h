@@ -26,7 +26,7 @@ namespace nes::cpu{
 		void BMI(int8_t value) noexcept;
 		void BNE(int8_t value) noexcept;
 		void BPL(int8_t value) noexcept;
-		void BRK(); // TODO sk: implement
+		void BRK();
 		void BVC(int8_t value) noexcept;
 		void BVS(int8_t value) noexcept;
 		void CLC() noexcept;
@@ -95,6 +95,8 @@ namespace nes::cpu{
 		void writeToStack(int8_t value);
 	private:
 		static constexpr uint16_t stackPage_ = uint16_t(0x0100);
+		static constexpr uint16_t interruptVectorLSB = uint16_t(0xFFFE);
+		static constexpr uint16_t interruptVectorMSB = uint16_t(0xFFFF);
 	private:
 		int8_t shiftLeftWithFlags(int8_t value) noexcept;
 		int8_t decrementWithFlags(int8_t value) noexcept;

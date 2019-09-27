@@ -183,6 +183,7 @@
     <ClCompile Include="opcodes\Executor_BMI_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_BNE_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_BPL_Tests.cpp" />
+    <ClCompile Include="opcodes\Executor_BRK_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_BVC_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_BVS_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_DEC_Tests.cpp" />
