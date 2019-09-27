@@ -209,7 +209,7 @@ namespace nes::cpu{
 		registers_.Y = incrementWithFlags(registers_.Y);
 	}
 
-	void OpcodesExecutor::JMP_absolute(uint16_t value)
+	void OpcodesExecutor::JMP_absolute(uint16_t value) noexcept
 	{
 		registers_.PC = value;
 	}
@@ -270,9 +270,9 @@ namespace nes::cpu{
 		memory_[address] = shiftRightWithFlags(memory_[address]);
 	}
 
-	//TODO sk: probably will need to increase program counter
 	void OpcodesExecutor::NOP() noexcept
 	{
+		++registers_.PC;
 	}
 
 	void OpcodesExecutor::ORA(int8_t value) noexcept

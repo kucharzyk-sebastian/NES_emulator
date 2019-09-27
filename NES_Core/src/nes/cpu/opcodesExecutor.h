@@ -47,7 +47,7 @@ namespace nes::cpu{
 		void INC(uint16_t address);
 		void INX() noexcept;
 		void INY() noexcept;
-		void JMP_absolute(uint16_t value);
+		void JMP_absolute(uint16_t value) noexcept;
 		void JMP_indirect(uint16_t address);
 		void JSR(uint16_t value);
 		void LDA(int8_t value) noexcept;
