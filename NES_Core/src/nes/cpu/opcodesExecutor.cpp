@@ -331,6 +331,17 @@ namespace nes::cpu{
 		memory_[address] = rotateRightWithFlags(memory_[address]);
 	}
 
+	void OpcodesExecutor::RTI()
+	{
+		registers_.PS = std::bitset<registers::Registers::PSSize>(readFromStack());
+		registers_.PC = uint8_t(readFromStack()) + (readFromStack() << 8);
+	}
+
+	void OpcodesExecutor::RTS()
+	{
+		registers_.PC = uint8_t(readFromStack()) + (readFromStack() << 8) + 1;
+	}
+
 	void OpcodesExecutor::SBC(int8_t value) noexcept
 	{
 		ADC(int8_t(~value));

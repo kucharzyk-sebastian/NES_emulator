@@ -69,8 +69,8 @@ namespace nes::cpu{
 		void ROL(uint16_t address);
 		void ROR() noexcept;
 		void ROR(uint16_t address);
-		void RTI(); // TODO sk: implement
-		void RTS(); // TODO sk: implement
+		void RTI();
+		void RTS();
 		void SBC(int8_t value) noexcept;
 		void SBC(uint16_t address);
 		void SEC() noexcept;
