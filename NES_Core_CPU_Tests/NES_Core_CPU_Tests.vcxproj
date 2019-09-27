@@ -203,6 +203,9 @@
     <ClCompile Include="opcodes\Executor_PHP_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_PLA_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_PLP_Tests.cpp" />
+    <ClCompile Include="opcodes\Executor_STA_Tests.cpp" />
+    <ClCompile Include="opcodes\Executor_STX_Tests.cpp" />
+    <ClCompile Include="opcodes\Executor_STY_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_TAX_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_TAY_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_TSX_Tests.cpp" />

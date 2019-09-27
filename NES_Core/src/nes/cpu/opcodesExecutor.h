@@ -74,9 +74,9 @@ namespace nes::cpu{
 		void SEC() noexcept;
 		void SED() noexcept;
 		void SEI() noexcept;
-		void STA();  // TODO sk: implement
-		void STX(); // TODO sk: implement
-		void STY(); // TODO sk: implement
+		void STA(uint16_t address);
+		void STX(uint16_t address);
+		void STY(uint16_t address);
 		void TAX() noexcept;
 		void TAY() noexcept;
 		void TSX() noexcept;

@@ -287,6 +287,21 @@ namespace nes::cpu{
 		registers_.PS.set(static_cast<uint8_t>(rps::InterruptDisable));
 	}
 
+	void OpcodesExecutor::STA(uint16_t address)
+	{
+		memory_[address] = registers_.A;
+	}
+
+	void OpcodesExecutor::STX(uint16_t address)
+	{
+		memory_[address] = registers_.X;
+	}
+
+	void OpcodesExecutor::STY(uint16_t address)
+	{
+		memory_[address] = registers_.Y;
+	}
+
 	void OpcodesExecutor::TAX() noexcept
 	{
 		registers_.X = registers_.A;
