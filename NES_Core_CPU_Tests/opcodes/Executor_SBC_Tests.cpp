@@ -158,8 +158,8 @@ namespace OpcodesExecutor
 		TEST_METHOD(SBC_sets_carry_flag_with_unsigned_register_A_gt_input)
 		{
 			reg_.A = uint8_t(9);
-			reg_.PS.set(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry));
-			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
+			reg_.PS.reset(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry));
+			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
 
 			oe_.SBC(int8_t(8));
 
