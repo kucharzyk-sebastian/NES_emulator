@@ -34,9 +34,8 @@ namespace OpcodesExecutor
 
 		TEST_METHOD(LSR_shifts_value_in_memory_right)
 		{
-			int8_t value = 0b10100111;
 			uint16_t address = 0x2056;
-			mem_[address] = value;
+			mem_[address] = int8_t(0b10100111);
 			Assert::AreNotEqual(int8_t(0b01010011), mem_[address]);
 
 			oe_.LSR(address);

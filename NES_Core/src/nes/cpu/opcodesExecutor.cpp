@@ -59,12 +59,60 @@ namespace nes::cpu{
 		memory_[address] = shiftLeftWithFlags(memory_[address]);
 	}
 
+	void OpcodesExecutor::BCC(int8_t value) noexcept
+	{
+		if (!registers_.PS[static_cast<uint8_t>(rps::Carry)])
+			registers_.PC += value;
+	}
+
+	void OpcodesExecutor::BCS(int8_t value) noexcept
+	{
+		if (registers_.PS[static_cast<uint8_t>(rps::Carry)])
+			registers_.PC += value;
+	}
+
+	void OpcodesExecutor::BEQ(int8_t value) noexcept
+	{
+		if (registers_.PS[static_cast<uint8_t>(rps::Zero)])
+			registers_.PC += value;
+	}
+
 	void OpcodesExecutor::BIT(uint16_t address)
 	{
 		int8_t result = memory_[address] & registers_.A;
 		registers_.PS[static_cast<uint8_t>(rps::Zero)] = result == 0 ? true : false;
 		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
 		registers_.PS[static_cast<uint8_t>(rps::Overflow)] = result & 0b01000000;
+	}
+
+	void OpcodesExecutor::BMI(int8_t value) noexcept
+	{
+		if (registers_.PS[static_cast<uint8_t>(rps::Negative)])
+			registers_.PC += value;
+	}
+
+	void OpcodesExecutor::BNE(int8_t value) noexcept
+	{
+		if (!registers_.PS[static_cast<uint8_t>(rps::Zero)])
+			registers_.PC += value;
+	}
+
+	void OpcodesExecutor::BPL(int8_t value) noexcept
+	{
+		if (!registers_.PS[static_cast<uint8_t>(rps::Negative)])
+			registers_.PC += value;
+	}
+
+	void OpcodesExecutor::BVC(int8_t value) noexcept
+	{
+		if (!registers_.PS[static_cast<uint8_t>(rps::Overflow)])
+			registers_.PC += value;
+	}
+
+	void OpcodesExecutor::BVS(int8_t value) noexcept
+	{
+		if (registers_.PS[static_cast<uint8_t>(rps::Overflow)])
+			registers_.PC += value;
 	}
 
 	void OpcodesExecutor::CMP(int8_t value) noexcept

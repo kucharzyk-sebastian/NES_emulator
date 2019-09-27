@@ -19,15 +19,16 @@ namespace nes::cpu{
 		void AND(uint16_t address);
 		void ASL() noexcept;
 		void ASL(uint16_t address);
-		void BCC(); // TODO sk: implement
-		void BCS(); // TODO sk: implement
-		void BEQ(); // TODO sk: implement
+		void BCC(int8_t value) noexcept;
+		void BCS(int8_t value) noexcept;
+		void BEQ(int8_t value) noexcept;
 		void BIT(uint16_t address);
-		void BMI(); // TODO sk: implement
-		void BNE(); // TODO sk: implement
-		void BPL(); // TODO sk: implement
+		void BMI(int8_t value) noexcept;
+		void BNE(int8_t value) noexcept;
+		void BPL(int8_t value) noexcept;
 		void BRK(); // TODO sk: implement
-		void BVC(); // TODO sk: implement
+		void BVC(int8_t value) noexcept;
+		void BVS(int8_t value) noexcept;
 		void CLC() noexcept;
 		void CLD() noexcept;
 		void CLI() noexcept;

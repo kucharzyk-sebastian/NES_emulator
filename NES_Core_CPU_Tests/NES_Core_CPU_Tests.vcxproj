@@ -177,6 +177,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="memory\Memory_Tests.cpp" />
+    <ClCompile Include="opcodes\Executor_BCC_Tests.cpp" />
+    <ClCompile Include="opcodes\Executor_BCS_Tests.cpp" />
+    <ClCompile Include="opcodes\Executor_BEQ_Tests.cpp" />
+    <ClCompile Include="opcodes\Executor_BMI_Tests.cpp" />
+    <ClCompile Include="opcodes\Executor_BNE_Tests.cpp" />
+    <ClCompile Include="opcodes\Executor_BPL_Tests.cpp" />
+    <ClCompile Include="opcodes\Executor_BVC_Tests.cpp" />
+    <ClCompile Include="opcodes\Executor_BVS_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_DEC_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_INC_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_LSR_Tests.cpp" />
