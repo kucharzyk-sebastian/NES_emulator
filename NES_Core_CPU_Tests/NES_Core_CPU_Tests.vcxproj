@@ -176,7 +176,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cpu\CPU_performInstruction_absoluteX_Tests.cpp" />
+    <ClCompile Include="cpu\CPU_performInstruction_absoluteY_Tests.cpp.cpp" />
+    <ClCompile Include="cpu\CPU_performInstruction_absolute_Tests.cpp" />
+    <ClCompile Include="cpu\CPU_performInstruction_immediate_Tests.cpp" />
+    <ClCompile Include="cpu\CPU_performInstruction_indirectX_Tests.cpp" />
+    <ClCompile Include="cpu\CPU_performInstruction_indirectY_Tests.cpp" />
+    <ClCompile Include="cpu\CPU_performInstruction_zeroPageX_Tests.cpp" />
+    <ClCompile Include="cpu\CPU_performInstruction_zeroPage_Tests.cpp.cpp" />
     <ClCompile Include="memory\Memory_Tests.cpp" />
+    <ClCompile Include="memory\RomLoader_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_BCC_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_BCS_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_BEQ_Tests.cpp" />

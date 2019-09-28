@@ -24,7 +24,7 @@ namespace nes::cpu::registers {
 		int8_t Y;
 		uint8_t SP;
 		uint16_t PC;
-		static constexpr uint8_t PSSize = magic_enum::enum_count<ProcessorStatus>();;
+		static constexpr size_t PSSize = magic_enum::enum_count<ProcessorStatus>();
 		std::bitset<PSSize> PS;
 
 		constexpr Registers() noexcept :

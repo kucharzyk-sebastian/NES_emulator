@@ -171,15 +171,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\nes\cpu\cpu.h" />
     <ClInclude Include="src\nes\cpu\opcodesExecutor.h" />
     <ClInclude Include="src\helpers\math.h" />
     <ClInclude Include="src\nes\cpu\registers.h" />
     <ClInclude Include="src\nes\memory\memory.h" />
+    <ClInclude Include="src\nes\memory\romLoader.h" />
     <ClInclude Include="src\thirdparty\magicEnum.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\nes\cpu\cpu.cpp" />
     <ClCompile Include="src\nes\cpu\opcodesExecutor.cpp" />
     <ClCompile Include="src\nes\memory\memory.cpp" />
+    <ClCompile Include="src\nes\memory\romLoader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
