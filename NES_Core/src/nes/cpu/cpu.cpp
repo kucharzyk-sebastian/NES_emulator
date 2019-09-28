@@ -264,6 +264,18 @@ namespace nes::cpu
 			case BVS_rel:
 				executor_.BVS(extractRelativevalueWithProgramCounter());
 				break;
+			case CLC_imp:
+				executor_.CLC();
+				break;
+			case CLD_imp:
+				executor_.CLD();
+				break;
+			case CLI_imp:
+				executor_.CLI();
+				break;
+			case CLV_imp:
+				executor_.CLV();
+				break;
 			
 
 
