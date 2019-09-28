@@ -70,5 +70,39 @@ namespace CPU
 			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
 			Assert::AreEqual(int(uint16_t(0x0803)), int(reg_.PC));
 		}
+
+		TEST_METHOD(performInstruction_CMP)
+		{
+			reg_.X = int8_t(0x05);
+			reg_.A = int8_t(1);
+			mem_[reg_.PC] = int8_t(0xDD);
+			mem_[reg_.PC + 1] = int8_t(0x76);
+			mem_[reg_.PC + 2] = int8_t(0xF4);
+			mem_[0xF476 + reg_.X] = int8_t(2);
+			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
+
+			cpu_.performInstruction();
+
+			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
+			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
+			Assert::AreEqual(int(uint16_t(0x0803)), int(reg_.PC));
+		}
+
+		TEST_METHOD(performInstruction_DEC)
+		{
+			reg_.X = int8_t(0xa0);
+			reg_.A = int8_t(1);
+			mem_[reg_.PC] = int8_t(0xDE);
+			mem_[reg_.PC + 1] = int8_t(0x02);
+			mem_[reg_.PC + 2] = int8_t(0x01);
+			int8_t value = 8;
+			mem_[0x0102 + uint8_t(reg_.X)] = value;
+
+			cpu_.performInstruction();
+
+			Assert::AreEqual(--value, mem_[0x0102 + uint8_t(reg_.X)]);
+			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
+			Assert::AreEqual(int(uint16_t(0x0803)), int(reg_.PC));
+		}
 	};
 }

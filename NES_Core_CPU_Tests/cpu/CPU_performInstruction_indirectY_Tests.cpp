@@ -58,5 +58,23 @@ namespace CPU
 			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
 			Assert::AreEqual(int(uint16_t(0x0802)), int(reg_.PC));
 		}
+
+		TEST_METHOD(performInstruction_CMP)
+		{
+			reg_.A = int8_t(1);
+			reg_.Y = int8_t(0xFF);
+			mem_[reg_.PC] = int8_t(0xD1);
+			mem_[reg_.PC + 1] = int8_t(0xFF);
+			mem_[0x00FF] = int8_t(0x03);
+			mem_[0x0100] = int8_t(0x65);
+			mem_[0x6503 + uint8_t(reg_.Y)] = int8_t(2);
+			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
+
+			cpu_.performInstruction();
+
+			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
+			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
+			Assert::AreEqual(int(uint16_t(0x0802)), int(reg_.PC));
+		}
 	};
 }

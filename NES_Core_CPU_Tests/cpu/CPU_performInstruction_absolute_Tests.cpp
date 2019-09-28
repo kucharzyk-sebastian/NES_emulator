@@ -83,5 +83,68 @@ namespace CPU
 			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
 			Assert::AreEqual(int(uint16_t(0x0803)), int(reg_.PC));
 		}
+
+		TEST_METHOD(performInstruction_CMP)
+		{
+			reg_.A = int8_t(1);
+			mem_[reg_.PC] = int8_t(0xCD);
+			mem_[reg_.PC + 1] = int8_t(0x01);
+			mem_[reg_.PC + 2] = int8_t(0xc3);
+			mem_[0xc301] =  int8_t(2);
+			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
+
+			cpu_.performInstruction();
+
+			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
+			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
+			Assert::AreEqual(int(uint16_t(0x0803)), int(reg_.PC));
+		}
+
+		TEST_METHOD(performInstruction_CPX)
+		{
+			reg_.X = int8_t(1);
+			mem_[reg_.PC] = int8_t(0xEC);
+			mem_[reg_.PC + 1] = int8_t(0x54);
+			mem_[reg_.PC + 2] = int8_t(0xc1);
+			mem_[0xc154] = int8_t(2);
+			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
+
+			cpu_.performInstruction();
+
+			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
+			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
+			Assert::AreEqual(int(uint16_t(0x0803)), int(reg_.PC));
+		}
+
+		TEST_METHOD(performInstruction_CPY)
+		{
+			reg_.Y = int8_t(1);
+			mem_[reg_.PC] = int8_t(0xCC);
+			mem_[reg_.PC + 1] = int8_t(0xFF);
+			mem_[reg_.PC + 2] = int8_t(0x02);
+			mem_[0x02FF] = int8_t(2);
+			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
+
+			cpu_.performInstruction();
+
+			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
+			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
+			Assert::AreEqual(int(uint16_t(0x0803)), int(reg_.PC));
+		}
+
+		TEST_METHOD(performInstruction_DEC)
+		{
+			mem_[reg_.PC] = int8_t(0xCE);
+			mem_[reg_.PC + 1] = int8_t(0xFF);
+			mem_[reg_.PC + 2] = int8_t(0xFF);
+			int8_t value = 8;
+			mem_[0xFFFF] = value;
+
+			cpu_.performInstruction();
+
+			Assert::AreEqual(--value, mem_[0xFFFF]);
+			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
+			Assert::AreEqual(int(uint16_t(0x0803)), int(reg_.PC));
+		}
 	};
 }

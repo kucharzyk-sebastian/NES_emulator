@@ -276,6 +276,66 @@ namespace nes::cpu
 			case CLV_imp:
 				executor_.CLV();
 				break;
+			case CMP_imm:
+				executor_.CMP(extractImmediatevalueWithProgramCounter());
+				break;
+			case CMP_zp:
+				executor_.CMP(extractZeroPageAddressWithProgramCounter());
+				break;
+			case CMP_zp_X:
+				executor_.CMP(extractZeroPageXAddressWithProgramCounter());
+				break;
+			case CMP_abs:
+				executor_.CMP(extractAbsoluteAddressWithProgramCounter());
+				break;
+			case CMP_abs_X:
+				executor_.CMP(extractAbsoluteXAddressWithProgramCounter());
+				break;
+			case CMP_abs_Y:
+				executor_.CMP(extractAbsoluteYAddressWithProgramCounter());
+				break;
+			case CMP_ind_X:
+				executor_.CMP(extractIndirectXAddressWithProgramCounter());
+				break;
+			case CMP_ind_Y:
+				executor_.CMP(extractIndirectYAddressWithProgramCounter());
+				break;
+			case CPX_imm:
+				executor_.CPX(extractImmediatevalueWithProgramCounter());
+				break;
+			case CPX_zp:
+				executor_.CPX(extractZeroPageAddressWithProgramCounter());
+				break;
+			case CPX_abs:
+				executor_.CPX(extractAbsoluteAddressWithProgramCounter());
+				break;
+			case CPY_imm:
+				executor_.CPY(extractImmediatevalueWithProgramCounter());
+				break;
+			case CPY_zp:
+				executor_.CPY(extractZeroPageAddressWithProgramCounter());
+				break;
+			case CPY_abs:
+				executor_.CPY(extractAbsoluteAddressWithProgramCounter());
+				break;
+			case DEC_zp:
+				executor_.DEC(extractZeroPageAddressWithProgramCounter());
+				break;
+			case DEC_zp_X:
+				executor_.DEC(extractZeroPageXAddressWithProgramCounter());
+				break;
+			case DEC_abs:
+				executor_.DEC(extractAbsoluteAddressWithProgramCounter());
+				break;
+			case DEC_abs_X:
+				executor_.DEC(extractAbsoluteXAddressWithProgramCounter());
+				break;
+			case DEX_imp:
+				executor_.DEX();
+				break;
+			case DEY_imp:
+				executor_.DEY();
+				break;
 			
 
 
@@ -324,7 +384,7 @@ namespace nes::cpu
 	uint16_t CPU::extractIndirectXAddressWithProgramCounter()
 	{
 		uint8_t incomingAddress = memory_[++registers_.PC];
-		uint16_t newAddress = incomingAddress + uint8_t(registers_.X);
+		uint16_t newAddress = uint8_t(incomingAddress + uint8_t(registers_.X));
 		return uint8_t(memory_[newAddress]) + (memory_[newAddress + 1] << CHAR_BIT);
 	}
 
