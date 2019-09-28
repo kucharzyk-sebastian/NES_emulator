@@ -21,6 +21,7 @@ namespace nes::cpu {
 		OpcodesExecutor executor_;
 	private:
 		int8_t extractImmediatevalueWithProgramCounter();
+		int8_t extractRelativevalueWithProgramCounter();
 		uint16_t extractZeroPageAddressWithProgramCounter();
 		uint16_t extractZeroPageXAddressWithProgramCounter();
 		uint16_t extractAbsoluteAddressWithProgramCounter();

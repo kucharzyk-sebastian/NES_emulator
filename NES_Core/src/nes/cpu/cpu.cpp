@@ -10,7 +10,7 @@ namespace nes::cpu
 	}
 
 	// TODO sk: maybe switch to map<opcode, function>
-	enum OpcodeValues : uint8_t
+	enum OpcodeValues : int8_t
 	{
 		BRK_imp = 0x00,
 		ORA_ind_X = 0x01,
@@ -21,7 +21,7 @@ namespace nes::cpu
 		ASL_acc = 0x0A,
 		ORA_abs = 0x0D,
 		ASL_abs = 0x0E,
-		BPL_imp = 0x10,
+		BPL_rel = 0x10,
 		ORA_ind_Y = 0x011,
 		ORA_zp_X = 0x15,
 		ASL_zp_X = 0x16,
@@ -230,6 +230,30 @@ namespace nes::cpu
 			case ASL_abs_X:
 				executor_.ASL(extractAbsoluteXAddressWithProgramCounter());
 				break;
+			case BCC_rel:
+				executor_.BCC(extractRelativevalueWithProgramCounter());
+				break;
+			case BCS_rel:
+				executor_.BCS(extractRelativevalueWithProgramCounter());
+				break;
+			case BEQ_rel:
+				executor_.BEQ(extractRelativevalueWithProgramCounter());
+				break;
+			case BMI_rel:
+				executor_.BMI(extractRelativevalueWithProgramCounter());
+				break;
+			case BNE_rel:
+				executor_.BNE(extractRelativevalueWithProgramCounter());
+				break;
+			case BPL_rel:
+				executor_.BPL(extractRelativevalueWithProgramCounter());
+				break;
+			case BVC_rel:
+				executor_.BVC(extractRelativevalueWithProgramCounter());
+				break;
+			case BVS_rel:
+				executor_.BVS(extractRelativevalueWithProgramCounter());
+				break;
 			
 
 
@@ -241,6 +265,11 @@ namespace nes::cpu
 	}
 	
 	int8_t CPU::extractImmediatevalueWithProgramCounter()
+	{
+		return memory_[++registers_.PC];
+	}
+
+	int8_t CPU::extractRelativevalueWithProgramCounter()
 	{
 		return memory_[++registers_.PC];
 	}
