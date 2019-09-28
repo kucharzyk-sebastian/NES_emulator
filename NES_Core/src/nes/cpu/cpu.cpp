@@ -239,6 +239,12 @@ namespace nes::cpu
 			case BEQ_rel:
 				executor_.BEQ(extractRelativevalueWithProgramCounter());
 				break;
+			case BIT_zp:
+				executor_.BIT(extractZeroPageAddressWithProgramCounter());
+				break;
+			case BIT_abs:
+				executor_.BIT(extractAbsoluteAddressWithProgramCounter());
+				break;
 			case BMI_rel:
 				executor_.BMI(extractRelativevalueWithProgramCounter());
 				break;
@@ -247,6 +253,10 @@ namespace nes::cpu
 				break;
 			case BPL_rel:
 				executor_.BPL(extractRelativevalueWithProgramCounter());
+				break;
+			case BRK_imp:
+				executor_.BRK();
+				return;
 				break;
 			case BVC_rel:
 				executor_.BVC(extractRelativevalueWithProgramCounter());
