@@ -8,6 +8,8 @@ namespace nes::cpu
 		executor_(registers_, memory_)
 	{
 	}
+
+	// TODO sk: maybe switch to map<opcode, function>
 	enum OpcodeValues : uint8_t
 	{
 		BRK_imp = 0x00,
@@ -189,6 +191,32 @@ namespace nes::cpu
 			case ADC_ind_Y:
 				executor_.ADC(extractIndirectYAddressWithProgramCounter());
 				break;
+			case AND_imm:
+				executor_.AND(memory_[++registers_.PC]);
+				break;
+			case AND_zp:
+				executor_.AND(extractZeroPageAddressWithProgramCounter());
+				break;
+			case AND_zp_X:
+				executor_.AND(extractZeroPageXAddressWithProgramCounter());
+				break;
+			case AND_abs:
+				executor_.AND(extractAbsoluteAddressWithProgramCounter());
+				break;
+			case AND_abs_X:
+				executor_.AND(extractAbsoluteXAddressWithProgramCounter());
+				break;
+			case AND_abs_Y:
+				executor_.AND(extractAbsoluteYAddressWithProgramCounter());
+				break;
+			case AND_ind_X:
+				executor_.AND(extractIndirectXAddressWithProgramCounter());
+				break;
+			case AND_ind_Y:
+				executor_.AND(extractIndirectYAddressWithProgramCounter());
+				break;
+			
+
 		}
 		++registers_.PC;
 	}
@@ -200,7 +228,7 @@ namespace nes::cpu
 
 	uint16_t CPU::extractZeroPageXAddressWithProgramCounter()
 	{
-		return uint8_t(memory_[++registers_.PC]) + uint8_t(registers_.X);
+		return uint8_t(uint8_t(memory_[++registers_.PC]) + uint8_t(registers_.X));
 	}
 
 	uint16_t CPU::extractAbsoluteAddressWithProgramCounter()

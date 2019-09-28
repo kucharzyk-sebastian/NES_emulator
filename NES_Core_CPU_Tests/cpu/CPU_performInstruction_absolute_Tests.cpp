@@ -22,19 +22,32 @@ namespace CPU
 			cpu_(reg_, mem_)
 		{
 			reg_.PC = 0x0800;
-			reg_.A = 5;
 		}
 
 		TEST_METHOD(performInstruction_ADC)
 		{
-			mem_[reg_.PC] = 0x6d;
-			mem_[reg_.PC + 1] = 0xcd;
-			mem_[reg_.PC + 2] = 0x68;
+			reg_.A = 5;
+			mem_[reg_.PC] = int8_t(0x6d);
+			mem_[reg_.PC + 1] = int8_t(0xcd);
+			mem_[reg_.PC + 2] = int8_t(0x68);
 			mem_[0x68cd] = 15;
 
 			cpu_.performInstruction();
 
 			Assert::AreEqual(int8_t(20), reg_.A);
+		}
+
+		TEST_METHOD(performInstruction_AND)
+		{
+			reg_.A = int8_t(0b10010111);
+			mem_[reg_.PC] = int8_t(0x2d);
+			mem_[reg_.PC + 1] = int8_t(0x09);
+			mem_[reg_.PC + 2] = int8_t(0xda);
+			mem_[0xda09] = int8_t(0b11001011);
+
+			cpu_.performInstruction();
+
+			Assert::AreEqual(int8_t(0b10000011), reg_.A);
 		}
 	};
 }

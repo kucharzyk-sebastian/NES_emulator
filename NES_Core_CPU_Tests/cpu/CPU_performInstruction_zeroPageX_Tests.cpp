@@ -22,17 +22,32 @@ namespace CPU
 			cpu_(reg_, mem_)
 		{
 			reg_.PC = 0x0800;
-			reg_.A = 5;
 		}
 
-		TEST_METHOD(performInstruction_adds_value_to_A_register_immediate_addressing)
+		TEST_METHOD(performInstruction_ADC)
 		{
-			mem_[reg_.PC] = 0x69;
-			mem_[reg_.PC + 1] = 5;
+			reg_.A = int8_t(5);
+			reg_.X = 0xa1;
+			mem_[reg_.PC] = int8_t(0x75);
+			mem_[reg_.PC + 1] = int8_t(0x05);
+			mem_[0x00a6] = int8_t(6);
 
 			cpu_.performInstruction();
 
-			Assert::AreEqual(int8_t(10), reg_.A);
+			Assert::AreEqual(int8_t(11), reg_.A);
+		}
+
+		TEST_METHOD(performInstruction_AND)
+		{
+			reg_.A = int8_t(0b00011001);
+			reg_.X = 0xFF;
+			mem_[reg_.PC] = int8_t(0x35);
+			mem_[reg_.PC + 1] = int8_t(0x02);
+			mem_[0x0001] = int8_t(0b00001111);
+
+			cpu_.performInstruction();
+
+			Assert::AreEqual(int8_t(0b00001001), reg_.A);
 		}
 	};
 }
