@@ -38,6 +38,8 @@ namespace CPU
 			cpu_.performInstruction();
 
 			Assert::AreEqual(int8_t(11), reg_.A);
+			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
+			Assert::AreEqual(int(uint16_t(0x0802)), int(reg_.PC));
 		}
 
 		TEST_METHOD(performInstruction_AND)
@@ -53,6 +55,8 @@ namespace CPU
 			cpu_.performInstruction();
 
 			Assert::AreEqual(int8_t(0b00000100), reg_.A);
+			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
+			Assert::AreEqual(int(uint16_t(0x0802)), int(reg_.PC));
 		}
 	};
 }

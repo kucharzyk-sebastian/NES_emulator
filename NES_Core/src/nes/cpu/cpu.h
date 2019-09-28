@@ -20,6 +20,7 @@ namespace nes::cpu {
 		memory::Memory& memory_;
 		OpcodesExecutor executor_;
 	private:
+		int8_t extractImmediatevalueWithProgramCounter();
 		uint16_t extractZeroPageAddressWithProgramCounter();
 		uint16_t extractZeroPageXAddressWithProgramCounter();
 		uint16_t extractAbsoluteAddressWithProgramCounter();

@@ -198,5 +198,8 @@
     <ClCompile Include="cpu\CPU_performInstruction_indirectY_Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cpu\CPU_performInstruction_accumulator_Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

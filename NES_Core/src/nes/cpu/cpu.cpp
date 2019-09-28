@@ -168,7 +168,7 @@ namespace nes::cpu
 		switch (memory_[registers_.PC])
 		{
 			case ADC_imm:
-				executor_.ADC(memory_[++registers_.PC]);
+				executor_.ADC(extractImmediatevalueWithProgramCounter());
 				break;
 			case ADC_zp:
 				executor_.ADC(extractZeroPageAddressWithProgramCounter());
@@ -192,7 +192,7 @@ namespace nes::cpu
 				executor_.ADC(extractIndirectYAddressWithProgramCounter());
 				break;
 			case AND_imm:
-				executor_.AND(memory_[++registers_.PC]);
+				executor_.AND(extractImmediatevalueWithProgramCounter());
 				break;
 			case AND_zp:
 				executor_.AND(extractZeroPageAddressWithProgramCounter());
@@ -215,12 +215,36 @@ namespace nes::cpu
 			case AND_ind_Y:
 				executor_.AND(extractIndirectYAddressWithProgramCounter());
 				break;
+			case ASL_acc:
+				executor_.ASL();
+				break;
+			case ASL_zp:
+				executor_.ASL(extractZeroPageAddressWithProgramCounter());
+				break;
+			case ASL_zp_X:
+				executor_.ASL(extractZeroPageXAddressWithProgramCounter());
+				break;
+			case ASL_abs:
+				executor_.ASL(extractAbsoluteAddressWithProgramCounter());
+				break;
+			case ASL_abs_X:
+				executor_.ASL(extractAbsoluteXAddressWithProgramCounter());
+				break;
 			
+
+
+			default:
+				throw std::exception("Not implemented opcode: " + memory_[registers_.PC]);
 
 		}
 		++registers_.PC;
 	}
 	
+	int8_t CPU::extractImmediatevalueWithProgramCounter()
+	{
+		return memory_[++registers_.PC];
+	}
+
 	uint16_t CPU::extractZeroPageAddressWithProgramCounter()
 	{
 		return uint8_t(memory_[++registers_.PC]);

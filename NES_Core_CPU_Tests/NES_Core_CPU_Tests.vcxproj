@@ -179,6 +179,7 @@
     <ClCompile Include="cpu\CPU_performInstruction_absoluteX_Tests.cpp" />
     <ClCompile Include="cpu\CPU_performInstruction_absoluteY_Tests.cpp.cpp" />
     <ClCompile Include="cpu\CPU_performInstruction_absolute_Tests.cpp" />
+    <ClCompile Include="cpu\CPU_performInstruction_accumulator_Tests.cpp" />
     <ClCompile Include="cpu\CPU_performInstruction_immediate_Tests.cpp" />
     <ClCompile Include="cpu\CPU_performInstruction_indirectX_Tests.cpp" />
     <ClCompile Include="cpu\CPU_performInstruction_indirectY_Tests.cpp" />
