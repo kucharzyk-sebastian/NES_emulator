@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <bitset>
+#include "thirdparty/magicEnum.h"
 
 //TODO sk: maybe incorporate ProcessorStatus into Registers
 namespace nes::cpu::registers {
@@ -11,6 +12,7 @@ namespace nes::cpu::registers {
 		InterruptDisable = 2,
 		Decimal = 3,
 		Break = 4,
+		Unknown = 5,
 		Overflow = 6,
 		Negative = 7
 	};
@@ -22,7 +24,7 @@ namespace nes::cpu::registers {
 		int8_t Y;
 		uint8_t SP;
 		uint16_t PC;
-		static constexpr uint8_t PSSize = 8;
+		static constexpr uint8_t PSSize = magic_enum::enum_count<ProcessorStatus>();;
 		std::bitset<PSSize> PS;
 
 		constexpr Registers() noexcept :
