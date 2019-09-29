@@ -336,6 +336,31 @@ namespace nes::cpu
 			case DEY_imp:
 				executor_.DEY();
 				break;
+			case EOR_imm:
+				executor_.EOR(extractImmediatevalueWithProgramCounter());
+				break;
+			case EOR_zp:
+				executor_.EOR(extractZeroPageAddressWithProgramCounter());
+				break;
+			case EOR_zp_X:
+				executor_.EOR(extractZeroPageXAddressWithProgramCounter());
+				break;
+			case EOR_abs:
+				executor_.EOR(extractAbsoluteAddressWithProgramCounter());
+				break;
+			case EOR_abs_X:
+				executor_.EOR(extractAbsoluteXAddressWithProgramCounter());
+				break;
+			case EOR_abs_Y:
+				executor_.EOR(extractAbsoluteYAddressWithProgramCounter());
+				break;
+			case EOR_ind_X:
+				executor_.EOR(extractIndirectXAddressWithProgramCounter());
+				break;
+			case EOR_ind_Y:
+				executor_.EOR(extractIndirectYAddressWithProgramCounter());
+				break;
+
 			
 
 
