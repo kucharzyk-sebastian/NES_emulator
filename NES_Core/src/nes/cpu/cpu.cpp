@@ -524,6 +524,12 @@ namespace nes::cpu
 			case ROR_abs_X:
 				executor_.ROR(extractAbsoluteXAddressWithProgramCounter());
 				break;
+			case RTI_imp:
+				executor_.RTI();
+				return;
+			case RTS_imp:
+				executor_.RTS();
+				return;
 
 
 			
