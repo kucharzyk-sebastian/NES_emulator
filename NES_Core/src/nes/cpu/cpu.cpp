@@ -458,6 +458,31 @@ namespace nes::cpu
 			case NOP_imp:
 				executor_.NOP();
 				return;
+			case ORA_imm:
+				executor_.ORA(extractImmediatevalueWithProgramCounter());
+				break;
+			case ORA_zp:
+				executor_.ORA(extractZeroPageAddressWithProgramCounter());
+				break;
+			case ORA_zp_X:
+				executor_.ORA(extractZeroPageXAddressWithProgramCounter());
+				break;
+			case ORA_abs:
+				executor_.ORA(extractAbsoluteAddressWithProgramCounter());
+				break;
+			case ORA_abs_X:
+				executor_.ORA(extractAbsoluteXAddressWithProgramCounter());
+				break;
+			case ORA_abs_Y:
+				executor_.ORA(extractAbsoluteYAddressWithProgramCounter());
+				break;
+			case ORA_ind_X:
+				executor_.ORA(extractIndirectXAddressWithProgramCounter());
+				break;
+			case ORA_ind_Y:
+				executor_.ORA(extractIndirectYAddressWithProgramCounter());
+				break;
+
 
 			
 
