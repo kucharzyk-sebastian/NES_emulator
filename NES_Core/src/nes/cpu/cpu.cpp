@@ -482,6 +482,18 @@ namespace nes::cpu
 			case ORA_ind_Y:
 				executor_.ORA(extractIndirectYAddressWithProgramCounter());
 				break;
+			case PHA_imp:
+				executor_.PHA();
+				break;
+			case PHP_imp:
+				executor_.PHP();
+				break;
+			case PLA_imp:
+				executor_.PLA();
+				break;
+			case PLP_imp:
+				executor_.PLP();
+				break;
 
 
 			

@@ -27,9 +27,10 @@ namespace OpcodesExecutor
 		{
 			auto value = PSType(0b01101101);
 			mem_[0x01FF] = static_cast<int8_t>(value.to_ulong());
+			reg_.SP = uint8_t(0x01FE);
 			Assert::AreNotEqual(value.to_string(), reg_.PS.to_string());
 
-			ie_.PHP();
+			ie_.PLP();
 
 			Assert::AreEqual(PSType(mem_[0x01FF]).to_string(), reg_.PS.to_string());
 		}
