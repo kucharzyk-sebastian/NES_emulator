@@ -440,6 +440,21 @@ namespace nes::cpu
 			case LDY_abs_X:
 				executor_.LDY(extractAbsoluteXAddressWithProgramCounter());
 				break;
+			case LSR_acc:
+				executor_.LSR();
+				break;
+			case LSR_zp:
+				executor_.LSR(extractZeroPageAddressWithProgramCounter());
+				break;
+			case LSR_zp_X:
+				executor_.LSR(extractZeroPageXAddressWithProgramCounter());
+				break;
+			case LSR_abs:
+				executor_.LSR(extractAbsoluteAddressWithProgramCounter());
+				break;
+			case LSR_abs_X:
+				executor_.LSR(extractAbsoluteXAddressWithProgramCounter());
+				break;
 
 			
 
