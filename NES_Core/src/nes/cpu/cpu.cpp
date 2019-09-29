@@ -154,7 +154,7 @@ namespace nes::cpu
 		SBC_abs = 0xED,
 		INC_abs = 0xEE,
 		BEQ_rel = 0xF0,
-		SBS_ind_Y = 0xF1,
+		SBC_ind_Y = 0xF1,
 		SBC_zp_X = 0xF5,
 		INC_zp_X = 0xF6,
 		SED_imp = 0xF8,
@@ -530,6 +530,30 @@ namespace nes::cpu
 			case RTS_imp:
 				executor_.RTS();
 				return;
+			case SBC_imm:
+				executor_.SBC(extractImmediatevalueWithProgramCounter());
+				break;
+			case SBC_zp:
+				executor_.SBC(extractZeroPageAddressWithProgramCounter());
+				break;
+			case SBC_zp_X:
+				executor_.SBC(extractZeroPageXAddressWithProgramCounter());
+				break;
+			case SBC_abs:
+				executor_.SBC(extractAbsoluteAddressWithProgramCounter());
+				break;
+			case SBC_abs_X:
+				executor_.SBC(extractAbsoluteXAddressWithProgramCounter());
+				break;
+			case SBC_abs_Y:
+				executor_.SBC(extractAbsoluteYAddressWithProgramCounter());
+				break;
+			case SBC_ind_X:
+				executor_.SBC(extractIndirectXAddressWithProgramCounter());
+				break;
+			case SBC_ind_Y:
+				executor_.SBC(extractIndirectYAddressWithProgramCounter());
+				break;
 
 
 			
