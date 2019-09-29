@@ -554,6 +554,15 @@ namespace nes::cpu
 			case SBC_ind_Y:
 				executor_.SBC(extractIndirectYAddressWithProgramCounter());
 				break;
+			case SEC_imp:
+				executor_.SEC();
+				break;
+			case SED_imp:
+				executor_.SED();
+				break;
+			case SEI_imp:
+				executor_.SEI();
+				break;
 
 
 			

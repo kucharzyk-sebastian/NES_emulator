@@ -234,5 +234,44 @@ namespace CPU
 			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
 			Assert::AreEqual(int(++newPC), int(reg_.PC));
 		}
+
+		TEST_METHOD(performInstruction_SEC)
+		{
+			mem_[reg_.PC] = int8_t(0x38);
+			reg_.PS.reset(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry));
+			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
+
+			cpu_.performInstruction();
+
+			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Carry)]);
+			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
+			Assert::AreEqual(int(uint16_t(0x0801)), int(reg_.PC));
+		}
+
+		TEST_METHOD(performInstruction_SED)
+		{
+			mem_[reg_.PC] = int8_t(0xF8);
+			reg_.PS.reset(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Decimal));
+			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Decimal)]);
+
+			cpu_.performInstruction();
+
+			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Decimal)]);
+			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
+			Assert::AreEqual(int(uint16_t(0x0801)), int(reg_.PC));
+		}
+
+		TEST_METHOD(performInstruction_SEI)
+		{
+			mem_[reg_.PC] = int8_t(0x78);
+			reg_.PS.reset(static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::InterruptDisable));
+			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::InterruptDisable)]);
+
+			cpu_.performInstruction();
+
+			Assert::IsTrue(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::InterruptDisable)]);
+			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
+			Assert::AreEqual(int(uint16_t(0x0801)), int(reg_.PC));
+		}
 	};
 }
