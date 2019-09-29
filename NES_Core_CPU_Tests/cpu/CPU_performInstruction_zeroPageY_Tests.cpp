@@ -38,5 +38,19 @@ namespace CPU
 			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
 			Assert::AreEqual(int(uint16_t(0x0802)), int(reg_.PC));
 		}
+
+		TEST_METHOD(performInstruction_STY)
+		{
+			reg_.Y = int8_t(4);
+			reg_.X = int8_t(127);
+			mem_[reg_.PC] = int8_t(0x96);
+			mem_[reg_.PC + 1] = int8_t(0x26);
+
+			cpu_.performInstruction();
+
+			Assert::AreEqual(reg_.X, mem_[0x0026 + reg_.Y]);
+			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
+			Assert::AreEqual(int(uint16_t(0x0802)), int(reg_.PC));
+		}
 	};
 }

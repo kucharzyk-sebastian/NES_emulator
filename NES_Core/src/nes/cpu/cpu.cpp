@@ -99,7 +99,8 @@ namespace nes::cpu
 		STA_zp_X = 0x95,
 		STX_zp_Y = 0x96,
 		TYA_imp = 0x98,
-		STA_abs_Y = 0x9D,
+		STA_abs_X = 0x9D,
+		STA_abs_Y = 0x99,
 		LDY_imm = 0xA0,
 		LDA_ind_X = 0xA1,
 		LDX_imm = 0xA2,
@@ -563,7 +564,45 @@ namespace nes::cpu
 			case SEI_imp:
 				executor_.SEI();
 				break;
-
+			case STA_zp:
+				executor_.STA(extractZeroPageAddressWithProgramCounter());
+				break;
+			case STA_zp_X:
+				executor_.STA(extractZeroPageXAddressWithProgramCounter());
+				break;
+			case STA_abs:
+				executor_.STA(extractAbsoluteAddressWithProgramCounter());
+				break;
+			case STA_abs_X:
+				executor_.STA(extractAbsoluteXAddressWithProgramCounter());
+				break;
+			case STA_abs_Y:
+				executor_.STA(extractAbsoluteYAddressWithProgramCounter());
+				break;
+			case STA_ind_X:
+				executor_.STA(extractIndirectXAddressWithProgramCounter());
+				break;
+			case STA_ind_Y:
+				executor_.STA(extractIndirectYAddressWithProgramCounter());
+				break;
+			case STX_zp:
+				executor_.STX(extractZeroPageAddressWithProgramCounter());
+				break;
+			case STX_zp_Y:
+				executor_.STX(extractZeroPageYAddressWithProgramCounter());
+				break;
+			case STX_abs:
+				executor_.STX(extractAbsoluteAddressWithProgramCounter());
+				break;
+			case STY_zp:
+				executor_.STY(extractZeroPageAddressWithProgramCounter());
+				break;
+			case STY_zp_X:
+				executor_.STY(extractZeroPageXAddressWithProgramCounter());
+				break;
+			case STY_abs:
+				executor_.STY(extractAbsoluteAddressWithProgramCounter());
+				break;
 
 			
 
