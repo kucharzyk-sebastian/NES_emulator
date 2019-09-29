@@ -455,6 +455,9 @@ namespace nes::cpu
 			case LSR_abs_X:
 				executor_.LSR(extractAbsoluteXAddressWithProgramCounter());
 				break;
+			case NOP_imp:
+				executor_.NOP();
+				return;
 
 			
 
