@@ -101,6 +101,7 @@ namespace nes::cpu
 		TYA_imp = 0x98,
 		STA_abs_X = 0x9D,
 		STA_abs_Y = 0x99,
+		TXS_imp = 0x9A,
 		LDY_imm = 0xA0,
 		LDA_ind_X = 0xA1,
 		LDX_imm = 0xA2,
@@ -603,10 +604,24 @@ namespace nes::cpu
 			case STY_abs:
 				executor_.STY(extractAbsoluteAddressWithProgramCounter());
 				break;
-
-			
-
-
+			case TAX_imp:
+				executor_.TAX();
+				break;
+			case TAY_imp:
+				executor_.TAY();
+				break;
+			case TSX_imp:
+				executor_.TSX();
+				break;
+			case TXA_imp:
+				executor_.TXA();
+				break;
+			case TXS_imp:
+				executor_.TXS();
+				break;
+			case TYA_imp:
+				executor_.TYA();
+				break;
 			default:
 				throw std::exception("Not implemented opcode: " + memory_[registers_.PC]);
 
