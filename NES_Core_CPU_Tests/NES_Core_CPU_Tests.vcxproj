@@ -184,6 +184,7 @@
     <ClCompile Include="cpu\CPU_performInstruction_Implied_Tests.cpp" />
     <ClCompile Include="cpu\CPU_performInstruction_indirectX_Tests.cpp" />
     <ClCompile Include="cpu\CPU_performInstruction_indirectY_Tests.cpp" />
+    <ClCompile Include="cpu\CPU_performInstruction_indirect_Tests.cpp" />
     <ClCompile Include="cpu\CPU_performInstruction_relative_Tests.cpp" />
     <ClCompile Include="cpu\CPU_performInstruction_zeroPageX_Tests.cpp" />
     <ClCompile Include="cpu\CPU_performInstruction_zeroPage_Tests.cpp.cpp" />

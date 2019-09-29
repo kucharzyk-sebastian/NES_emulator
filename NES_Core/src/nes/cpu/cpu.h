@@ -29,6 +29,7 @@ namespace nes::cpu {
 		uint16_t extractAbsoluteYAddressWithProgramCounter();
 		uint16_t extractIndirectXAddressWithProgramCounter();
 		uint16_t extractIndirectYAddressWithProgramCounter();
+		uint16_t extractIndirectAddressWithProgramCounter();
 	};
 }
 

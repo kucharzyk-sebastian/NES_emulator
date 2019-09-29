@@ -257,7 +257,6 @@ namespace nes::cpu
 			case BRK_imp:
 				executor_.BRK();
 				return;
-				break;
 			case BVC_rel:
 				executor_.BVC(extractRelativevalueWithProgramCounter());
 				break;
@@ -360,7 +359,33 @@ namespace nes::cpu
 			case EOR_ind_Y:
 				executor_.EOR(extractIndirectYAddressWithProgramCounter());
 				break;
-
+			case INC_zp:
+				executor_.INC(extractZeroPageAddressWithProgramCounter());
+				break;
+			case INC_zp_X:
+				executor_.INC(extractZeroPageXAddressWithProgramCounter());
+				break;
+			case INC_abs:
+				executor_.INC(extractAbsoluteAddressWithProgramCounter());
+				break;
+			case INC_abs_X:
+				executor_.INC(extractAbsoluteXAddressWithProgramCounter());
+				break;
+			case INX_imp:
+				executor_.INX();
+				break;
+			case INY_imp:
+				executor_.INY();
+				break;
+			case JMP_abs:
+				executor_.JMP_absolute(extractAbsoluteAddressWithProgramCounter());
+				return;
+			case JMP_ind:
+				executor_.JMP_indirect(extractIndirectAddressWithProgramCounter());
+				return;
+			case JSR_abs:
+				executor_.JSR(extractAbsoluteAddressWithProgramCounter());
+				return;
 			
 
 
@@ -417,6 +442,11 @@ namespace nes::cpu
 	{
 		uint8_t incomingAddress = memory_[++registers_.PC];
 		return  uint8_t(memory_[incomingAddress]) + (memory_[incomingAddress + 1] << CHAR_BIT) + uint8_t(registers_.Y);
+	}
+
+	uint16_t CPU::extractIndirectAddressWithProgramCounter()
+	{
+		return uint8_t(memory_[++registers_.PC]) + (memory_[++registers_.PC] << CHAR_BIT);
 	}
 
 }

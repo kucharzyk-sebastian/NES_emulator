@@ -207,5 +207,8 @@
     <ClCompile Include="cpu\CPU_performInstruction_Implied_Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cpu\CPU_performInstruction_indirect_Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
