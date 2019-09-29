@@ -36,7 +36,7 @@ namespace OpcodesExecutor
 		{
 			uint16_t address = 0xda75;
 			mem_[address] = 0x23;
-			mem_[address + 1] = 0xac;
+			mem_[address + 1] = int8_t(0xac);
 
 			oe_.JMP_indirect(address);
 
@@ -47,8 +47,8 @@ namespace OpcodesExecutor
 		TEST_METHOD(JMP_indirect_copy_2_bytes_of_memory_from_passed_address_crossing_page)
 		{
 			uint16_t address = 0xdaFF;
-			mem_[address] = 0x97;
-			mem_[0xda00] = 0xfd;
+			mem_[address] = int8_t(0x97);
+			mem_[0xda00] = int8_t(0xfd);
 
 			oe_.JMP_indirect(address);
 

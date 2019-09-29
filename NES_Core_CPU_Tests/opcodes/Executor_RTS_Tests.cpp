@@ -25,9 +25,9 @@ namespace OpcodesExecutor
 		TEST_METHOD(RTS_loads_Program_Counter_plus_one_from_stack)
 		{
 			uint16_t newPC = 0xcf97;
-			mem_[0x01FF] = 0xcf;
-			mem_[0x01FE] = 0x97;
-			reg_.SP = 0x01FD;
+			mem_[0x01FF] = int8_t(0xcf);
+			mem_[0x01FE] = int8_t(0x97);
+			reg_.SP = 0xFD;
 
 			oe_.RTS();
 

@@ -10,7 +10,7 @@ namespace nes::cpu
 	}
 
 	// TODO sk: maybe switch to map<opcode, function>
-	enum OpcodeValues : int8_t
+	enum OpcodeValues : uint8_t
 	{
 		BRK_imp = 0x00,
 		ORA_ind_X = 0x01,
@@ -167,7 +167,7 @@ namespace nes::cpu
 
 	void nes::cpu::CPU::performInstruction()
 	{
-		switch (memory_[registers_.PC])
+		switch (uint8_t(memory_[registers_.PC]))
 		{
 			case ADC_imm:
 				executor_.ADC(extractImmediatevalueWithProgramCounter());

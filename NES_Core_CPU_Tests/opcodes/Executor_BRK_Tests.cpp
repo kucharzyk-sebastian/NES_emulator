@@ -37,7 +37,7 @@ namespace OpcodesExecutor
 		TEST_METHOD(BRK_loads_interrupt_vector_to_PC)
 		{
 			uint16_t interruptVector = 0xda71;
-			mem_[0xFFFF] = 0xda;
+			mem_[0xFFFF] = int8_t(0xda);
 			mem_[0xFFFE] = 0x71;
 
 			oe_.BRK();

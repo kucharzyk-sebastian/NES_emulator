@@ -209,11 +209,11 @@ namespace CPU
 		{
 			mem_[reg_.PC] = int8_t(0x40);
 			uint16_t newPC = 0x14cd;
-			mem_[0x01FF] = 0x14;
-			mem_[0x01FE] = 0xcd;
+			mem_[0x01FF] = int8_t(0x14);
+			mem_[0x01FE] = int8_t(0xcd);
 			uint8_t newPS = 0b01101000;
 			mem_[0x01FD] = newPS;
-			reg_.SP = 0x01FC;
+			reg_.SP = 0xFC;
 
 			cpu_.performInstruction();
 
@@ -225,9 +225,9 @@ namespace CPU
 		{
 			mem_[reg_.PC] = int8_t(0x60);
 			uint16_t newPC = 0xcf97;
-			mem_[0x01FF] = 0xcf;
-			mem_[0x01FE] = 0x97;
-			reg_.SP = 0x01FD;
+			mem_[0x01FF] = int8_t(0xcf);
+			mem_[0x01FE] = int8_t(0x97);
+			reg_.SP = 0xFD;
 
 			cpu_.performInstruction();
 

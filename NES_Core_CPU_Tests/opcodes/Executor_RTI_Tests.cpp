@@ -26,10 +26,10 @@ namespace OpcodesExecutor
 		{
 			uint16_t newPC = 0x14cd;
 			mem_[0x01FF] = 0x14;
-			mem_[0x01FE] = 0xcd;
+			mem_[0x01FE] = int8_t(0xcd);
 			uint8_t newPS = 0b01101000;
 			mem_[0x01FD] = newPS;
-			reg_.SP = 0x01FC;
+			reg_.SP = 0xFC;
 
 			oe_.RTI();
 

@@ -108,7 +108,7 @@ namespace nes::cpu{
 		//todo sk: extract reading/writing 2bytes from stack to common place;
 		writeToStack(registers_.PC >> CHAR_BIT);
 		writeToStack(registers_.PC & 0x00FF);
-		writeToStack(registers_.PS.to_ulong());
+		writeToStack(int8_t(registers_.PS.to_ulong()));
 		registers_.PC = uint8_t(memory_[interruptVectorLSB]) + (memory_[interruptVectorMSB] << CHAR_BIT);
 		registers_.PS.set(static_cast<uint8_t>(rps::Break));
 	}
