@@ -24,6 +24,7 @@ namespace nes::cpu {
 		int8_t extractRelativevalueWithProgramCounter();
 		uint16_t extractZeroPageAddressWithProgramCounter();
 		uint16_t extractZeroPageXAddressWithProgramCounter();
+		uint16_t extractZeroPageYAddressWithProgramCounter();
 		uint16_t extractAbsoluteAddressWithProgramCounter();
 		uint16_t extractAbsoluteXAddressWithProgramCounter();
 		uint16_t extractAbsoluteYAddressWithProgramCounter();

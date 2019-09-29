@@ -386,6 +386,61 @@ namespace nes::cpu
 			case JSR_abs:
 				executor_.JSR(extractAbsoluteAddressWithProgramCounter());
 				return;
+			case LDA_imm:
+				executor_.LDA(extractImmediatevalueWithProgramCounter());
+				break;
+			case LDA_zp:
+				executor_.LDA(extractZeroPageAddressWithProgramCounter());
+				break;
+			case LDA_zp_X:
+				executor_.LDA(extractZeroPageXAddressWithProgramCounter());
+				break;
+			case LDA_abs:
+				executor_.LDA(extractAbsoluteAddressWithProgramCounter());
+				break;
+			case LDA_abs_X:
+				executor_.LDA(extractAbsoluteXAddressWithProgramCounter());
+				break;
+			case LDA_abs_Y:
+				executor_.LDA(extractAbsoluteYAddressWithProgramCounter());
+				break;
+			case LDA_ind_X:
+				executor_.LDA(extractIndirectXAddressWithProgramCounter());
+				break;
+			case LDA_ind_Y:
+				executor_.LDA(extractIndirectYAddressWithProgramCounter());
+				break;
+			case LDX_imm:
+				executor_.LDX(extractImmediatevalueWithProgramCounter());
+				break;
+			case LDX_zp:
+				executor_.LDX(extractZeroPageAddressWithProgramCounter());
+				break;
+			case LDX_zp_Y:
+				executor_.LDX(extractZeroPageYAddressWithProgramCounter());
+				break;
+			case LDX_abs:
+				executor_.LDX(extractAbsoluteAddressWithProgramCounter());
+				break;
+			case LDX_abs_Y:
+				executor_.LDX(extractAbsoluteYAddressWithProgramCounter());
+				break;
+			case LDY_imm:
+				executor_.LDY(extractImmediatevalueWithProgramCounter());
+				break;
+			case LDY_zp:
+				executor_.LDY(extractZeroPageAddressWithProgramCounter());
+				break;
+			case LDY_zp_X:
+				executor_.LDY(extractZeroPageXAddressWithProgramCounter());
+				break;
+			case LDY_abs:
+				executor_.LDY(extractAbsoluteAddressWithProgramCounter());
+				break;
+			case LDY_abs_X:
+				executor_.LDY(extractAbsoluteXAddressWithProgramCounter());
+				break;
+
 			
 
 
@@ -414,6 +469,11 @@ namespace nes::cpu
 	uint16_t CPU::extractZeroPageXAddressWithProgramCounter()
 	{
 		return uint8_t(uint8_t(memory_[++registers_.PC]) + uint8_t(registers_.X));
+	}
+
+	uint16_t CPU::extractZeroPageYAddressWithProgramCounter()
+	{
+		return uint8_t(uint8_t(memory_[++registers_.PC]) + uint8_t(registers_.Y));
 	}
 
 	uint16_t CPU::extractAbsoluteAddressWithProgramCounter()
