@@ -39,7 +39,7 @@ namespace nes::cpu
 		ROL_acc = 0x2A,
 		BIT_abs = 0x2C,
 		AND_abs = 0x2D,
-		ROL = 0x2E,
+		ROL_abs = 0x2E,
 		BMI_rel = 0x30,
 		AND_ind_Y = 0x31,
 		AND_zp_X = 0x35,
@@ -493,6 +493,36 @@ namespace nes::cpu
 				break;
 			case PLP_imp:
 				executor_.PLP();
+				break;
+			case ROL_acc:
+				executor_.ROL();
+				break;
+			case ROL_zp:
+				executor_.ROL(extractZeroPageAddressWithProgramCounter());
+				break;
+			case ROL_zp_X:
+				executor_.ROL(extractZeroPageXAddressWithProgramCounter());
+				break;
+			case ROL_abs:
+				executor_.ROL(extractAbsoluteAddressWithProgramCounter());
+				break;
+			case ROL_abs_X:
+				executor_.ROL(extractAbsoluteXAddressWithProgramCounter());
+				break;
+			case ROR_acc:
+				executor_.ROR();
+				break;
+			case ROR_zp:
+				executor_.ROR(extractZeroPageAddressWithProgramCounter());
+				break;
+			case ROR_zp_X:
+				executor_.ROR(extractZeroPageXAddressWithProgramCounter());
+				break;
+			case ROR_abs:
+				executor_.ROR(extractAbsoluteAddressWithProgramCounter());
+				break;
+			case ROR_abs_X:
+				executor_.ROR(extractAbsoluteXAddressWithProgramCounter());
 				break;
 
 
