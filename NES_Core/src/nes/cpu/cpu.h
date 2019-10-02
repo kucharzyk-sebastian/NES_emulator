@@ -31,6 +31,8 @@ namespace nes::cpu {
 		uint16_t extractIndirectXAddressWithProgramCounter();
 		uint16_t extractIndirectYAddressWithProgramCounter();
 		uint16_t extractIndirectAddressWithProgramCounter();
+
+		static void logStatus(uint16_t PC, uint8_t opcode, uint16_t input, const registers::Registers& reg);
 	};
 }
 

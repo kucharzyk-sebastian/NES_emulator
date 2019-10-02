@@ -1,4 +1,6 @@
 #include "nes/cpu/cpu.h"
+#include "thirdparty/easyloggingcpp/easylogging++.h"
+#include <iomanip>
 
 namespace nes::cpu
 {
@@ -164,6 +166,8 @@ namespace nes::cpu
 		SBC_abs_X = 0xFD,
 		INC_abs_X = 0xFE
 	};
+
+#include <string>
 
 	void nes::cpu::CPU::performInstruction()
 	{
@@ -628,63 +632,107 @@ namespace nes::cpu
 		}
 		++registers_.PC;
 	}
+
+
+
 	
 	int8_t CPU::extractImmediatevalueWithProgramCounter()
 	{
-		return memory_[++registers_.PC];
+		int8_t res = memory_[++registers_.PC];
+		logStatus(registers_.PC - 1, uint8_t(memory_[registers_.PC - 1]), res, registers_);
+		return res;
 	}
 
 	int8_t CPU::extractRelativevalueWithProgramCounter()
 	{
-		return memory_[++registers_.PC];
+		int8_t res = memory_[++registers_.PC];
+		logStatus(registers_.PC - 1, uint8_t(memory_[registers_.PC - 1]), res, registers_);
+		return res;
 	}
 
 	uint16_t CPU::extractZeroPageAddressWithProgramCounter()
 	{
-		return uint8_t(memory_[++registers_.PC]);
+		uint8_t res = memory_[++registers_.PC];
+		logStatus(registers_.PC - 1, uint8_t(memory_[registers_.PC - 1]), res, registers_);
+		return res;
 	}
 
 	uint16_t CPU::extractZeroPageXAddressWithProgramCounter()
 	{
-		return uint8_t(uint8_t(memory_[++registers_.PC]) + uint8_t(registers_.X));
+		uint8_t res = uint8_t(memory_[++registers_.PC]) + uint8_t(registers_.X);
+		logStatus(registers_.PC - 1, uint8_t(memory_[registers_.PC - 1]), uint8_t(memory_[registers_.PC]), registers_);
+		return res;
 	}
 
 	uint16_t CPU::extractZeroPageYAddressWithProgramCounter()
 	{
-		return uint8_t(uint8_t(memory_[++registers_.PC]) + uint8_t(registers_.Y));
+		uint8_t res = uint8_t(memory_[++registers_.PC]) + uint8_t(registers_.Y);
+		logStatus(registers_.PC - 1, uint8_t(memory_[registers_.PC - 1]), uint8_t(memory_[registers_.PC]), registers_);
+
+		return res;
 	}
 
 	uint16_t CPU::extractAbsoluteAddressWithProgramCounter()
 	{
-		return uint8_t(memory_[++registers_.PC]) + (memory_[++registers_.PC] << CHAR_BIT);
+		uint16_t res = uint8_t(memory_[++registers_.PC]) + (memory_[++registers_.PC] << CHAR_BIT);
+		logStatus(registers_.PC - 2, uint8_t(memory_[registers_.PC - 2]), uint8_t(memory_[registers_.PC - 1]) + (memory_[registers_.PC] << CHAR_BIT), registers_);
+
+		return res;
 	}
 
 	uint16_t CPU::extractAbsoluteXAddressWithProgramCounter()
 	{
-		return uint8_t(memory_[++registers_.PC]) + (memory_[++registers_.PC] << CHAR_BIT) + uint8_t(registers_.X);
+		uint16_t res = uint8_t(memory_[++registers_.PC]) + (memory_[++registers_.PC] << CHAR_BIT) + uint8_t(registers_.X);
+		logStatus(registers_.PC - 2, uint8_t(memory_[registers_.PC - 2]), uint8_t(memory_[registers_.PC - 1]) + (memory_[registers_.PC] << CHAR_BIT), registers_);
+
+		return res;
 	}
 
 	uint16_t CPU::extractAbsoluteYAddressWithProgramCounter()
 	{
-		return uint8_t(memory_[++registers_.PC]) + (memory_[++registers_.PC] << CHAR_BIT) + uint8_t(registers_.Y);
+		uint16_t res = uint8_t(memory_[++registers_.PC]) + (memory_[++registers_.PC] << CHAR_BIT) + uint8_t(registers_.Y);
+		logStatus(registers_.PC - 2, uint8_t(memory_[registers_.PC - 2]), uint8_t(memory_[registers_.PC - 1]) + (memory_[registers_.PC] << CHAR_BIT), registers_);
+
+		return res;
 	}
 
 	uint16_t CPU::extractIndirectXAddressWithProgramCounter()
 	{
 		uint8_t incomingAddress = memory_[++registers_.PC];
 		uint16_t newAddress = uint8_t(incomingAddress + uint8_t(registers_.X));
-		return uint8_t(memory_[newAddress]) + (memory_[newAddress + 1] << CHAR_BIT);
+		uint16_t res = uint8_t(memory_[newAddress]) + (memory_[newAddress + 1] << CHAR_BIT);
+		logStatus(registers_.PC - 2, uint8_t(memory_[registers_.PC - 2]), uint8_t(memory_[registers_.PC - 1]), registers_);
+
+		return res;
 	}
 
 	uint16_t CPU::extractIndirectYAddressWithProgramCounter()
 	{
 		uint8_t incomingAddress = memory_[++registers_.PC];
-		return  uint8_t(memory_[incomingAddress]) + (memory_[incomingAddress + 1] << CHAR_BIT) + uint8_t(registers_.Y);
+		uint16_t res = uint8_t(memory_[incomingAddress]) + (memory_[incomingAddress + 1] << CHAR_BIT) + uint8_t(registers_.Y);
+		logStatus(registers_.PC - 2, uint8_t(memory_[registers_.PC - 2]), uint8_t(memory_[registers_.PC - 1]), registers_);
+
+		return  res;
 	}
 
 	uint16_t CPU::extractIndirectAddressWithProgramCounter()
 	{
-		return uint8_t(memory_[++registers_.PC]) + (memory_[++registers_.PC] << CHAR_BIT);
+		uint16_t res = uint8_t(memory_[++registers_.PC]) + (memory_[++registers_.PC] << CHAR_BIT);
+		logStatus(registers_.PC - 2, uint8_t(memory_[registers_.PC - 2]), uint8_t(memory_[registers_.PC - 1]) + (memory_[registers_.PC] << CHAR_BIT), registers_);
+
+		return res;
 	}
 
+	void CPU::logStatus(uint16_t PC, uint8_t opcode, uint16_t input, const registers::Registers& reg)
+	{
+		LOG(INFO) << std::hex << std::uppercase
+			<< std::setfill('0') << std::setw(4) << PC << "  "
+			<< std::setw(2) << int(opcode) << " "
+			<< std::setw(4) << input << "  "
+			<< "A:" << int(uint8_t(reg.A)) << " "
+			<< "X:" << int(uint8_t(reg.X)) << " "
+			<< "Y:" << int(uint8_t(reg.Y)) << " "
+			<< "P:" << int(reg.PS.to_ulong()) << " "
+			<< "SP:" << int(reg.SP);
+	}
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <bitset>
-#include "thirdparty/magicEnum.h"
+#include "thirdparty/magicEnum/magicEnum.h"
 
 //TODO sk: maybe incorporate ProcessorStatus into Registers
 namespace nes::cpu::registers {
