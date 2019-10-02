@@ -506,7 +506,7 @@ namespace nes::cpu
 				break;
 			case PHP_imp:
 				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
-				.PHP();
+				executor_.PHP();
 				break;
 			case PLA_imp:
 				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
@@ -668,14 +668,14 @@ namespace nes::cpu
 	int8_t CPU::extractImmediatevalueWithProgramCounter()
 	{
 		int8_t res = memory_[++registers_.PC];
-		logStatus(registers_.PC - 1, uint8_t(memory_[registers_.PC - 1]), res, registers_);
+		logStatus(registers_.PC - 1, uint8_t(memory_[registers_.PC - 1]), uint8_t(res), registers_);
 		return res;
 	}
 
 	int8_t CPU::extractRelativevalueWithProgramCounter()
 	{
 		int8_t res = memory_[++registers_.PC];
-		logStatus(registers_.PC - 1, uint8_t(memory_[registers_.PC - 1]), res, registers_);
+		logStatus(registers_.PC - 1, uint8_t(memory_[registers_.PC - 1]), uint8_t(res), registers_);
 		return res;
 	}
 
@@ -758,10 +758,10 @@ namespace nes::cpu
 			<< std::setfill('0') << std::setw(4) << PC << "  "
 			<< std::setw(2) << int(opcode) << " "
 			<< std::setw(4) << input << "  "
-			<< "A:" << int(uint8_t(reg.A)) << " "
-			<< "X:" << int(uint8_t(reg.X)) << " "
-			<< "Y:" << int(uint8_t(reg.Y)) << " "
-			<< "P:" << int(reg.PS.to_ulong()) << " "
-			<< "SP:" << int(reg.SP);
+			<< "A:" << std::setw(2) << int(uint8_t(reg.A)) << " "
+			<< "X:" << std::setw(2) << int(uint8_t(reg.X)) << " "
+			<< "Y:" << std::setw(2) << int(uint8_t(reg.Y)) << " "
+			<< "P:" << std::setw(2) << int(reg.PS.to_ulong()) << " "
+			<< "SP:" << std::setw(2) << int(reg.SP);
 	}
 }
