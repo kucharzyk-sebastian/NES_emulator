@@ -729,8 +729,8 @@ namespace nes::cpu
 	{
 		uint8_t incomingAddress = memory_[++registers_.PC];
 		uint16_t newAddress = uint8_t(incomingAddress + uint8_t(registers_.X));
-		uint16_t res = uint8_t(memory_[newAddress]) + (memory_[newAddress + 1] << CHAR_BIT);
-		logStatus(registers_.PC - 2, uint8_t(memory_[registers_.PC - 2]), uint8_t(memory_[registers_.PC - 1]), registers_);
+		uint16_t res = uint8_t(memory_[newAddress]) + (memory_[uint8_t(newAddress + 1)] << CHAR_BIT);
+		logStatus(registers_.PC - 1, uint8_t(memory_[registers_.PC - 1]), uint8_t(memory_[registers_.PC]), registers_);
 
 		return res;
 	}
@@ -739,7 +739,7 @@ namespace nes::cpu
 	{
 		uint8_t incomingAddress = memory_[++registers_.PC];
 		uint16_t res = uint8_t(memory_[incomingAddress]) + (memory_[incomingAddress + 1] << CHAR_BIT) + uint8_t(registers_.Y);
-		logStatus(registers_.PC - 2, uint8_t(memory_[registers_.PC - 2]), uint8_t(memory_[registers_.PC - 1]), registers_);
+		logStatus(registers_.PC - 1, uint8_t(memory_[registers_.PC - 1]), uint8_t(memory_[registers_.PC]), registers_);
 
 		return  res;
 	}
