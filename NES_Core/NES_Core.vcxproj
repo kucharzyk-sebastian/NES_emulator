@@ -100,7 +100,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\dev\NES_Emulator\NES_Core\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\dev\NES_Emulator\NES_Core\src;C:\dev\NES_Emulator\NES_Core\src\thirdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
@@ -118,7 +118,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\dev\NES_Emulator\NES_Core\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\dev\NES_Emulator\NES_Core\src;C:\dev\NES_Emulator\NES_Core\src\thirdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
@@ -138,7 +138,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\dev\NES_Emulator\NES_Core\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\dev\NES_Emulator\NES_Core\src;C:\dev\NES_Emulator\NES_Core\src\thirdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
@@ -160,7 +160,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\dev\NES_Emulator\NES_Core\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\dev\NES_Emulator\NES_Core\src;C:\dev\NES_Emulator\NES_Core\src\thirdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
@@ -177,13 +177,16 @@
     <ClInclude Include="src\nes\cpu\registers.h" />
     <ClInclude Include="src\nes\memory\memory.h" />
     <ClInclude Include="src\nes\memory\romLoader.h" />
-    <ClInclude Include="src\thirdparty\magicEnum.h" />
+    <ClInclude Include="src\nes\nesemulator.h" />
+    <ClInclude Include="src\thirdparty\easyloggingcpp\easylogging++.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\nes\cpu\cpu.cpp" />
     <ClCompile Include="src\nes\cpu\opcodesExecutor.cpp" />
     <ClCompile Include="src\nes\memory\memory.cpp" />
     <ClCompile Include="src\nes\memory\romLoader.cpp" />
+    <ClCompile Include="src\nes\nesemulator.cpp" />
+    <ClCompile Include="src\thirdparty\easyloggingcpp\easylogging++.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -738,7 +738,7 @@ namespace nes::cpu
 	uint16_t CPU::extractIndirectYAddressWithProgramCounter()
 	{
 		uint8_t incomingAddress = memory_[++registers_.PC];
-		uint16_t res = uint8_t(memory_[incomingAddress]) + (memory_[incomingAddress + 1] << CHAR_BIT) + uint8_t(registers_.Y);
+		uint16_t res = uint8_t(memory_[incomingAddress]) + (memory_[uint8_t(incomingAddress + 1)] << CHAR_BIT) + uint8_t(registers_.Y);
 		logStatus(registers_.PC - 1, uint8_t(memory_[registers_.PC - 1]), uint8_t(memory_[registers_.PC]), registers_);
 
 		return  res;

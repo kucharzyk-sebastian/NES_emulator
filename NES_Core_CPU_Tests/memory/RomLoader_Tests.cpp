@@ -2,6 +2,7 @@
 #include "nes/memory/romLoader.h"
 #include "nes/memory/memory.h"
 
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Memory_Tests

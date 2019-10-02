@@ -9,10 +9,12 @@ namespace nes::memory {
 		std::ifstream file(path, std::ios::binary);
 		std::vector<uint8_t> v(std::istreambuf_iterator<char>{file}, {});
 
+		int i = 0;
 		for (uint16_t addr = 0x0010; addr < 0x4000; ++addr)
 		{
-			memory[0x8000] = v[addr];
-			memory[0xC000] = v[addr];
+			memory[0x8000 + i] = v[addr];
+			memory[0xC000 + i] = v[addr];
+			++i;
 		}
 	} 
 }
