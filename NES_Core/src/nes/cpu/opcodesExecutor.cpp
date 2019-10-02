@@ -501,7 +501,7 @@ namespace nes::cpu{
 	void OpcodesExecutor::compareWithFlags(int8_t registerValue, int8_t inputValue) noexcept
 	{
 		registers_.PS[static_cast<uint8_t>(rps::Carry)] = static_cast<uint8_t>(registerValue) >= static_cast<uint8_t>(inputValue) ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = (registerValue - inputValue) < 0 ? true : false;
+		registers_.PS[static_cast<uint8_t>(rps::Negative)] = int8_t(registerValue - inputValue) < 0 ? true : false;
 		registers_.PS[static_cast<uint8_t>(rps::Zero)] = registerValue == inputValue ? true : false;
 	}
 
