@@ -213,5 +213,8 @@
     <ClCompile Include="cpu\CPU_performInstruction_zeroPageY_Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NESEmulator_Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

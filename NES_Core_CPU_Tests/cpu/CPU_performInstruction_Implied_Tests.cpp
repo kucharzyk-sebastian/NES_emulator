@@ -166,11 +166,12 @@ namespace CPU
 		TEST_METHOD(performInstruction_PHP)
 		{
 			mem_[reg_.PC] = int8_t(0x08);
-			Assert::AreNotEqual(PSType(mem_[0x01FF]).to_string(), reg_.PS.to_string());
+			reg_.PS = PSType(0b11001011);
+			Assert::AreNotEqual(unsigned long(uint8_t(mem_[0x01FF])), reg_.PS.to_ulong());
 
 			cpu_.performInstruction();
 
-			Assert::AreEqual(reg_.PS.to_string(), PSType(mem_[0x01FF]).to_string());
+			Assert::AreEqual(reg_.PS.to_ulong() | 0b00110000, unsigned long(uint8_t(mem_[0x01FF])));
 			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
 			Assert::AreEqual(int(uint16_t(0x0801)), int(reg_.PC));
 		}

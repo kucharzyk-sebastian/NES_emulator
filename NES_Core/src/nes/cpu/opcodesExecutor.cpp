@@ -108,9 +108,9 @@ namespace nes::cpu{
 		//todo sk: extract reading/writing 2bytes from stack to common place;
 		writeToStack(registers_.PC >> CHAR_BIT);
 		writeToStack(registers_.PC & 0x00FF);
-		writeToStack(int8_t(registers_.PS.to_ulong()));
-		registers_.PC = uint8_t(memory_[interruptVectorLSB]) + (memory_[interruptVectorMSB] << CHAR_BIT);
 		registers_.PS.set(static_cast<uint8_t>(rps::Break));
+		writeToStack(int8_t(registers_.PS.to_ulong() | (1 << static_cast<uint8_t>(rps::Unknown))));
+		registers_.PC = uint8_t(memory_[interruptVectorLSB]) + (memory_[interruptVectorMSB] << CHAR_BIT);
 	}
 
 	void OpcodesExecutor::BVC(int8_t value) noexcept
@@ -234,7 +234,7 @@ namespace nes::cpu{
 
 	void OpcodesExecutor::JSR(uint16_t value)
 	{
-		uint16_t returnPoint = --registers_.PC;
+		uint16_t returnPoint = registers_.PC;
 		writeToStack(returnPoint >> CHAR_BIT);
 		writeToStack(returnPoint & 0x00FF);
 		registers_.PC = value;
@@ -306,7 +306,10 @@ namespace nes::cpu{
 
 	void OpcodesExecutor::PHP()
 	{
-		writeToStack(static_cast<int8_t>(registers_.PS.to_ulong()));
+		int8_t valueToWrite = static_cast<int8_t>(registers_.PS.to_ulong());
+		valueToWrite |= (1 << static_cast<uint8_t>(rps::Break));
+		valueToWrite |= (1 << static_cast<uint8_t>(rps::Unknown));
+		writeToStack(valueToWrite);
 	}
 
 	void OpcodesExecutor::PLA()
@@ -318,7 +321,11 @@ namespace nes::cpu{
 
 	void OpcodesExecutor::PLP()
 	{
-		registers_.PS = readFromStack();
+		uint8_t newPS = readFromStack();
+		uint8_t oldPS = uint8_t(registers_.PS.to_ulong());
+		newPS ^= (-((oldPS >> static_cast<uint8_t>(rps::Break)) & 1) ^ newPS) & (1 << static_cast<uint8_t>(rps::Break));
+		newPS ^= (-((oldPS >> static_cast<uint8_t>(rps::Unknown)) & 1) ^ newPS) & (1 << static_cast<uint8_t>(rps::Unknown));
+		registers_.PS = newPS;
 	}
 
 	void OpcodesExecutor::ROL() noexcept

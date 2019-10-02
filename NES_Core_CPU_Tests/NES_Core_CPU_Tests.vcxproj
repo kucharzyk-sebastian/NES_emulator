@@ -191,6 +191,7 @@
     <ClCompile Include="cpu\CPU_performInstruction_zeroPage_Tests.cpp.cpp" />
     <ClCompile Include="memory\Memory_Tests.cpp" />
     <ClCompile Include="memory\RomLoader_Tests.cpp" />
+    <ClCompile Include="NESEmulator_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_BCC_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_BCS_Tests.cpp" />
     <ClCompile Include="opcodes\Executor_BEQ_Tests.cpp" />

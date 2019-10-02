@@ -23,35 +23,32 @@ namespace OpcodesExecutor
 
 		}
 
-		TEST_METHOD(PLP_pulls_value_from_stack_to_processor_status_register)
+		TEST_METHOD(PLP_pulls_value_from_stack_to_processor_status_register_ignoring_bit_4_and_5)
 		{
-			auto value = PSType(0b01101101);
-			mem_[0x01FF] = static_cast<int8_t>(value.to_ulong());
+			reg_.PS = PSType(0b011011110);
+			mem_[0x01FF] = int8_t(0b01101101);
 			reg_.SP = uint8_t(0x01FE);
-			Assert::AreNotEqual(value.to_string(), reg_.PS.to_string());
 
 			ie_.PLP();
 
-			Assert::AreEqual(PSType(mem_[0x01FF]).to_string(), reg_.PS.to_string());
+			Assert::AreEqual(PSType(0b01011101).to_string(), reg_.PS.to_string());
 		}
 
-		TEST_METHOD(PLP_pulls_value_from_stack_to_processor_status_register_two_times)
+		TEST_METHOD(PLP_pulls_value_from_stack_to_processor_status_register_two_times_ignoring_bit_4_and_5)
 		{
-			auto firstValue = PSType(0b01101101);
-			auto secondValue = PSType(0b00000111);
-			mem_[0x01FF] = static_cast<int8_t>(firstValue.to_ulong());
-			mem_[0x01FE] = static_cast<int8_t>(secondValue.to_ulong());
+			reg_.PS = PSType(0b11011110);
+			mem_[0x01FF] = int8_t(0b01101101);
+			mem_[0x01FE] = int8_t(0b01111100);
 			reg_.SP = uint8_t(0x01FD);
-			Assert::AreNotEqual(firstValue.to_string(), reg_.PS.to_string());
-			Assert::AreNotEqual(secondValue.to_string(), reg_.PS.to_string());
 
 			ie_.PLP();
-			auto firstPull = reg_.PS;
+			uint8_t firstPull = reg_.PS.to_ullong();
+			reg_.PS = PSType(0b011011110);
 			ie_.PLP();
-			auto secondPull = reg_.PS;
+			uint8_t secondPull = reg_.PS.to_ullong();
 
-			Assert::AreEqual(secondValue.to_string(), firstPull.to_string());
-			Assert::AreEqual(firstValue.to_string(), secondPull.to_string());
+			Assert::AreEqual(uint8_t(0b01011100), firstPull);
+			Assert::AreEqual(uint8_t(0b01011101), secondPull);
 		}
 
 		TEST_METHOD(PLP_increments_stack_pointer)

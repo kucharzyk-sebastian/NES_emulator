@@ -22,15 +22,15 @@ namespace OpcodesExecutor
 			reg_.PC = 0x0604;
 		}
 
-		TEST_METHOD(JSR_copy_current_Program_Counter_decremented_by_one_onto_the_stack_and_copies_passed_value_to_PC)
+		TEST_METHOD(JSR_copy_Program_Counter_of_next_instruction_decremented_by_one_onto_the_stack_and_copies_passed_value_to_PC)
 		{
 			uint16_t value = 0x8c4f;
+			uint16_t nextPC = reg_.PC + 1;
 
 			oe_.JSR(value);
 
+			Assert::AreEqual(nextPC - 1, (mem_[0x01FF] << CHAR_BIT) + mem_[0x01FE]);
 			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
-			Assert::AreEqual(int8_t(0x06), mem_[0x01FF]);
-			Assert::AreEqual(int8_t(0x03), mem_[0x01FE]);
 			Assert::AreEqual(int(value), int(reg_.PC));
 		}
 	};

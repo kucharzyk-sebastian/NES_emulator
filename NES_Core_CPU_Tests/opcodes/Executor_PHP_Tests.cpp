@@ -24,26 +24,27 @@ namespace OpcodesExecutor
 
 		TEST_METHOD(PHP_pushes_processor_status_flags_value_onto_the_stack)
 		{
-			Assert::AreNotEqual(PSType(mem_[0x01FF]).to_string(), reg_.PS.to_string());
+			reg_.PS = PSType(0b11001011);
+			Assert::AreNotEqual(unsigned long(uint8_t(mem_[0x01FF])), reg_.PS.to_ulong());
 
 			ie_.PHP();
 
-			Assert::AreEqual(reg_.PS.to_string(), PSType(mem_[0x01FF]).to_string());
+			Assert::AreEqual(reg_.PS.to_ulong() | 0b00110000, unsigned long(uint8_t(mem_[0x01FF])));
 		}
 
-		TEST_METHOD(PHP_pushes_processor_status_flags_value_onto_the_stack_two_times)
+		TEST_METHOD(PHP_pushes_processor_status_flags_value_onto_the_stack_two_times_always_with_4_and_5_bits_set)
 		{
-			auto firstPS = reg_.PS;
+			auto firstPS = reg_.PS = PSType(0b11001011);
 			auto secondPS = PSType(0b010100110);
-			Assert::AreNotEqual(firstPS.to_string(), PSType(mem_[0x01FF]).to_string());
-			Assert::AreNotEqual(secondPS.to_string(), PSType(mem_[0x01FF]).to_string());
+			Assert::AreNotEqual(firstPS.to_ulong(), PSType(mem_[0x01FF]).to_ulong());
+			Assert::AreNotEqual(secondPS.to_ulong(), PSType(mem_[0x01FF]).to_ulong());
 
 			ie_.PHP();
 			reg_.PS = secondPS;
 			ie_.PHP();
 
-			Assert::AreEqual(firstPS.to_string(), PSType(mem_[0x01FF]).to_string());
-			Assert::AreEqual(secondPS.to_string(), PSType(mem_[0x01FE]).to_string());
+			Assert::AreEqual(firstPS.to_ulong() | 0b00110000, PSType(mem_[0x01FF]).to_ulong());
+			Assert::AreEqual(secondPS.to_ulong() | 0b00110000, PSType(mem_[0x01FE]).to_ulong() | 0b00110000);
 		}
 
 		TEST_METHOD(PHP_decrements_stack_pointer)
