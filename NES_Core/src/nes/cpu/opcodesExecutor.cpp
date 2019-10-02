@@ -81,8 +81,8 @@ namespace nes::cpu{
 	{
 		int8_t result = memory_[address] & registers_.A;
 		registers_.PS[static_cast<uint8_t>(rps::Zero)] = result == 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Overflow)] = result & 0b01000000;
+		registers_.PS[static_cast<uint8_t>(rps::Negative)] = memory_[address] & 0b10000000;
+		registers_.PS[static_cast<uint8_t>(rps::Overflow)] = memory_[address] & 0b01000000;
 	}
 
 	void OpcodesExecutor::BMI(int8_t value) noexcept
