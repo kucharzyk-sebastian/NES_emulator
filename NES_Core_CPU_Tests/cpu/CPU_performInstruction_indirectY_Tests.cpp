@@ -66,7 +66,7 @@ namespace CPU
 			mem_[reg_.PC] = int8_t(0xD1);
 			mem_[reg_.PC + 1] = int8_t(0xFF);
 			mem_[0x00FF] = int8_t(0x03);
-			mem_[0x0100] = int8_t(0x65);
+			mem_[0x0000] = int8_t(0x65);
 			mem_[0x6503 + uint8_t(reg_.Y)] = int8_t(2);
 			Assert::IsFalse(reg_.PS[static_cast<uint8_t>(nes::cpu::registers::ProcessorStatus::Negative)]);
 
