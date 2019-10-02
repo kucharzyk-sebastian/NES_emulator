@@ -13,6 +13,7 @@ namespace OpcodesExecutor
 		nes::cpu::registers::Registers reg_;
 		nes::memory::Memory mem_;
 		nes::cpu::OpcodesExecutor oe_;
+		uint16_t stackPage_ = uint16_t(0x0100);
 
 
 		BRK_Tests() :
@@ -29,9 +30,9 @@ namespace OpcodesExecutor
 			
 			oe_.BRK();
 
-			Assert::AreEqual(int8_t(0xaf), mem_[0x01FF]);
-			Assert::AreEqual(int8_t(0x38), mem_[0x01FE]);
-			Assert::AreEqual(uint8_t(reg_.PS.to_ulong()), uint8_t(mem_[0x01FD]));
+			Assert::AreEqual(int8_t(0xaf), mem_[stackPage_ + reg_.SP + 3]);
+			Assert::AreEqual(int8_t(0x38), mem_[stackPage_ + reg_.SP + 2]);
+			Assert::AreEqual(uint8_t(reg_.PS.to_ulong()), uint8_t(mem_[stackPage_ + reg_.SP + 1]));
 		}
 
 		TEST_METHOD(BRK_loads_interrupt_vector_to_PC)
