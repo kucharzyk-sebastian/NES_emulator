@@ -15,7 +15,7 @@ namespace CPU
 		nes::memory::Memory mem_;
 		nes::cpu::CPU cpu_;
 		using PSType = std::bitset<nes::cpu::registers::Registers::PSSize>;
-
+		uint16_t stackPage_ = uint16_t(0x0100);
 
 		PerformInstruction_Implied_Tests() :
 			reg_(),
@@ -153,11 +153,11 @@ namespace CPU
 			int8_t value = 5;
 			reg_.A = value;
 			mem_[reg_.PC] = int8_t(0x48);
-			Assert::AreNotEqual(value, mem_[0x01FF]);
+			Assert::AreNotEqual(value, mem_[stackPage_ + reg_.SP]);
 
 			cpu_.performInstruction();
 
-			Assert::AreEqual(value, mem_[0x01FF]);
+			Assert::AreEqual(value, mem_[stackPage_ + reg_.SP + 1]);
 			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
 			Assert::AreEqual(int(uint16_t(0x0801)), int(reg_.PC));
 		}
@@ -167,11 +167,11 @@ namespace CPU
 		{
 			mem_[reg_.PC] = int8_t(0x08);
 			reg_.PS = PSType(0b11001011);
-			Assert::AreNotEqual(unsigned long(uint8_t(mem_[0x01FF])), reg_.PS.to_ulong());
+			Assert::AreNotEqual(unsigned long(uint8_t(mem_[stackPage_ + reg_.SP])), reg_.PS.to_ulong());
 
 			cpu_.performInstruction();
 
-			Assert::AreEqual(reg_.PS.to_ulong() | 0b00110000, unsigned long(uint8_t(mem_[0x01FF])));
+			Assert::AreEqual(reg_.PS.to_ulong() | 0b00110000, unsigned long(uint8_t(mem_[stackPage_ + reg_.SP + 1])));
 			// Casting to int because of a well known bug in CppUnit which does not allow comparison of uint16_t
 			Assert::AreEqual(int(uint16_t(0x0801)), int(reg_.PC));
 		}

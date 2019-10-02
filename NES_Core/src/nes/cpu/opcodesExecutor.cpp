@@ -350,7 +350,7 @@ namespace nes::cpu{
 
 	void OpcodesExecutor::RTI()
 	{
-		registers_.PS = std::bitset<registers::Registers::PSSize>(readFromStack());
+		PLP();
 		registers_.PC = uint8_t(readFromStack()) + (readFromStack() << CHAR_BIT);
 	}
 
