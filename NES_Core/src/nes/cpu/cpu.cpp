@@ -222,6 +222,7 @@ namespace nes::cpu
 				executor_.AND(extractIndirectYAddressWithProgramCounter());
 				break;
 			case ASL_acc:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.ASL();
 				break;
 			case ASL_zp:
@@ -261,6 +262,7 @@ namespace nes::cpu
 				executor_.BPL(extractRelativevalueWithProgramCounter());
 				break;
 			case BRK_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.BRK();
 				return;
 			case BVC_rel:
@@ -270,15 +272,19 @@ namespace nes::cpu
 				executor_.BVS(extractRelativevalueWithProgramCounter());
 				break;
 			case CLC_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.CLC();
 				break;
 			case CLD_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.CLD();
 				break;
 			case CLI_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.CLI();
 				break;
 			case CLV_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.CLV();
 				break;
 			case CMP_imm:
@@ -336,9 +342,11 @@ namespace nes::cpu
 				executor_.DEC(extractAbsoluteXAddressWithProgramCounter());
 				break;
 			case DEX_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.DEX();
 				break;
 			case DEY_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.DEY();
 				break;
 			case EOR_imm:
@@ -378,9 +386,11 @@ namespace nes::cpu
 				executor_.INC(extractAbsoluteXAddressWithProgramCounter());
 				break;
 			case INX_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.INX();
 				break;
 			case INY_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.INY();
 				break;
 			case JMP_abs:
@@ -447,6 +457,7 @@ namespace nes::cpu
 				executor_.LDY(extractAbsoluteXAddressWithProgramCounter());
 				break;
 			case LSR_acc:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.LSR();
 				break;
 			case LSR_zp:
@@ -462,6 +473,7 @@ namespace nes::cpu
 				executor_.LSR(extractAbsoluteXAddressWithProgramCounter());
 				break;
 			case NOP_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.NOP();
 				return;
 			case ORA_imm:
@@ -489,18 +501,23 @@ namespace nes::cpu
 				executor_.ORA(extractIndirectYAddressWithProgramCounter());
 				break;
 			case PHA_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.PHA();
 				break;
 			case PHP_imp:
-				executor_.PHP();
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
+				.PHP();
 				break;
 			case PLA_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.PLA();
 				break;
 			case PLP_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.PLP();
 				break;
 			case ROL_acc:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.ROL();
 				break;
 			case ROL_zp:
@@ -516,6 +533,7 @@ namespace nes::cpu
 				executor_.ROL(extractAbsoluteXAddressWithProgramCounter());
 				break;
 			case ROR_acc:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.ROR();
 				break;
 			case ROR_zp:
@@ -531,9 +549,11 @@ namespace nes::cpu
 				executor_.ROR(extractAbsoluteXAddressWithProgramCounter());
 				break;
 			case RTI_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.RTI();
 				return;
 			case RTS_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.RTS();
 				return;
 			case SBC_imm:
@@ -561,12 +581,15 @@ namespace nes::cpu
 				executor_.SBC(extractIndirectYAddressWithProgramCounter());
 				break;
 			case SEC_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.SEC();
 				break;
 			case SED_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.SED();
 				break;
 			case SEI_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.SEI();
 				break;
 			case STA_zp:
@@ -609,21 +632,27 @@ namespace nes::cpu
 				executor_.STY(extractAbsoluteAddressWithProgramCounter());
 				break;
 			case TAX_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.TAX();
 				break;
 			case TAY_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.TAY();
 				break;
 			case TSX_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.TSX();
 				break;
 			case TXA_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.TXA();
 				break;
 			case TXS_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.TXS();
 				break;
 			case TYA_imp:
+				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.TYA();
 				break;
 			default:
