@@ -110,7 +110,7 @@ namespace nes::cpu{
 		writeToStack(registers_.PC & 0x00FF);
 		registers_.PS.set(static_cast<uint8_t>(rps::Break));
 		writeToStack(int8_t(registers_.PS.to_ulong() | (1 << static_cast<uint8_t>(rps::Unknown))));
-		registers_.PC = uint8_t(memory_[interruptVectorLSB]) + (memory_[interruptVectorMSB] << CHAR_BIT);
+		registers_.PC = uint8_t(memory_[interruptVectorLSB_]) + (memory_[interruptVectorMSB_] << CHAR_BIT);
 	}
 
 	void OpcodesExecutor::BVC(int8_t value) noexcept

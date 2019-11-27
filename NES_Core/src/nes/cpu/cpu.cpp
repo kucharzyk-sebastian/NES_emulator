@@ -174,102 +174,102 @@ namespace nes::cpu
 		switch (uint8_t(memory_[registers_.PC]))
 		{
 			case ADC_imm:
-				executor_.ADC(extractImmediatevalueWithProgramCounter());
+				executor_.ADC(getImmediateValue());
 				break;
 			case ADC_zp:
-				executor_.ADC(extractZeroPageAddressWithProgramCounter());
+				executor_.ADC(getZeroPageAddress());
 				break;
 			case ADC_zp_X:
-				executor_.ADC(extractZeroPageXAddressWithProgramCounter());
+				executor_.ADC(getZeroPageXAddress());
 				break;
 			case ADC_abs:
-				executor_.ADC(extractAbsoluteAddressWithProgramCounter());
+				executor_.ADC(getAbsoluteAddress());
 				break;
 			case ADC_abs_X:
-				executor_.ADC(extractAbsoluteXAddressWithProgramCounter());
+				executor_.ADC(getAbsoluteXAddress());
 				break;
 			case ADC_abs_Y:
-				executor_.ADC(extractAbsoluteYAddressWithProgramCounter());
+				executor_.ADC(getAbsoluteYAddress());
 				break;
 			case ADC_ind_X:
-				executor_.ADC(extractIndirectXAddressWithProgramCounter());
+				executor_.ADC(getIndirectXAddress());
 				break;
 			case ADC_ind_Y:
-				executor_.ADC(extractIndirectYAddressWithProgramCounter());
+				executor_.ADC(getIndirectYAddress());
 				break;
 			case AND_imm:
-				executor_.AND(extractImmediatevalueWithProgramCounter());
+				executor_.AND(getImmediateValue());
 				break;
 			case AND_zp:
-				executor_.AND(extractZeroPageAddressWithProgramCounter());
+				executor_.AND(getZeroPageAddress());
 				break;
 			case AND_zp_X:
-				executor_.AND(extractZeroPageXAddressWithProgramCounter());
+				executor_.AND(getZeroPageXAddress());
 				break;
 			case AND_abs:
-				executor_.AND(extractAbsoluteAddressWithProgramCounter());
+				executor_.AND(getAbsoluteAddress());
 				break;
 			case AND_abs_X:
-				executor_.AND(extractAbsoluteXAddressWithProgramCounter());
+				executor_.AND(getAbsoluteXAddress());
 				break;
 			case AND_abs_Y:
-				executor_.AND(extractAbsoluteYAddressWithProgramCounter());
+				executor_.AND(getAbsoluteYAddress());
 				break;
 			case AND_ind_X:
-				executor_.AND(extractIndirectXAddressWithProgramCounter());
+				executor_.AND(getIndirectXAddress());
 				break;
 			case AND_ind_Y:
-				executor_.AND(extractIndirectYAddressWithProgramCounter());
+				executor_.AND(getIndirectYAddress());
 				break;
 			case ASL_acc:
 				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.ASL();
 				break;
 			case ASL_zp:
-				executor_.ASL(extractZeroPageAddressWithProgramCounter());
+				executor_.ASL(getZeroPageAddress());
 				break;
 			case ASL_zp_X:
-				executor_.ASL(extractZeroPageXAddressWithProgramCounter());
+				executor_.ASL(getZeroPageXAddress());
 				break;
 			case ASL_abs:
-				executor_.ASL(extractAbsoluteAddressWithProgramCounter());
+				executor_.ASL(getAbsoluteAddress());
 				break;
 			case ASL_abs_X:
-				executor_.ASL(extractAbsoluteXAddressWithProgramCounter());
+				executor_.ASL(getAbsoluteXAddress());
 				break;
 			case BCC_rel:
-				executor_.BCC(extractRelativevalueWithProgramCounter());
+				executor_.BCC(getRelativeValue());
 				break;
 			case BCS_rel:
-				executor_.BCS(extractRelativevalueWithProgramCounter());
+				executor_.BCS(getRelativeValue());
 				break;
 			case BEQ_rel:
-				executor_.BEQ(extractRelativevalueWithProgramCounter());
+				executor_.BEQ(getRelativeValue());
 				break;
 			case BIT_zp:
-				executor_.BIT(extractZeroPageAddressWithProgramCounter());
+				executor_.BIT(getZeroPageAddress());
 				break;
 			case BIT_abs:
-				executor_.BIT(extractAbsoluteAddressWithProgramCounter());
+				executor_.BIT(getAbsoluteAddress());
 				break;
 			case BMI_rel:
-				executor_.BMI(extractRelativevalueWithProgramCounter());
+				executor_.BMI(getRelativeValue());
 				break;
 			case BNE_rel:
-				executor_.BNE(extractRelativevalueWithProgramCounter());
+				executor_.BNE(getRelativeValue());
 				break;
 			case BPL_rel:
-				executor_.BPL(extractRelativevalueWithProgramCounter());
+				executor_.BPL(getRelativeValue());
 				break;
 			case BRK_imp:
 				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.BRK();
 				return;
 			case BVC_rel:
-				executor_.BVC(extractRelativevalueWithProgramCounter());
+				executor_.BVC(getRelativeValue());
 				break;
 			case BVS_rel:
-				executor_.BVS(extractRelativevalueWithProgramCounter());
+				executor_.BVS(getRelativeValue());
 				break;
 			case CLC_imp:
 				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
@@ -288,58 +288,58 @@ namespace nes::cpu
 				executor_.CLV();
 				break;
 			case CMP_imm:
-				executor_.CMP(extractImmediatevalueWithProgramCounter());
+				executor_.CMP(getImmediateValue());
 				break;
 			case CMP_zp:
-				executor_.CMP(extractZeroPageAddressWithProgramCounter());
+				executor_.CMP(getZeroPageAddress());
 				break;
 			case CMP_zp_X:
-				executor_.CMP(extractZeroPageXAddressWithProgramCounter());
+				executor_.CMP(getZeroPageXAddress());
 				break;
 			case CMP_abs:
-				executor_.CMP(extractAbsoluteAddressWithProgramCounter());
+				executor_.CMP(getAbsoluteAddress());
 				break;
 			case CMP_abs_X:
-				executor_.CMP(extractAbsoluteXAddressWithProgramCounter());
+				executor_.CMP(getAbsoluteXAddress());
 				break;
 			case CMP_abs_Y:
-				executor_.CMP(extractAbsoluteYAddressWithProgramCounter());
+				executor_.CMP(getAbsoluteYAddress());
 				break;
 			case CMP_ind_X:
-				executor_.CMP(extractIndirectXAddressWithProgramCounter());
+				executor_.CMP(getIndirectXAddress());
 				break;
 			case CMP_ind_Y:
-				executor_.CMP(extractIndirectYAddressWithProgramCounter());
+				executor_.CMP(getIndirectYAddress());
 				break;
 			case CPX_imm:
-				executor_.CPX(extractImmediatevalueWithProgramCounter());
+				executor_.CPX(getImmediateValue());
 				break;
 			case CPX_zp:
-				executor_.CPX(extractZeroPageAddressWithProgramCounter());
+				executor_.CPX(getZeroPageAddress());
 				break;
 			case CPX_abs:
-				executor_.CPX(extractAbsoluteAddressWithProgramCounter());
+				executor_.CPX(getAbsoluteAddress());
 				break;
 			case CPY_imm:
-				executor_.CPY(extractImmediatevalueWithProgramCounter());
+				executor_.CPY(getImmediateValue());
 				break;
 			case CPY_zp:
-				executor_.CPY(extractZeroPageAddressWithProgramCounter());
+				executor_.CPY(getZeroPageAddress());
 				break;
 			case CPY_abs:
-				executor_.CPY(extractAbsoluteAddressWithProgramCounter());
+				executor_.CPY(getAbsoluteAddress());
 				break;
 			case DEC_zp:
-				executor_.DEC(extractZeroPageAddressWithProgramCounter());
+				executor_.DEC(getZeroPageAddress());
 				break;
 			case DEC_zp_X:
-				executor_.DEC(extractZeroPageXAddressWithProgramCounter());
+				executor_.DEC(getZeroPageXAddress());
 				break;
 			case DEC_abs:
-				executor_.DEC(extractAbsoluteAddressWithProgramCounter());
+				executor_.DEC(getAbsoluteAddress());
 				break;
 			case DEC_abs_X:
-				executor_.DEC(extractAbsoluteXAddressWithProgramCounter());
+				executor_.DEC(getAbsoluteXAddress());
 				break;
 			case DEX_imp:
 				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
@@ -350,40 +350,40 @@ namespace nes::cpu
 				executor_.DEY();
 				break;
 			case EOR_imm:
-				executor_.EOR(extractImmediatevalueWithProgramCounter());
+				executor_.EOR(getImmediateValue());
 				break;
 			case EOR_zp:
-				executor_.EOR(extractZeroPageAddressWithProgramCounter());
+				executor_.EOR(getZeroPageAddress());
 				break;
 			case EOR_zp_X:
-				executor_.EOR(extractZeroPageXAddressWithProgramCounter());
+				executor_.EOR(getZeroPageXAddress());
 				break;
 			case EOR_abs:
-				executor_.EOR(extractAbsoluteAddressWithProgramCounter());
+				executor_.EOR(getAbsoluteAddress());
 				break;
 			case EOR_abs_X:
-				executor_.EOR(extractAbsoluteXAddressWithProgramCounter());
+				executor_.EOR(getAbsoluteXAddress());
 				break;
 			case EOR_abs_Y:
-				executor_.EOR(extractAbsoluteYAddressWithProgramCounter());
+				executor_.EOR(getAbsoluteYAddress());
 				break;
 			case EOR_ind_X:
-				executor_.EOR(extractIndirectXAddressWithProgramCounter());
+				executor_.EOR(getIndirectXAddress());
 				break;
 			case EOR_ind_Y:
-				executor_.EOR(extractIndirectYAddressWithProgramCounter());
+				executor_.EOR(getIndirectYAddress());
 				break;
 			case INC_zp:
-				executor_.INC(extractZeroPageAddressWithProgramCounter());
+				executor_.INC(getZeroPageAddress());
 				break;
 			case INC_zp_X:
-				executor_.INC(extractZeroPageXAddressWithProgramCounter());
+				executor_.INC(getZeroPageXAddress());
 				break;
 			case INC_abs:
-				executor_.INC(extractAbsoluteAddressWithProgramCounter());
+				executor_.INC(getAbsoluteAddress());
 				break;
 			case INC_abs_X:
-				executor_.INC(extractAbsoluteXAddressWithProgramCounter());
+				executor_.INC(getAbsoluteXAddress());
 				break;
 			case INX_imp:
 				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
@@ -394,111 +394,111 @@ namespace nes::cpu
 				executor_.INY();
 				break;
 			case JMP_abs:
-				executor_.JMP_absolute(extractAbsoluteAddressWithProgramCounter());
+				executor_.JMP_absolute(getAbsoluteAddress());
 				return;
 			case JMP_ind:
-				executor_.JMP_indirect(extractIndirectAddressWithProgramCounter());
+				executor_.JMP_indirect(getIndirectAddress());
 				return;
 			case JSR_abs:
-				executor_.JSR(extractAbsoluteAddressWithProgramCounter());
+				executor_.JSR(getAbsoluteAddress());
 				return;
 			case LDA_imm:
-				executor_.LDA(extractImmediatevalueWithProgramCounter());
+				executor_.LDA(getImmediateValue());
 				break;
 			case LDA_zp:
-				executor_.LDA(extractZeroPageAddressWithProgramCounter());
+				executor_.LDA(getZeroPageAddress());
 				break;
 			case LDA_zp_X:
-				executor_.LDA(extractZeroPageXAddressWithProgramCounter());
+				executor_.LDA(getZeroPageXAddress());
 				break;
 			case LDA_abs:
-				executor_.LDA(extractAbsoluteAddressWithProgramCounter());
+				executor_.LDA(getAbsoluteAddress());
 				break;
 			case LDA_abs_X:
-				executor_.LDA(extractAbsoluteXAddressWithProgramCounter());
+				executor_.LDA(getAbsoluteXAddress());
 				break;
 			case LDA_abs_Y:
-				executor_.LDA(extractAbsoluteYAddressWithProgramCounter());
+				executor_.LDA(getAbsoluteYAddress());
 				break;
 			case LDA_ind_X:
-				executor_.LDA(extractIndirectXAddressWithProgramCounter());
+				executor_.LDA(getIndirectXAddress());
 				break;
 			case LDA_ind_Y:
-				executor_.LDA(extractIndirectYAddressWithProgramCounter());
+				executor_.LDA(getIndirectYAddress());
 				break;
 			case LDX_imm:
-				executor_.LDX(extractImmediatevalueWithProgramCounter());
+				executor_.LDX(getImmediateValue());
 				break;
 			case LDX_zp:
-				executor_.LDX(extractZeroPageAddressWithProgramCounter());
+				executor_.LDX(getZeroPageAddress());
 				break;
 			case LDX_zp_Y:
-				executor_.LDX(extractZeroPageYAddressWithProgramCounter());
+				executor_.LDX(getZeroPageYAddress());
 				break;
 			case LDX_abs:
-				executor_.LDX(extractAbsoluteAddressWithProgramCounter());
+				executor_.LDX(getAbsoluteAddress());
 				break;
 			case LDX_abs_Y:
-				executor_.LDX(extractAbsoluteYAddressWithProgramCounter());
+				executor_.LDX(getAbsoluteYAddress());
 				break;
 			case LDY_imm:
-				executor_.LDY(extractImmediatevalueWithProgramCounter());
+				executor_.LDY(getImmediateValue());
 				break;
 			case LDY_zp:
-				executor_.LDY(extractZeroPageAddressWithProgramCounter());
+				executor_.LDY(getZeroPageAddress());
 				break;
 			case LDY_zp_X:
-				executor_.LDY(extractZeroPageXAddressWithProgramCounter());
+				executor_.LDY(getZeroPageXAddress());
 				break;
 			case LDY_abs:
-				executor_.LDY(extractAbsoluteAddressWithProgramCounter());
+				executor_.LDY(getAbsoluteAddress());
 				break;
 			case LDY_abs_X:
-				executor_.LDY(extractAbsoluteXAddressWithProgramCounter());
+				executor_.LDY(getAbsoluteXAddress());
 				break;
 			case LSR_acc:
 				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.LSR();
 				break;
 			case LSR_zp:
-				executor_.LSR(extractZeroPageAddressWithProgramCounter());
+				executor_.LSR(getZeroPageAddress());
 				break;
 			case LSR_zp_X:
-				executor_.LSR(extractZeroPageXAddressWithProgramCounter());
+				executor_.LSR(getZeroPageXAddress());
 				break;
 			case LSR_abs:
-				executor_.LSR(extractAbsoluteAddressWithProgramCounter());
+				executor_.LSR(getAbsoluteAddress());
 				break;
 			case LSR_abs_X:
-				executor_.LSR(extractAbsoluteXAddressWithProgramCounter());
+				executor_.LSR(getAbsoluteXAddress());
 				break;
 			case NOP_imp:
 				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.NOP();
 				return;
 			case ORA_imm:
-				executor_.ORA(extractImmediatevalueWithProgramCounter());
+				executor_.ORA(getImmediateValue());
 				break;
 			case ORA_zp:
-				executor_.ORA(extractZeroPageAddressWithProgramCounter());
+				executor_.ORA(getZeroPageAddress());
 				break;
 			case ORA_zp_X:
-				executor_.ORA(extractZeroPageXAddressWithProgramCounter());
+				executor_.ORA(getZeroPageXAddress());
 				break;
 			case ORA_abs:
-				executor_.ORA(extractAbsoluteAddressWithProgramCounter());
+				executor_.ORA(getAbsoluteAddress());
 				break;
 			case ORA_abs_X:
-				executor_.ORA(extractAbsoluteXAddressWithProgramCounter());
+				executor_.ORA(getAbsoluteXAddress());
 				break;
 			case ORA_abs_Y:
-				executor_.ORA(extractAbsoluteYAddressWithProgramCounter());
+				executor_.ORA(getAbsoluteYAddress());
 				break;
 			case ORA_ind_X:
-				executor_.ORA(extractIndirectXAddressWithProgramCounter());
+				executor_.ORA(getIndirectXAddress());
 				break;
 			case ORA_ind_Y:
-				executor_.ORA(extractIndirectYAddressWithProgramCounter());
+				executor_.ORA(getIndirectYAddress());
 				break;
 			case PHA_imp:
 				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
@@ -521,32 +521,32 @@ namespace nes::cpu
 				executor_.ROL();
 				break;
 			case ROL_zp:
-				executor_.ROL(extractZeroPageAddressWithProgramCounter());
+				executor_.ROL(getZeroPageAddress());
 				break;
 			case ROL_zp_X:
-				executor_.ROL(extractZeroPageXAddressWithProgramCounter());
+				executor_.ROL(getZeroPageXAddress());
 				break;
 			case ROL_abs:
-				executor_.ROL(extractAbsoluteAddressWithProgramCounter());
+				executor_.ROL(getAbsoluteAddress());
 				break;
 			case ROL_abs_X:
-				executor_.ROL(extractAbsoluteXAddressWithProgramCounter());
+				executor_.ROL(getAbsoluteXAddress());
 				break;
 			case ROR_acc:
 				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
 				executor_.ROR();
 				break;
 			case ROR_zp:
-				executor_.ROR(extractZeroPageAddressWithProgramCounter());
+				executor_.ROR(getZeroPageAddress());
 				break;
 			case ROR_zp_X:
-				executor_.ROR(extractZeroPageXAddressWithProgramCounter());
+				executor_.ROR(getZeroPageXAddress());
 				break;
 			case ROR_abs:
-				executor_.ROR(extractAbsoluteAddressWithProgramCounter());
+				executor_.ROR(getAbsoluteAddress());
 				break;
 			case ROR_abs_X:
-				executor_.ROR(extractAbsoluteXAddressWithProgramCounter());
+				executor_.ROR(getAbsoluteXAddress());
 				break;
 			case RTI_imp:
 				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
@@ -557,28 +557,28 @@ namespace nes::cpu
 				executor_.RTS();
 				return;
 			case SBC_imm:
-				executor_.SBC(extractImmediatevalueWithProgramCounter());
+				executor_.SBC(getImmediateValue());
 				break;
 			case SBC_zp:
-				executor_.SBC(extractZeroPageAddressWithProgramCounter());
+				executor_.SBC(getZeroPageAddress());
 				break;
 			case SBC_zp_X:
-				executor_.SBC(extractZeroPageXAddressWithProgramCounter());
+				executor_.SBC(getZeroPageXAddress());
 				break;
 			case SBC_abs:
-				executor_.SBC(extractAbsoluteAddressWithProgramCounter());
+				executor_.SBC(getAbsoluteAddress());
 				break;
 			case SBC_abs_X:
-				executor_.SBC(extractAbsoluteXAddressWithProgramCounter());
+				executor_.SBC(getAbsoluteXAddress());
 				break;
 			case SBC_abs_Y:
-				executor_.SBC(extractAbsoluteYAddressWithProgramCounter());
+				executor_.SBC(getAbsoluteYAddress());
 				break;
 			case SBC_ind_X:
-				executor_.SBC(extractIndirectXAddressWithProgramCounter());
+				executor_.SBC(getIndirectXAddress());
 				break;
 			case SBC_ind_Y:
-				executor_.SBC(extractIndirectYAddressWithProgramCounter());
+				executor_.SBC(getIndirectYAddress());
 				break;
 			case SEC_imp:
 				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
@@ -593,43 +593,43 @@ namespace nes::cpu
 				executor_.SEI();
 				break;
 			case STA_zp:
-				executor_.STA(extractZeroPageAddressWithProgramCounter());
+				executor_.STA(getZeroPageAddress());
 				break;
 			case STA_zp_X:
-				executor_.STA(extractZeroPageXAddressWithProgramCounter());
+				executor_.STA(getZeroPageXAddress());
 				break;
 			case STA_abs:
-				executor_.STA(extractAbsoluteAddressWithProgramCounter());
+				executor_.STA(getAbsoluteAddress());
 				break;
 			case STA_abs_X:
-				executor_.STA(extractAbsoluteXAddressWithProgramCounter());
+				executor_.STA(getAbsoluteXAddress());
 				break;
 			case STA_abs_Y:
-				executor_.STA(extractAbsoluteYAddressWithProgramCounter());
+				executor_.STA(getAbsoluteYAddress());
 				break;
 			case STA_ind_X:
-				executor_.STA(extractIndirectXAddressWithProgramCounter());
+				executor_.STA(getIndirectXAddress());
 				break;
 			case STA_ind_Y:
-				executor_.STA(extractIndirectYAddressWithProgramCounter());
+				executor_.STA(getIndirectYAddress());
 				break;
 			case STX_zp:
-				executor_.STX(extractZeroPageAddressWithProgramCounter());
+				executor_.STX(getZeroPageAddress());
 				break;
 			case STX_zp_Y:
-				executor_.STX(extractZeroPageYAddressWithProgramCounter());
+				executor_.STX(getZeroPageYAddress());
 				break;
 			case STX_abs:
-				executor_.STX(extractAbsoluteAddressWithProgramCounter());
+				executor_.STX(getAbsoluteAddress());
 				break;
 			case STY_zp:
-				executor_.STY(extractZeroPageAddressWithProgramCounter());
+				executor_.STY(getZeroPageAddress());
 				break;
 			case STY_zp_X:
-				executor_.STY(extractZeroPageXAddressWithProgramCounter());
+				executor_.STY(getZeroPageXAddress());
 				break;
 			case STY_abs:
-				executor_.STY(extractAbsoluteAddressWithProgramCounter());
+				executor_.STY(getAbsoluteAddress());
 				break;
 			case TAX_imp:
 				logStatus(registers_.PC, uint8_t(memory_[registers_.PC]), 0, registers_);
@@ -661,39 +661,36 @@ namespace nes::cpu
 		}
 		++registers_.PC;
 	}
-
-
-
 	
-	int8_t CPU::extractImmediatevalueWithProgramCounter()
+	int8_t CPU::getImmediateValue()
 	{
 		int8_t res = memory_[++registers_.PC];
 		logStatus(registers_.PC - 1, uint8_t(memory_[registers_.PC - 1]), uint8_t(res), registers_);
 		return res;
 	}
 
-	int8_t CPU::extractRelativevalueWithProgramCounter()
+	int8_t CPU::getRelativeValue()
 	{
 		int8_t res = memory_[++registers_.PC];
 		logStatus(registers_.PC - 1, uint8_t(memory_[registers_.PC - 1]), uint8_t(res), registers_);
 		return res;
 	}
 
-	uint16_t CPU::extractZeroPageAddressWithProgramCounter()
+	uint16_t CPU::getZeroPageAddress()
 	{
 		uint8_t res = memory_[++registers_.PC];
 		logStatus(registers_.PC - 1, uint8_t(memory_[registers_.PC - 1]), res, registers_);
 		return res;
 	}
 
-	uint16_t CPU::extractZeroPageXAddressWithProgramCounter()
+	uint16_t CPU::getZeroPageXAddress()
 	{
 		uint8_t res = uint8_t(memory_[++registers_.PC]) + uint8_t(registers_.X);
 		logStatus(registers_.PC - 1, uint8_t(memory_[registers_.PC - 1]), uint8_t(memory_[registers_.PC]), registers_);
 		return res;
 	}
 
-	uint16_t CPU::extractZeroPageYAddressWithProgramCounter()
+	uint16_t CPU::getZeroPageYAddress()
 	{
 		uint8_t res = uint8_t(memory_[++registers_.PC]) + uint8_t(registers_.Y);
 		logStatus(registers_.PC - 1, uint8_t(memory_[registers_.PC - 1]), uint8_t(memory_[registers_.PC]), registers_);
@@ -701,7 +698,7 @@ namespace nes::cpu
 		return res;
 	}
 
-	uint16_t CPU::extractAbsoluteAddressWithProgramCounter()
+	uint16_t CPU::getAbsoluteAddress()
 	{
 		uint16_t res = uint8_t(memory_[++registers_.PC]) + (memory_[++registers_.PC] << CHAR_BIT);
 		logStatus(registers_.PC - 2, uint8_t(memory_[registers_.PC - 2]), uint8_t(memory_[registers_.PC - 1]) + (memory_[registers_.PC] << CHAR_BIT), registers_);
@@ -709,7 +706,7 @@ namespace nes::cpu
 		return res;
 	}
 
-	uint16_t CPU::extractAbsoluteXAddressWithProgramCounter()
+	uint16_t CPU::getAbsoluteXAddress()
 	{
 		uint16_t res = uint8_t(memory_[++registers_.PC]) + (memory_[++registers_.PC] << CHAR_BIT) + uint8_t(registers_.X);
 		logStatus(registers_.PC - 2, uint8_t(memory_[registers_.PC - 2]), uint8_t(memory_[registers_.PC - 1]) + (memory_[registers_.PC] << CHAR_BIT), registers_);
@@ -717,7 +714,7 @@ namespace nes::cpu
 		return res;
 	}
 
-	uint16_t CPU::extractAbsoluteYAddressWithProgramCounter()
+	uint16_t CPU::getAbsoluteYAddress()
 	{
 		uint16_t res = uint8_t(memory_[++registers_.PC]) + (memory_[++registers_.PC] << CHAR_BIT) + uint8_t(registers_.Y);
 		logStatus(registers_.PC - 2, uint8_t(memory_[registers_.PC - 2]), uint8_t(memory_[registers_.PC - 1]) + (memory_[registers_.PC] << CHAR_BIT), registers_);
@@ -725,7 +722,7 @@ namespace nes::cpu
 		return res;
 	}
 
-	uint16_t CPU::extractIndirectXAddressWithProgramCounter()
+	uint16_t CPU::getIndirectXAddress()
 	{
 		uint8_t incomingAddress = memory_[++registers_.PC];
 		uint16_t newAddress = uint8_t(incomingAddress + uint8_t(registers_.X));
@@ -735,7 +732,7 @@ namespace nes::cpu
 		return res;
 	}
 
-	uint16_t CPU::extractIndirectYAddressWithProgramCounter()
+	uint16_t CPU::getIndirectYAddress()
 	{
 		uint8_t incomingAddress = memory_[++registers_.PC];
 		uint16_t res = uint8_t(memory_[incomingAddress]) + (memory_[uint8_t(incomingAddress + 1)] << CHAR_BIT) + uint8_t(registers_.Y);
@@ -744,7 +741,7 @@ namespace nes::cpu
 		return  res;
 	}
 
-	uint16_t CPU::extractIndirectAddressWithProgramCounter()
+	uint16_t CPU::getIndirectAddress()
 	{
 		uint16_t res = uint8_t(memory_[++registers_.PC]) + (memory_[++registers_.PC] << CHAR_BIT);
 		logStatus(registers_.PC - 2, uint8_t(memory_[registers_.PC - 2]), uint8_t(memory_[registers_.PC - 1]) + (memory_[registers_.PC] << CHAR_BIT), registers_);

@@ -20,17 +20,17 @@ namespace nes::cpu {
 		memory::Memory& memory_;
 		OpcodesExecutor executor_;
 	private:
-		int8_t extractImmediatevalueWithProgramCounter();
-		int8_t extractRelativevalueWithProgramCounter();
-		uint16_t extractZeroPageAddressWithProgramCounter();
-		uint16_t extractZeroPageXAddressWithProgramCounter();
-		uint16_t extractZeroPageYAddressWithProgramCounter();
-		uint16_t extractAbsoluteAddressWithProgramCounter();
-		uint16_t extractAbsoluteXAddressWithProgramCounter();
-		uint16_t extractAbsoluteYAddressWithProgramCounter();
-		uint16_t extractIndirectXAddressWithProgramCounter();
-		uint16_t extractIndirectYAddressWithProgramCounter();
-		uint16_t extractIndirectAddressWithProgramCounter();
+		int8_t getImmediateValue();
+		int8_t getRelativeValue();
+		uint16_t getZeroPageAddress();
+		uint16_t getZeroPageXAddress();
+		uint16_t getZeroPageYAddress();
+		uint16_t getAbsoluteAddress();
+		uint16_t getAbsoluteXAddress();
+		uint16_t getAbsoluteYAddress();
+		uint16_t getIndirectXAddress();
+		uint16_t getIndirectYAddress();
+		uint16_t getIndirectAddress();
 
 		static void logStatus(uint16_t PC, uint8_t opcode, uint16_t input, const registers::Registers& reg);
 	};

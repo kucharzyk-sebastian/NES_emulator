@@ -86,18 +86,17 @@ namespace nes::cpu{
 		void TXS() noexcept;
 		void TYA() noexcept;
 
-	protected:
+	private:
 		using rps =  registers::ProcessorStatus;
 		registers::Registers& registers_;
 		memory::Memory& memory_;
-	protected:
+		static constexpr uint16_t stackPage_ = uint16_t(0x0100);
+		static constexpr uint16_t interruptVectorLSB_ = uint16_t(0xFFFE);
+		static constexpr uint16_t interruptVectorMSB_ = uint16_t(0xFFFF);
+
+	private:
 		int8_t readFromStack();
 		void writeToStack(int8_t value);
-	private:
-		static constexpr uint16_t stackPage_ = uint16_t(0x0100);
-		static constexpr uint16_t interruptVectorLSB = uint16_t(0xFFFE);
-		static constexpr uint16_t interruptVectorMSB = uint16_t(0xFFFF);
-	private:
 		int8_t shiftLeftWithFlags(int8_t value) noexcept;
 		int8_t decrementWithFlags(int8_t value) noexcept;
 		int8_t incrementWithFlags(int8_t value) noexcept;
