@@ -4,7 +4,7 @@
 #include "thirdparty/magicEnum/magicEnum.h"
 
 namespace nes::cpu::registers {
-	enum class ProcessorStatus : uint8_t
+	enum ProcessorStatus : uint8_t
 	{
 		Carry = 0,
 		Zero = 1,

@@ -12,9 +12,6 @@ namespace nes {
 		void run(const std::string& pathToROM);
 
 	private:
-		void loadROM();
-
-	private:
 		memory::Memory memory_;
 		memory::RomLoader romLoader_;
 		cpu::registers::Registers registers_;

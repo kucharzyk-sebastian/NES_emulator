@@ -19,13 +19,6 @@ namespace nes {
 		el::Loggers::reconfigureAllLoggers(conf);
 		registers_.PC = uint16_t(0xC000);
 		while (true)
-		{
 			cpu_.performInstruction();
-		}
-
-	}
-
-	void NESEmulator::loadROM()
-	{
 	}
 }

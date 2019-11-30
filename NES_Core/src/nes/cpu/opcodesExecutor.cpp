@@ -21,13 +21,12 @@ namespace nes::cpu{
 	void OpcodesExecutor::ADC(int8_t value) noexcept
 	{
 		using namespace helpers::math;
-		int8_t resultWithoutCarry = registers_.A + value;
-		int8_t resultWithCarry = resultWithoutCarry + registers_.PS[static_cast<uint8_t>(rps::Carry)];
-		registers_.PS[static_cast<uint8_t>(rps::Overflow)] = isOverflow(registers_.A, value) ? true : isOverflow(resultWithoutCarry, registers_.PS[static_cast<uint8_t>(rps::Carry)]);
-		registers_.PS[static_cast<uint8_t>(rps::Carry)] = isCarry(registers_.A, value) ? true : isCarry(resultWithoutCarry, registers_.PS[static_cast<uint8_t>(rps::Carry)]);
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = resultWithCarry < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = resultWithCarry == 0 ? true : false;
-		registers_.A = resultWithCarry;
+		int8_t result = registers_.A + value + registers_.PS[rps::Carry];
+		registers_.PS[rps::Overflow] = isOverflow(registers_.A, value, registers_.PS[rps::Carry]);
+		registers_.PS[rps::Carry] = isCarry(registers_.A, value, registers_.PS[rps::Carry]);
+		registers_.PS[rps::Negative] = result < 0;
+		registers_.PS[rps::Zero] = result == 0;
+		registers_.A = result;
 	}
 
 	void OpcodesExecutor::ADC(uint16_t address)
@@ -38,8 +37,8 @@ namespace nes::cpu{
 	void OpcodesExecutor::AND(int8_t value) noexcept
 	{
 		int8_t result = registers_.A & value;
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = result == 0 ? true : false;
+		registers_.PS[rps::Negative] = result < 0;
+		registers_.PS[rps::Zero] = result == 0;
 
 		registers_.A = result;
 	}
@@ -61,45 +60,45 @@ namespace nes::cpu{
 
 	void OpcodesExecutor::BCC(int8_t value) noexcept
 	{
-		if (!registers_.PS[static_cast<uint8_t>(rps::Carry)])
+		if (!registers_.PS[rps::Carry])
 			registers_.PC += value;
 	}
 
 	void OpcodesExecutor::BCS(int8_t value) noexcept
 	{
-		if (registers_.PS[static_cast<uint8_t>(rps::Carry)])
+		if (registers_.PS[rps::Carry])
 			registers_.PC += value;
 	}
 
 	void OpcodesExecutor::BEQ(int8_t value) noexcept
 	{
-		if (registers_.PS[static_cast<uint8_t>(rps::Zero)])
+		if (registers_.PS[rps::Zero])
 			registers_.PC += value;
 	}
 
 	void OpcodesExecutor::BIT(uint16_t address)
 	{
 		int8_t result = memory_[address] & registers_.A;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = result == 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = memory_[address] < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Overflow)] = memory_[address] & 0b01000000;
+		registers_.PS[rps::Zero] = result == 0;
+		registers_.PS[rps::Negative] = memory_[address] < 0;
+		registers_.PS[rps::Overflow] = memory_[address] & 0b01000000;
 	}
 
 	void OpcodesExecutor::BMI(int8_t value) noexcept
 	{
-		if (registers_.PS[static_cast<uint8_t>(rps::Negative)])
+		if (registers_.PS[rps::Negative])
 			registers_.PC += value;
 	}
 
 	void OpcodesExecutor::BNE(int8_t value) noexcept
 	{
-		if (!registers_.PS[static_cast<uint8_t>(rps::Zero)])
+		if (!registers_.PS[rps::Zero])
 			registers_.PC += value;
 	}
 
 	void OpcodesExecutor::BPL(int8_t value) noexcept
 	{
-		if (!registers_.PS[static_cast<uint8_t>(rps::Negative)])
+		if (!registers_.PS[rps::Negative])
 			registers_.PC += value;
 	}
 
@@ -107,20 +106,20 @@ namespace nes::cpu{
 	{
 		writeToStack(registers_.PC >> CHAR_BIT);
 		writeToStack(registers_.PC & 0x00FF);
-		registers_.PS.set(static_cast<uint8_t>(rps::Break));
-		writeToStack(int8_t(registers_.PS.to_ulong() | (1 << static_cast<uint8_t>(rps::Unknown))));
+		registers_.PS.set(rps::Break);
+		writeToStack(int8_t(registers_.PS.to_ulong() | (1 << rps::Unknown)));
 		registers_.PC = uint8_t(memory_[interruptVectorLSB_]) + (memory_[interruptVectorMSB_] << CHAR_BIT);
 	}
 
 	void OpcodesExecutor::BVC(int8_t value) noexcept
 	{
-		if (!registers_.PS[static_cast<uint8_t>(rps::Overflow)])
+		if (!registers_.PS[rps::Overflow])
 			registers_.PC += value;
 	}
 
 	void OpcodesExecutor::BVS(int8_t value) noexcept
 	{
-		if (registers_.PS[static_cast<uint8_t>(rps::Overflow)])
+		if (registers_.PS[rps::Overflow])
 			registers_.PC += value;
 	}
 
@@ -156,22 +155,22 @@ namespace nes::cpu{
 
 	void OpcodesExecutor::CLC() noexcept
 	{
-		registers_.PS.reset(static_cast<uint8_t>(rps::Carry));
+		registers_.PS.reset(rps::Carry);
 	}
 
 	void OpcodesExecutor::CLD() noexcept
 	{
-		registers_.PS.reset(static_cast<uint8_t>(rps::Decimal));
+		registers_.PS.reset(rps::Decimal);
 	}
 
 	void OpcodesExecutor::CLI() noexcept
 	{
-		registers_.PS.reset(static_cast<uint8_t>(rps::InterruptDisable));
+		registers_.PS.reset(rps::InterruptDisable);
 	}
 
 	void OpcodesExecutor::CLV() noexcept
 	{
-		registers_.PS.reset(static_cast<uint8_t>(rps::Overflow));
+		registers_.PS.reset(rps::Overflow);
 	}
 
 	void OpcodesExecutor::DEC(uint16_t address)
@@ -192,8 +191,8 @@ namespace nes::cpu{
 	void OpcodesExecutor::EOR(int8_t value) noexcept
 	{
 		int8_t result = registers_.A ^ value;
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = result == 0 ? true : false;
+		registers_.PS[rps::Negative] = result < 0;
+		registers_.PS[rps::Zero] = result == 0;
 
 		registers_.A = result;
 	}
@@ -287,8 +286,8 @@ namespace nes::cpu{
 	void OpcodesExecutor::ORA(int8_t value) noexcept
 	{
 		int8_t result = registers_.A | value;
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = result == 0 ? true : false;
+		registers_.PS[rps::Negative] = result < 0;
+		registers_.PS[rps::Zero] = result == 0;
 
 		registers_.A = result;
 	}
@@ -306,24 +305,24 @@ namespace nes::cpu{
 	void OpcodesExecutor::PHP()
 	{
 		int8_t valueToWrite = static_cast<int8_t>(registers_.PS.to_ulong());
-		valueToWrite |= (1 << static_cast<uint8_t>(rps::Break));
-		valueToWrite |= (1 << static_cast<uint8_t>(rps::Unknown));
+		valueToWrite |= (1 << rps::Break);
+		valueToWrite |= (1 << rps::Unknown);
 		writeToStack(valueToWrite);
 	}
 
 	void OpcodesExecutor::PLA()
 	{
 		registers_.A = readFromStack();
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = registers_.A < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = registers_.A == 0 ? true : false;
+		registers_.PS[rps::Negative] = registers_.A < 0;
+		registers_.PS[rps::Zero] = registers_.A == 0;
 	}
 
 	void OpcodesExecutor::PLP()
 	{
 		auto oldPS = registers_.PS;
 		registers_.PS = uint8_t(readFromStack());
-		registers_.PS[static_cast<uint8_t>(rps::Break)] = oldPS[static_cast<uint8_t>(rps::Break)];
-		registers_.PS[static_cast<uint8_t>(rps::Unknown)] = oldPS[static_cast<uint8_t>(rps::Unknown)];
+		registers_.PS[rps::Break] = oldPS[rps::Break];
+		registers_.PS[rps::Unknown] = oldPS[rps::Unknown];
 	}
 
 	void OpcodesExecutor::ROL() noexcept
@@ -361,13 +360,13 @@ namespace nes::cpu{
 	{
 		using namespace helpers::math;
 		value = ~value;
-		if (registers_.PS[static_cast<uint8_t>(rps::Carry)])
+		if (registers_.PS[rps::Carry])
 			value = uint8_t(value) + 1;
 		int8_t result = registers_.A + value;
-		registers_.PS[static_cast<uint8_t>(rps::Overflow)] = isOverflow(registers_.A, value) ? true :false;
-		registers_.PS[static_cast<uint8_t>(rps::Carry)] = isCarry(registers_.A, value) ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = result == 0 ? true : false;
+		registers_.PS[rps::Overflow] = isOverflow(registers_.A, value);
+		registers_.PS[rps::Carry] = isCarry(registers_.A, value);
+		registers_.PS[rps::Negative] = result < 0;
+		registers_.PS[rps::Zero] = result == 0;
 		registers_.A = result;
 	}
 
@@ -378,17 +377,17 @@ namespace nes::cpu{
 
 	void OpcodesExecutor::SEC() noexcept
 	{
-		registers_.PS.set(static_cast<uint8_t>(rps::Carry));
+		registers_.PS.set(rps::Carry);
 	}
 
 	void OpcodesExecutor::SED() noexcept
 	{
-		registers_.PS.set(static_cast<uint8_t>(rps::Decimal));
+		registers_.PS.set(rps::Decimal);
 	}
 
 	void OpcodesExecutor::SEI() noexcept
 	{
-		registers_.PS.set(static_cast<uint8_t>(rps::InterruptDisable));
+		registers_.PS.set(rps::InterruptDisable);
 	}
 
 	void OpcodesExecutor::STA(uint16_t address)
@@ -440,58 +439,58 @@ namespace nes::cpu{
 	int8_t OpcodesExecutor::decrementWithFlags(int8_t value) noexcept
 	{
 		int8_t result = value - 1;
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = result == 0 ? true : false;
+		registers_.PS[rps::Negative] = result < 0;
+		registers_.PS[rps::Zero] = result == 0;
 
 		return result;
 	}
 	int8_t OpcodesExecutor::incrementWithFlags(int8_t value) noexcept
 	{
 		int8_t result = value + 1;
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = result < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = result == 0 ? true : false;
+		registers_.PS[rps::Negative] = result < 0;
+		registers_.PS[rps::Zero] = result == 0;
 
 		return result;
 	}
 
 	int8_t OpcodesExecutor::shiftLeftWithFlags(int8_t value) noexcept
 	{
-		registers_.PS[static_cast<uint8_t>(rps::Carry)] = value >> (sizeof(value) * CHAR_BIT - 1);
+		registers_.PS[rps::Carry] = value >> (sizeof(value) * CHAR_BIT - 1);
 		value = value << 1;
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = value < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = value == 0 ? true : false;
+		registers_.PS[rps::Negative] = value < 0;
+		registers_.PS[rps::Zero] = value == 0;
 
 		return value;
 	}
 
 	int8_t OpcodesExecutor::shiftRightWithFlags(int8_t value) noexcept
 	{
-		registers_.PS[static_cast<uint8_t>(rps::Carry)] = value & 1;
+		registers_.PS[rps::Carry] = value & 1;
 		value = uint8_t(value) >> 1;
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = value < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = value == 0 ? true : false;
+		registers_.PS[rps::Negative] = value < 0;
+		registers_.PS[rps::Zero] = value == 0;
 
 		return value;
 	}
 
 	int8_t OpcodesExecutor::rotateLeftWithFlags(int8_t value) noexcept
 	{
-		int8_t oldCarry = registers_.PS[static_cast<uint8_t>(rps::Carry)];
-		registers_.PS[static_cast<uint8_t>(rps::Carry)] = value >> (sizeof(value) * CHAR_BIT - 1);
+		int8_t oldCarry = registers_.PS[rps::Carry];
+		registers_.PS[rps::Carry] = value >> (sizeof(value) * CHAR_BIT - 1);
 		value = (value << 1) + oldCarry;
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = value < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = value == 0 ? true : false;
+		registers_.PS[rps::Negative] = value < 0;
+		registers_.PS[rps::Zero] = value == 0;
 
 		return value;
 	}
 
 	int8_t OpcodesExecutor::rotateRightWithFlags(int8_t value) noexcept
 	{
-		int8_t oldCarry = registers_.PS[static_cast<uint8_t>(rps::Carry)];
-		registers_.PS[static_cast<uint8_t>(rps::Carry)] = value & 1;
+		int8_t oldCarry = registers_.PS[rps::Carry];
+		registers_.PS[rps::Carry] = value & 1;
 		value = (uint8_t(value) >> 1) + (oldCarry << (sizeof(value) * CHAR_BIT - 1));
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = value < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = value == 0 ? true : false;
+		registers_.PS[rps::Negative] = value < 0;
+		registers_.PS[rps::Zero] = value == 0;
 
 		return value;
 	}
@@ -499,22 +498,22 @@ namespace nes::cpu{
 	void OpcodesExecutor::transferWithFlags(int8_t& src, int8_t& dest)
 	{
 		dest = src;
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = src < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = src == 0 ? true : false;
+		registers_.PS[rps::Negative] = src < 0;
+		registers_.PS[rps::Zero] = src == 0;
 	}
 
 
 	void OpcodesExecutor::compareWithFlags(int8_t registerValue, int8_t inputValue) noexcept
 	{
-		registers_.PS[static_cast<uint8_t>(rps::Carry)] = static_cast<uint8_t>(registerValue) >= static_cast<uint8_t>(inputValue) ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Negative)] = int8_t(registerValue - inputValue) < 0 ? true : false;
-		registers_.PS[static_cast<uint8_t>(rps::Zero)] = registerValue == inputValue ? true : false;
+		registers_.PS[rps::Carry] = static_cast<uint8_t>(registerValue) >= static_cast<uint8_t>(inputValue);
+		registers_.PS[rps::Negative] = int8_t(registerValue - inputValue) < 0;
+		registers_.PS[rps::Zero] = registerValue == inputValue;
 	}
 
 	void OpcodesExecutor::loadWithFlags(int8_t& reg, int8_t value, std::bitset<registers::Registers::PSSize> & flags) noexcept
 	{
-		flags[static_cast<uint8_t>(rps::Negative)] = value < 0 ? true : false;
-		flags[static_cast<uint8_t>(rps::Zero)] = value == 0 ? true : false;
+		flags[rps::Negative] = value < 0;
+		flags[rps::Zero] = value == 0;
 
 		reg = value;
 	}
