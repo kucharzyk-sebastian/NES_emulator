@@ -3,7 +3,6 @@
 #include <bitset>
 #include "thirdparty/magicEnum/magicEnum.h"
 
-//TODO sk: maybe incorporate ProcessorStatus into Registers
 namespace nes::cpu::registers {
 	enum class ProcessorStatus : uint8_t
 	{
