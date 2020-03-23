@@ -2,13 +2,15 @@
 
 Fully functional and well-tested emulator of an 8-bit 6502 processor from Nintendo Entertainment System (NES) home video game console created as a bachelor's thesis in C++
 
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
 * Visual Studio 2019 or newer
 * VSCppUnit C++ Unit Testing Framework
 * Windows 7 or newer
-
 
 ### Installing
 
