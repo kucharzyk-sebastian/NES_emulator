@@ -1,9 +1,6 @@
-# NES Emulator (In progress)
+# NES 6502 Emulator
 
-Emulator of an 8-bit Nintendo Entertainment System (NES) home video game console created in C++.
-
-## Progress made
-Already created a fully functional and well tested emulator of 6502 processor as a bachelors thesis.
+Emulator of an 8-bit 6502 processof from Nintendo Entertainment System (NES) home video game console created as a bachhelors thesis in C++.
 
 ## Contributing
 
